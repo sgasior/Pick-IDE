@@ -1,0 +1,514 @@
+body {
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+}
+
+
+
+.container-fluid {
+    padding: 0;
+}
+
+.row {
+    margin: 0;
+}
+
+/* -----------NAV --------*/
+
+nav {
+    background: #071a52;
+    padding: 3rem 0;
+    overflow: hidden;
+    transition: .35s;
+}
+
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #071a52;
+    z-index: 9999;
+}
+
+
+nav ul {
+    margin: 0;
+}
+
+#brand {
+    font-family: 'Gochi Hand', cursive;
+    font-weight: 900;
+    text-align: left;
+    margin: auto;
+    position: relative;
+    left: 16px;
+    letter-spacing: 0.2rem;
+    font-size: 2.5rem;
+    padding-left: 3rem;
+    transition: .35s;
+}
+
+#brand a {
+    text-decoration: none;
+    color: #a7ff83;
+    transition: color .3s;
+}
+
+#brand a:hover {
+    color: white;
+    transition: color .3s;
+}
+
+
+.navbar-links {
+    text-align: right;
+    padding-right: 3rem;
+}
+
+.navbar-links li {
+    display: inline-block;
+}
+
+#navbar-big-screen-links {
+    padding: 8.5px 0;
+    font-size: 1.2rem;
+    transition: .35s;
+}
+
+
+.navbar-link {
+    padding: 0 20px;
+    color: #17b978;
+    transition: color .3s;
+}
+
+.navbar-link:hover {
+    color: white;
+    text-decoration: none;
+    transition: color .3s;
+}
+
+/*CHANGING BRAND AND LINKS STYLE WHEN STICKY NAV IS ACTIVE*/
+
+.brand-fixed {
+    font-size: 2rem !important;
+    transition: .35s;
+}
+
+/*CHANGING BRAND AND LINKS STYLE WHEN STICKY NAV IS ACTIVE*/
+
+.navbar-big-screen-links-fixed {
+    font-size: 1rem !important;
+    transition: .35s;
+}
+
+/* -----------Main section--------*/
+
+#main {
+    background: #071a52;
+    height: 65vh;
+}
+
+.title-img {
+    font-size: 14rem;
+    color: white;
+    text-align: right;
+    vertical-align: middle;
+    padding-right: 50px;
+    margin: auto;
+}
+
+.big-heading {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    text-align: left;
+    color: #a7ff83;
+    position: relative;
+    top: 58px;
+    font-style: italic;
+    padding-left: 50px;
+}
+
+.main-buttons {
+    margin-top: 50px;
+}
+
+
+/* -----------Features section --------*/
+
+#features {
+    margin-top: 64px;
+}
+
+.feature-heading {
+    font-family: Roboto, sans-serif;
+    text-align: center;
+    margin: 0 50px;
+    color: #071a52;
+    text-transform: uppercase;
+}
+
+
+.feature-box {
+    margin: 64px 0;
+    text-align: center;
+}
+
+.feature-box .fas {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: #086972;
+}
+
+.feature-box h3 {
+    color: #071a52;
+}
+
+.feature-box p {
+    color: #071a52;
+    opacity: 0.7;
+}
+
+
+/* -----------About app section --------*/
+
+#about-app {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.75)), url(../images/artem-sapegin-176819-unsplash.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    padding-bottom: 50px;
+}
+
+#about-app h2 {
+    padding: 75px 150px 50px 150px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #a7ff83;
+}
+
+.step {
+    padding: 0 150px 12px 150px;
+    text-align: left;
+}
+
+.step-number {
+    color: #a7ff83;
+    border: 2px solid #a7ff83;
+    display: inline-block;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    margin: 12px;
+    font-size: 1.5rem;
+    margin-right: 24px;
+}
+
+.step-description {
+    display: inline-block;
+    color: white;
+    position: relative;
+    bottom: 4px;
+}
+
+
+/* -----------How it works section --------*/
+
+#how-it-works {
+    background: #f6f5f5;
+}
+
+.slider {
+    margin: 0rem 4%;
+    padding: 6rem 0;
+    text-align: center;
+}
+
+.slider img {
+    margin: auto;
+    width: 50%;
+}
+
+.slider-description {
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #071a52;
+    font-weight: 900;
+    font-style: italic;
+    display: inline-block;
+}
+
+
+#how-it-works .fas {
+    font-size: 2rem;
+    position: relative;
+    bottom: 2rem;
+}
+
+#how-it-works .hidden {
+    display: none;
+}
+
+
+/* -----------Footer section--------*/
+
+#footer {
+    background-color: #086972;
+    color: white;
+    display: block;
+}
+
+.media {
+    margin: auto;
+}
+
+.media ul li {
+    display: inline-block;
+}
+
+#footer ul {
+    padding: 0;
+    margin: 0;
+}
+
+.media a {
+    padding: 0px;
+}
+
+.social-icon {
+    margin: 20px 10px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.social-icon:hover {
+    opacity: 0.7;
+    transform: scale(1.05);
+}
+
+.copyright {
+    margin: auto;
+    padding-bottom: 16px;
+}
+
+
+/* -----------Buttons --------*/
+
+.start-button {
+    margin: 0 10px;
+    color: white;
+    width: 130px;
+}
+
+.login-button {
+    margin: 0 10px;
+    margin-right: 15px;
+    width: 130px;
+    background: #17b978;
+    color: black;
+    opacity: 0.8;
+}
+
+.login-button:hover {
+    color: white;
+    opacity: 1;
+}
+
+.slider-arrow-button {
+    font-size: 100%;
+    font-family: inherit;
+    border: 0;
+    padding: 0;
+    background-color: inherit;
+    color: inherit;
+}
+
+
+/* -----------Hamburger Menu --------*/
+
+.hamburger {
+    display: none;
+}
+
+
+@media (max-width: 720px) {
+    .hamburger {
+        display: inline-block;
+        margin-right: 48px;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    #navbar-big-screen-links {
+        display: none;
+    }
+
+
+    .big-heading {
+        position: static;
+        font-style: italic;
+        margin: auto 0;
+        padding-right: 50px;
+    }
+
+    .big-heading h1 {
+        font-size: 1.2rem;
+    }
+
+    .title-img {
+        font-size: 7rem;
+    }
+
+
+    .start-button {
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    .login-button {
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    .main-buttons {
+        margin: 0;
+    }
+
+
+}
+
+.hamburger .line {
+    transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    height: 3px;
+    width: 32px;
+    display: block;
+    background-color: white;
+    margin: 8px 0;
+}
+
+
+.hamburger.is-active .line:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+    /*-moz-transition: translateY(11px) rotate(45deg);*/
+    /*-webkit-transition: translateY(11px) rotate(45deg);*/
+    /*-o-transition: translateY(11px) rotate(45deg);*/
+}
+
+.hamburger.is-active .line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.is-active .line:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+    /*-moz-transition: translateY(-11px) rotate(-45deg);*/
+    /*-webkit-transition: translateY(-11px) rotate(-45deg);*/
+    /*-o-transition: translateY(-11px) rotate(-45deg);*/
+}
+
+
+
+#navbar-small-screen-links {
+    display: none;
+    text-align: center;
+}
+
+
+#navbar-small-screen-links ul {
+    list-style-type: none;
+    padding: 0;
+
+}
+
+#navbar-small-screen-links li {
+    padding: 12px;
+}
+
+#navbar-small-screen-links li:hover {
+    background-color: #086972;
+    opacity: 0.8;
+}
+
+#navbar-small-screen-links a {
+    color: #17b978;
+    text-decoration: none;
+}
+
+#navbar-small-screen-links a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+#navbar-small-screen-links .fas {
+    margin-left: 12px;
+    font-size: 0.9rem;
+    position: relative;
+    bottom: 0.05rem;
+}
+
+
+@media (min-width: 720px) {
+    #navbar-small-screen-links {
+        display: none !important;
+    }
+
+    .hamburger {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1091px) {
+    .feature-box {
+        margin: 20px 0;
+    }
+
+}
+
+
+
+@media (max-width: 836px) {
+
+    #about-app h2 {
+        font-size: 1.5rem;
+    }
+
+    .step {
+        text-align: center;
+    }
+
+    .step-description {
+        display: block;
+    }
+
+    .slider img {
+        width: 80%;
+    }
+}
+
+@media (max-width: 556px) {
+
+    #about-app h2 {
+        font-size: 1.2rem;
+        padding: 75px 50px 12px 50px;
+    }
+
+    .start-button {
+        width: 100px;
+    }
+
+    .login-button {
+        width: 100px;
+    }
+
+    .big-heading h1 {
+        font-size: 1rem;
+    }
+
+    .slider img {
+        width: 100%;
+    }
+}

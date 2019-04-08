@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<!--<head th:replace="~{layouts/main_layout :: head(title = 'Pick - IDE')}">-->
+<!--</head>-->
+
+
+<head>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Pick - IDE')}"></th:block>
+
+
+</head>
+
+<body>
+
+<div th:replace="~{layouts/main_layout :: navbar}"></div>
+
+<div class="new-content">
+
+
+    <div class="container-fluid">
+
+
+        <section id="main">
+
+            <div class="row">
+
+                <div class="col-6 title-img">
+                    <i class="fas fa-laptop-code animated fadeIn">
+
+                    </i>
+
+                </div>
+                <div class="col-6 big-heading animated fadeIn">
+                    <h1>
+                        Choose the most suitable IDE to increase your work efficiency!
+                    </h1>
+
+                    <div class="row main-buttons">
+                        <button type="button" class="btn btn-outline-light start-button"
+                                onclick="window.location.href='/start'">Start
+                        </button>
+
+                        <button type="button" class="btn login-button">Login</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <section id="features">
+            <div class="feature-heading">
+                <h2 class="animated slideInDown">
+                    IDE is important for a programmer as a calculator is for mathematician!
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-12 feature-box">
+                    <i class="fas fa-check-square"></i>
+                    <h3><strong>Code checking</strong></h3>
+                    <p>Forget about typos or stupid mistakes in your code!</p>
+                </div>
+                <div class="col-lg-4 col-sm-12 feature-box">
+                    <i class="fas fa-bug"></i>
+                    <h3><strong>Debugging</strong></h3>
+                    <p>Inspect your executing app step by step</p>
+                </div>
+                <div class="col-lg-4 col-sm-12 feature-box">
+                    <i class="fas fa-code"></i>
+                    <h3><strong>Refactoring &amp; Clean Code</strong></h3>
+                    <p>Make your code clean fast and easy! </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="about-app">
+
+            <h2>Choose the most suitable IDE for your needs in <strong>3 steps</strong> USIGN AHP METHOD!</h2>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">
+                        1
+                    </div>
+                    <div class="step-description">
+                        Complete a short survey with your IDE preferences
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">
+                        2
+                    </div>
+                    <div class="step-description">
+                        Comparison with pairs of selected criteria
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">
+                        3
+                    </div>
+                    <div class="step-description">
+                        Find out which IDE meets your expectations
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="how-it-works">
+            <div class="slider">
+                <div class="slider-description">
+                    Analytic Hierarchy Process - how does it work?
+                </div>
+                <div>
+                    <!--                    <button type="button" class="slider-arrow-button" id="slide-left"><i class=" fas fa-chevron-left "></i></button>-->
+
+                    <img th:src="@{/images/how-it-works/1.png}" id="image-1">
+                    <img th:src="@{/images/how-it-works/2.png}" id="image-2" class="hidden">
+                    <img th:src="@{/images/how-it-works/3.png}" id="image-3" class="hidden">
+                    <!--                    <button type="button" class="slider-arrow-button" id="slide-right"><i class="fas fa-chevron-right "></i></button>-->
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+<div th:replace="~{layouts/main_layout :: footer}"></div>
+
+<script type="text/javascript" th:src="@{/vendors/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+
+</body>
+</html>

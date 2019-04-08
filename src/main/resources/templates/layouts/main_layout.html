@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:fragment="head(title)">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Title goes here</title>
+
+    <!--   GOOGLE FONTS-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,900i|Montserrat|Roboto|Gochi+Hand" rel="stylesheet">
+
+
+    <!--    BOOTSTRAP 4.3-->
+    <link rel="stylesheet" th:href="@{/vendors/css/bootstrap.min.css}">
+
+    <!--   FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <!--   ANIMATE CSS-->
+    <link rel="stylesheet" th:href="@{/vendors/css/animate.css}">
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{/css/main_layout.css}">
+
+</head>
+
+<body>
+<div class="container-fluid">
+    <nav th:fragment="navbar">
+        <div class="row" id="sticky-nav">
+            <div class="col-sm-4 col-6 animated fadeIn" id="brand">
+                <a th:href="@{/}">Pick IDE</a>
+            </div>
+            <div class="col-sm-8 col-6 navbar-links animated fadeIn">
+                <ul id="navbar-big-screen-links">
+                    <li>
+                        <a href="#" class="navbar-link">Guide</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="navbar-link">About project</a>
+                    </li>
+                    <li>
+                        <a href="#" class="navbar-link">Contact</a>
+                    </li>
+
+                </ul>
+                <div class="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="navbar-small-screen-links">
+            <ul>
+                <li>
+                    <a href="#">Guide<i class="fas fa-hands-helping"></i></a>
+                </li>
+                <li>
+                    <a href="#">About<i class="fas fa-info-circle"></i></a>
+                </li>
+
+                <li>
+                    <a href="#">Contact<i class="fas fa-address-book"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <section id="new-content" th:fragment="new-content">
+
+        <p> This is main content</p>
+
+    </section>
+
+
+    <section id="footer" th:fragment="footer">
+        <div class="row">
+            <div class="media">
+                <ul>
+                    <li>
+                        <a href="https://www.linkedin.com/in/szymon-gasior/ "><i
+                                class="social-icon fab fa-linkedin "></i></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/sgasior "><i class="social-icon fab fa-github "></i></a>
+                    </li>
+                    <li>
+                        <a href="mailto:szgasior@gmail.com?subject=Pick-IDE&body=Treść wiadomości "><i
+                                class="social-icon far fa-envelope "></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="copyright">
+                © Copyright 2019 Pick IDE
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+</body>
+
+</html>
+
+
