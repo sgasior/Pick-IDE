@@ -1,20 +1,79 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example </title>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Pick - IDE')}"></th:block>
+
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{css/login.css}">
+
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+
+<div class="new-content">
+
+    <div class="container-fluid">
+        <section id="login" class="row">
+
+            <div id="login-box">
+
+                <div class="login-form-logo">
+                    <div class="circle">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <h4>Sign In</h4>
+                </div>
+
+                <form th:action="@{/login}" method="post">
+                    <div class="login-inputs">
+                        <div class="login-input">
+                            <i class="fas fa-user-tie"></i>
+                            <input type="email" name="email" id="email" placeholder="Enter email" required autofocus>
+
+                        </div>
+                        <div class="login-input">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" id="password" placeholder="Enter password" required>
+                        </div>
+
+                        <div class="login-input">
+                            <button type="submit" class="btn submit-login-button">Login</button>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                <div class="checkbox remember-me">
+                                    <input type="checkbox" id="checkbox_1">
+                                    <label for="checkbox_1">Remember me</label>
+                                </div>
+                            </div>
+
+                            <div class="col-6 register-link">
+                                <a href="register.html">Not a member?</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js "></script>
+
+<script src="vendors/js/jquery-3.3.1.min.js "></script>
+
+
+<script src="vendors/js/bootstrap.min.js "></script>
+
+
+<script src="vendors/js/jquery.waypoints.min.js "></script>
+<script src="js/index.js "></script>
 </body>
 </html>
