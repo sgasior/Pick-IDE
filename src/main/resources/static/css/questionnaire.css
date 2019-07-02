@@ -190,3 +190,31 @@
 .next-button {
     width: 28%;
 }
+
+
+/* -----------MEDIA QUERIES--------*/
+
+@media (max-width: 822px) {
+    #question-2 .answer,
+    #question-3 .answer {
+        margin-left: 30%;
+    }
+
+    .question {
+        padding: 32px 50px 32px 50px;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 622px) {
+    #question-2 .answer,
+    #question-3 .answer {
+        margin-left: 15%;
+    }
+
+    .question {
+        padding: 32px 20px 32px 20px;
+        text-align: center;
+    }
+}
