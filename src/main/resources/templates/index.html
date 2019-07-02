@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <!--<head th:replace="~{layouts/main_layout :: head(title = 'Pick - IDE')}">-->
@@ -37,13 +37,24 @@
                         Choose the most suitable IDE to increase your work efficiency!
                     </h1>
 
-                    <div class="row main-buttons">
+                    <div class="row main-buttons" sec:authorize="!isAuthenticated()">
                         <button type="button" class="btn btn-outline-light start-button"
                                 onclick="window.location.href='/start'">Start
                         </button>
 
                         <button type="button" class="btn login-button" onclick="window.location.href='/login'">
                             Login
+                        </button>
+
+                    </div>
+
+                    <div class="row main-buttons" sec:authorize="isAuthenticated()">
+                        <button type="button" class="btn btn-outline-light start-button"
+                                onclick="window.location.href='/start'">Start
+                        </button>
+
+                        <button type="button" class="btn login-button" onclick="window.location.href='/#'">
+                            Account
                         </button>
 
                     </div>

@@ -30,7 +30,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .usernameParameter("email")
                 .and()
                         .logout()
-                        .logoutSuccessUrl("/");
+                        .logoutSuccessUrl("/")
+                .and()
+                        .rememberMe();
     }
 
 

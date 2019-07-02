@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <head th:fragment="head(title)">
@@ -37,10 +37,10 @@
             <div class="col-sm-8 col-6 navbar-links animated fadeIn">
                 <ul id="navbar-big-screen-links">
 
-                    <li>
+                    <li sec:authorize="!isAuthenticated()">
                         <a href="#" class="navbar-link">Register</a>
                     </li>
-                    <li>
+                    <li sec:authorize="isAuthenticated()">
                         <form method="POST" th:action="@{/logout}">
                             <button class="button-logout">
                                 Logout
@@ -64,10 +64,10 @@
         </div>
         <div class="row" id="navbar-small-screen-links">
             <ul>
-                <li>
+                <li sec:authorize="!isAuthenticated()">
                     <a href="#">Register<i class="fas fa-hands-helping"></i></a>
                 </li>
-                <li>
+                <li sec:authorize="isAuthenticated()">
                     <form method="POST" action="/logout">
                         <button class="button-logout">
                             Logout<i class="fas fa-sign-out-alt"></i>
