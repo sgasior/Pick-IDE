@@ -13,7 +13,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private UserDetailsService userDetailsService;
 
-    public WebSecurityConfiguration(UserDetailsService userDetailsService) {
+    public WebSecurityConfiguration(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
@@ -21,12 +21,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+                        .antMatchers("/").permitAll()
+                        .antMatchers("/start").hasRole("USER")
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .usernameParameter("email");
+                        .formLogin()
+                        .loginPage("/login")
+                        .permitAll()
+                        .usernameParameter("email")
+                .and()
+                        .logout()
+                        .logoutSuccessUrl("/");
     }
 
 

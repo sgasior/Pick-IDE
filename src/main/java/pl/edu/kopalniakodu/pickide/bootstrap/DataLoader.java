@@ -9,8 +9,6 @@ import pl.edu.kopalniakodu.pickide.repository.RoleRepository;
 import pl.edu.kopalniakodu.pickide.repository.UserRepository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 @Component
@@ -61,7 +59,8 @@ public class DataLoader implements CommandLineRunner {
         user.addRole(user_role);
         userRepository.save(user);
 
-        admin.addRoles(new HashSet<>(Arrays.asList(user_role, admin_role)));
+        admin.addRole(admin_role);
+//        admin.addRoles(new HashSet<>(Arrays.asList(user_role, admin_role)));
         userRepository.save(admin);
 
     }

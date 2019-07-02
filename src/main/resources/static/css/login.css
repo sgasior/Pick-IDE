@@ -10,6 +10,7 @@
 #login-box {
     height: 400px;
     width: 400px;
+    position: relative;
     background: white;
     color: black;
     margin: auto;
@@ -19,6 +20,14 @@
     -webkit-box-shadow: 1px -1px 24px 6px rgba(0, 0, 0, 0.72);
     box-shadow: 1px -1px 24px 6px rgba(0, 0, 0, 0.72);
 }
+
+#alerts {
+    height: 100px;
+    width: 400px;
+    position: absolute;
+    bottom: 98%;
+}
+
 
 .login-form-logo {
     color: #000;
@@ -174,7 +183,8 @@
     width: 60%;
     border: 1px solid #071a52;
     background: #fff;
-    padding-left: 32px
+    padding-left: 32px;
+    outline: none;
 }
 
 .login-inputs input[type="password"]::placeholder,
