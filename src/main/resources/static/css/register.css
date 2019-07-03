@@ -1,0 +1,200 @@
+html,
+body {
+    height: 100%;
+}
+
+
+.container-fluid {
+    background: linear-gradient(180deg, rgba(7, 26, 82, 0.95) 54%, rgba(8, 105, 114, 1) 100%);
+    height: 100%;
+}
+
+
+
+/* -----------Register section--------*/
+
+#register {
+    height: 100%;
+    padding: 12% 30% 12% 30%;
+}
+
+#register-box {
+    border-radius: 3%;
+}
+
+
+.register-info {
+    height: 100%;
+    font-family: Roboto, sans-serif;
+    color: #fff;
+}
+
+.register-info-welcome-msg {
+    padding-top: 80px;
+    text-align: left;
+    letter-spacing: 1px;
+    color: #a7ff83;
+}
+
+
+.register-info-welcome-msg hr {
+    width: 102%;
+    margin: 25px auto;
+    border: solid #a7ff83 1px;
+    border-bottom: none;
+}
+
+.register-description {
+    text-align: justify;
+    line-height: 2;
+}
+
+.login-info {
+    position: relative;
+    top: 200px;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.login-info a {
+    color: #a7ff83;
+    text-decoration: none;
+}
+
+.login-info a:hover {
+    opacity: 0.7;
+}
+
+.register-form {
+    height: 100%;
+    padding: 0;
+    border-radius: 3%;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.register-form-welcome-msg {
+    color: #fff;
+    padding-top: 12px;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.register-form-welcome-msg .fas {
+    margin-right: 12px;
+}
+
+
+.register-form-welcome-msg hr {
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    border: solid #fff 3px;
+    border-bottom: none;
+}
+
+
+
+/* -----------Buttons--------*/
+
+.submit-register-button {
+    width: 60%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    background: #086972;
+    color: #fff;
+}
+
+.submit-login-button:hover {
+    opacity: 0.9;
+    color: #fff;
+}
+
+.register-button {
+    text-align: center;
+    color: black;
+}
+
+.register-button .btn {
+    background: #17b978;
+    width: 82%
+}
+
+.register-button .btn:hover {
+    opacity: 0.7;
+}
+
+/* -----------INPUTS --------*/
+
+.register-inputs input[type="password"],
+.register-inputs input[type="text"],
+.register-inputs input[type="email"] {
+    height: 40px;
+    width: 60%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+
+}
+
+.register-inputs input[type="password"]::placeholder,
+.register-inputs input[type="text"]::placeholder,
+.register-inputs input[type="email"]::placeholder {
+    color: #fff;
+    font-size: 16px;
+}
+
+
+.register-input label {
+    color: #fff;
+    display: block;
+    margin-bottom: 35px;
+}
+
+.hr-input {
+    margin-top: 0;
+    margin-left: 40px;
+    width: 80%;
+    border: solid #fff 1px;
+    border-bottom: none;
+}
+
+.register-inputs .fa-lock,
+.register-inputs .fa-user-tie {
+    position: absolute;
+    left: 90px;
+    top: 12px;
+    font-size: 16px;
+    color: #071a52
+}
+
+
+.input-icon {
+    color: #fff;
+    margin: 0 12px;
+    display: inline;
+}
+
+.register-input {
+    display: inline;
+}
+
+
+/* -----------MEDIA QUERIES --------*/
+
+@media (max-width: 1200px) {
+    #register {
+        padding: 16% 20% 16% 20%;
+    }
+}
+
+
+@media (max-width: 900px) {
+    #register {
+        padding: 30% 5% 30% 5%;
+    }
+}

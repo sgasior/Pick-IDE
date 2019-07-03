@@ -38,7 +38,7 @@
                 <ul id="navbar-big-screen-links">
 
                     <li sec:authorize="!isAuthenticated()">
-                        <a href="#" class="navbar-link">Register</a>
+                        <a th:href="@{/register}" class="navbar-link">Register</a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
                         <form method="POST" th:action="@{/logout}">

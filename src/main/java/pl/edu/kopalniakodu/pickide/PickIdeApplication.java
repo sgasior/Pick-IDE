@@ -13,10 +13,10 @@ public class PickIdeApplication {
 
     }
 
-
     @Bean
     public SpringSecurityDialect securityDialect() {
         return new SpringSecurityDialect();
     }
+
 
 }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Register')}"></th:block>
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{css/register.css}">
+
+</head>
+<body>
+
+
+<div class="container-fluid">
+
+    <section id="register">
+
+
+        <!--ALERT WHEN USER TYPED SOMETHING WRONG-->
+        <!--
+<div id="alerts">
+<div class="alert alert-warning fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Invalid!</strong>
+</div>
+</div>git
+-->
+
+        <div class="row h-100 justify-content-center align-items-center" id="register-box">
+            <div class="col-6 register-info">
+                <div class="register-info-welcome-msg">
+                    <h2><strong>Sign up right now!</strong></h2>
+                    <hr>
+                </div>
+                <div class="register-description">
+                    Thanks to registration you will be able to share your survey with other people. This will allow
+                    you to decide together.
+                </div>
+
+                <div class="login-info">
+                    <a th:href="@{/login}">Already a member?</a>
+                </div>
+
+
+            </div>
+            <div class="col-6 register-form">
+                <div class="register-form-welcome-msg">
+                    <i class="fas fa-hands-helping"></i> Register:
+                    <hr>
+                </div>
+
+                <form th:action="@{/register}" method="POST" th:object="${user}">
+                    <div class="register-inputs">
+
+                        <div class="input-icon"><i class="fas fa-user"></i></div>
+                        <div class="register-input">
+                            <input type="text" name="username" id="username" placeholder="Your name" required
+                                   autofocus autocomplete="off" th:field="*{nickName}"/>
+                            <label for="username">
+                                <hr class="hr-input">
+                            </label>
+                        </div>
+
+                        <div class="input-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="register-input">
+                            <input type="email" name="email" id="email" placeholder="Your email" required
+                                   autocomplete="off" th:field="*{email}"/>
+                            <label for="email">
+                                <hr class="hr-input">
+                            </label>
+                        </div>
+
+
+                        <div class="input-icon"><i class="fas fa-key"></i></div>
+                        <div class="register-input">
+                            <input type="password" name="password" id="password" placeholder="Your password"
+                                   required autocomplete="off" th:field="*{password}"/>
+                            <label for="password">
+                                <hr class="hr-input">
+                            </label>
+                        </div>
+
+                        <div class="input-icon"><i class="fas fa-key"></i></div>
+                        <div class="register-input">
+                            <input type="password" name="confirm_password" id="confirm_password"
+                                   placeholder="Confirm your password" required autocomplete="off"
+                                   th:field="*{confirmPassword}"/>
+                            <label for="confirm_password">
+                                <hr class="hr-input">
+                            </label>
+                        </div>
+
+                        <div class="register-button">
+                            <button type="submit" class="btn">Submit</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js "></script>
+
+<script src="vendors/js/jquery-3.3.1.min.js "></script>
+
+
+<script src="vendors/js/bootstrap.min.js "></script>
+
+
+<script src="vendors/js/jquery.waypoints.min.js "></script>
+<script src="js/index.js "></script>
+</body>
+</html>

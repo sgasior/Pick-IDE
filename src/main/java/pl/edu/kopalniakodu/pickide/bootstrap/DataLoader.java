@@ -49,6 +49,10 @@ public class DataLoader implements CommandLineRunner {
 
         User user = new User("user@mail.com", encodePassword("user"));
         User admin = new User("admin@mail.com", encodePassword("admin"));
+        user.setNickName("UserNickName");
+        user.setConfirmPassword(user.getPassword());
+        admin.setNickName("AdminNickName");
+        admin.setConfirmPassword(admin.getPassword());
         userList.add(user);
         userList.add(admin);
 

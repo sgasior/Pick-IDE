@@ -5,11 +5,14 @@ import lombok.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.edu.kopalniakodu.pickide.domain.validator.ConfirmPasswords;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.*;
 
 @Entity
+@ConfirmPasswords
 public class User implements UserDetails {
 
 
@@ -19,10 +22,21 @@ public class User implements UserDetails {
 
     @NonNull
     @Column(nullable = false, unique = true)
+    @NotEmpty(message = "Please enter mail")
     private String email;
 
     @NonNull
+    @NotEmpty(message = "Please enter password")
     private String password;
+
+    @Transient
+    @NotEmpty(message = "Please enter password confirmation")
+    private String confirmPassword;
+
+    @NonNull
+    @NotEmpty(message = "Please enter your name")
+    @Column(nullable = false, unique = true)
+    private String nickName;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -117,15 +131,23 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", nickName='" + nickName + '\'' +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -136,7 +158,8 @@ public class User implements UserDetails {
 
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        return password != null ? password.equals(user.password) : user.password == null;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        return nickName != null ? nickName.equals(user.nickName) : user.nickName == null;
     }
 
     @Override
@@ -144,6 +167,15 @@ public class User implements UserDetails {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (nickName != null ? nickName.hashCode() : 0);
         return result;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }
