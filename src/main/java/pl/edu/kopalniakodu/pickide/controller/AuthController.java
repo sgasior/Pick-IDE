@@ -40,7 +40,7 @@ public class AuthController {
         } else {
             System.out.println(user.toString());
             User registeredUser = userService.save(user);
-            redirectAttributes.addAttribute("successfully-registered", true);
+            redirectAttributes.addFlashAttribute("successfullyRegistered", true);
             return "redirect:/login";
         }
 

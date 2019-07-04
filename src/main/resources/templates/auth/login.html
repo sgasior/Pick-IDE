@@ -17,12 +17,18 @@
 
             <div id="login-box">
 
-                <div id="alerts" th:if="${param.error !=null}">
-                    <div class="alert alert-warning fade show">
+                <div class="alerts">
+                    <div class="alert alert-success fade show" th:if="${successfullyRegistered !=null}">
+                        <button type="button" class="close" data-dismiss="alert">&times;
+                        </button>
+                        <strong>You have successfully registered!</strong>
+                    </div>
+                    <div class="alert alert-warning fade show" th:if="${param.error !=null}">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>Invalid email or password!</strong>
                     </div>
                 </div>
+
 
                 <div class="login-form-logo">
                     <div class="circle">
@@ -58,7 +64,7 @@
                             </div>
 
                             <div class="col-6 register-link">
-                                <a href="register.html">Not a member?</a>
+                                <a th:href="@{/register}">Not a member?</a>
                             </div>
                         </div>
 

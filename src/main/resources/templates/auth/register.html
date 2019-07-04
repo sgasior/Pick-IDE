@@ -16,14 +16,18 @@
 
 
         <!--ALERT WHEN USER TYPED SOMETHING WRONG-->
-        <!--
-<div id="alerts">
-<div class="alert alert-warning fade show">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Invalid!</strong>
-</div>
-</div>git
--->
+
+        <div id="alerts" th:if="validationErrors">
+            <div th:each="validationError : ${validationErrors}">
+                <div class="alert alert-warning fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>
+                        <th:block th:text="${validationError.getDefaultMessage()}"></th:block>
+                    </strong>
+                </div>
+            </div>
+        </div>
+
 
         <div class="row h-100 justify-content-center align-items-center" id="register-box">
             <div class="col-6 register-info">
@@ -53,8 +57,8 @@
 
                         <div class="input-icon"><i class="fas fa-user"></i></div>
                         <div class="register-input">
-                            <input type="text" name="username" id="username" placeholder="Your name" required
-                                   autofocus autocomplete="off" th:field="*{nickName}"/>
+                            <input type="text" name="username" id="username" placeholder="Your name"
+                                   required autofocus autocomplete="off" th:field="*{nickName}"/>
                             <label for="username">
                                 <hr class="hr-input">
                             </label>
@@ -62,8 +66,8 @@
 
                         <div class="input-icon"><i class="fas fa-envelope"></i></div>
                         <div class="register-input">
-                            <input type="email" name="email" id="email" placeholder="Your email" required
-                                   autocomplete="off" th:field="*{email}"/>
+                            <input type="email" name="email" id="email" placeholder="Your email"
+                                   required autocomplete="off" th:field="*{email}"/>
                             <label for="email">
                                 <hr class="hr-input">
                             </label>

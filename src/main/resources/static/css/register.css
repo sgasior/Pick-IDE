@@ -10,7 +10,6 @@ body {
 }
 
 
-
 /* -----------Register section--------*/
 
 #register {
@@ -18,8 +17,15 @@ body {
     padding: 12% 30% 12% 30%;
 }
 
+#alerts{
+    position: relative;
+    bottom: 20%;
+}
+
 #register-box {
     border-radius: 3%;
+    position: relative;
+    bottom: 20%;
 }
 
 
@@ -93,7 +99,6 @@ body {
     border: solid #fff 3px;
     border-bottom: none;
 }
-
 
 
 /* -----------Buttons--------*/

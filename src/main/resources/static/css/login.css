@@ -21,7 +21,7 @@
     box-shadow: 1px -1px 24px 6px rgba(0, 0, 0, 0.72);
 }
 
-#alerts {
+.alerts {
     height: 100px;
     width: 400px;
     position: absolute;
