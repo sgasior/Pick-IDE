@@ -5,12 +5,13 @@ import org.springframework.stereotype.Service;
 import pl.edu.kopalniakodu.pickide.domain.User;
 import pl.edu.kopalniakodu.pickide.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private RoleService roleService;
-
     private PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository, RoleService roleService, PasswordEncoder passwordEncoder) {
@@ -27,6 +28,16 @@ public class UserServiceImpl implements UserService {
         user.setConfirmPassword(encodedPassword);
         userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findByNickName(String nickName) {
+        return userRepository.findByNickName(nickName);
     }
 
 

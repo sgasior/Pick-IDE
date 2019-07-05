@@ -6,6 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.edu.kopalniakodu.pickide.domain.validator.ConfirmPasswords;
+import pl.edu.kopalniakodu.pickide.domain.validator.NonWhitespace;
+import pl.edu.kopalniakodu.pickide.domain.validator.PasswordStrength;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -21,22 +23,27 @@ public class User implements UserDetails {
     private Long id;
 
     @NonNull
+    @NotEmpty(message = "Please enter your name")
+    @Column(nullable = false, unique = true)
+    @NonWhitespace(message = "Your name cannot contain whitespaces")
+    private String nickName;
+
+    @NonNull
     @Column(nullable = false, unique = true)
     @NotEmpty(message = "Please enter mail")
+    @NonWhitespace(message = "Your email cannot contain whitespaces")
     private String email;
 
     @NonNull
     @NotEmpty(message = "Please enter password")
+    @PasswordStrength
+    @NonWhitespace(message = "Your password cannot contain whitespaces")
     private String password;
 
     @Transient
     @NotEmpty(message = "Please enter password confirmation")
     private String confirmPassword;
 
-    @NonNull
-    @NotEmpty(message = "Please enter your name")
-    @Column(nullable = false, unique = true)
-    private String nickName;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
