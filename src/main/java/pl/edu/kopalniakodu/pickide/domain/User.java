@@ -74,7 +74,7 @@ public class User implements UserDetails {
         surveys.add(survey);
     }
 
-    public void addSurveys(Survey survey) {
+    public void addSurveys(List<Survey> surveys) {
         surveys.forEach(this::addSurvey);
     }
 

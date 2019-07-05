@@ -3,13 +3,9 @@ package pl.edu.kopalniakodu.pickide.bootstrap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import pl.edu.kopalniakodu.pickide.domain.Role;
-import pl.edu.kopalniakodu.pickide.domain.Survey;
-import pl.edu.kopalniakodu.pickide.domain.User;
-import pl.edu.kopalniakodu.pickide.domain.util.ProgrammingSkill;
-import pl.edu.kopalniakodu.pickide.repository.RoleRepository;
-import pl.edu.kopalniakodu.pickide.repository.SurveyRepository;
-import pl.edu.kopalniakodu.pickide.repository.UserRepository;
+import pl.edu.kopalniakodu.pickide.domain.*;
+import pl.edu.kopalniakodu.pickide.domain.enumUtil.ProgrammingSkill;
+import pl.edu.kopalniakodu.pickide.repository.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +24,27 @@ public class DataLoader implements CommandLineRunner {
     private static final String ROLE_USER = "ROLE_USER";
     private static final String ROLE_ADMIN = "ROLE_ADMIN";
 
+    private static final String SURVEY_NAME_BEGINNER = "AHP_BEGINNER";
+    private static final String SURVEY_NAME_MID = "AHP_MID";
+    private static final String SURVEY_NAME_PRO = "AHP_PRO";
+    private static final String SURVEY_NAME_GUEST = "GUEST_SURVEY_BEGINNER";
+
+
+    private static final String CRITERIA_NAME_SYNTAX = "SYNTAX";
+    private static final String ALTERNATIVE__NAME_INTELIJ = "INTELLIJ IDEA";
+
     private UserRepository userRepository;
-
     private RoleRepository roleRepository;
-
     private SurveyRepository surveyRepository;
+    private CriteriaRepository criteriaRepository;
+    private AlternativeRepository alternativeRepository;
 
-    public DataLoader(UserRepository userRepository, RoleRepository roleRepository, SurveyRepository surveyRepository) {
+    public DataLoader(UserRepository userRepository, RoleRepository roleRepository, SurveyRepository surveyRepository, CriteriaRepository criteriaRepository, AlternativeRepository alternativeRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.surveyRepository = surveyRepository;
+        this.criteriaRepository = criteriaRepository;
+        this.alternativeRepository = alternativeRepository;
     }
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -47,15 +54,38 @@ public class DataLoader implements CommandLineRunner {
 
         LoadUsersAndRoles();
         LoadSurverys();
+//        LoadCriterias();
+//        LoadAlternatives();
+    }
+
+    private void LoadAlternatives() {
+        Survey survey_1 = surveyRepository.findBySurveyName(SURVEY_NAME_BEGINNER).get();
+        Alternative alternative_1 = new Alternative(ALTERNATIVE__NAME_INTELIJ, survey_1);
+
+        survey_1.addAlternative(alternative_1);
+        surveyRepository.save(survey_1);
+        alternativeRepository.deleteById(1L);
+    }
+
+    private void LoadCriterias() {
+        Survey survey_1 = surveyRepository.findBySurveyName(SURVEY_NAME_BEGINNER).get();
+        Criteria criteria_1 = new Criteria(CRITERIA_NAME_SYNTAX, survey_1);
+
+
+        survey_1.addCriteria(criteria_1);
+        surveyRepository.save(survey_1);
+//        criteriaRepository.deleteById(1L);
+
     }
 
     private void LoadSurverys() {
         User user = userRepository.findByEmail(USER_MAIL).get();
         User admin = userRepository.findByEmail(ADMIN_MAIL).get();
 
-        Survey survey_1 = new Survey("AHP_BEGINNER", user, ProgrammingSkill.BEGINNER);
-        Survey survey_2 = new Survey("AHP_MID", user, ProgrammingSkill.MID_EXP);
-        Survey survey_3 = new Survey("AHP_PRO", admin, ProgrammingSkill.PRO);
+        Survey survey_1 = new Survey(SURVEY_NAME_BEGINNER, user, ProgrammingSkill.BEGINNER);
+        Survey survey_2 = new Survey(SURVEY_NAME_MID, user, ProgrammingSkill.MID_EXP);
+        Survey survey_3 = new Survey(SURVEY_NAME_PRO, admin, ProgrammingSkill.PRO);
+        Survey survey_4 = new Survey(SURVEY_NAME_GUEST, ProgrammingSkill.BEGINNER);
 
         user.addSurvey(survey_1);
         survey_2.getUser().addSurvey(survey_2);
@@ -66,6 +96,8 @@ public class DataLoader implements CommandLineRunner {
 
 //        surveyRepository.deleteById(1L);
 //        userRepository.deleteById(1L);
+
+        surveyRepository.save(survey_4);
 
     }
 

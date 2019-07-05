@@ -4,9 +4,15 @@ package pl.edu.kopalniakodu.pickide.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import pl.edu.kopalniakodu.pickide.domain.util.ProgrammingSkill;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import pl.edu.kopalniakodu.pickide.domain.enumUtil.PreferedCriteria;
+import pl.edu.kopalniakodu.pickide.domain.enumUtil.PreferedIDE;
+import pl.edu.kopalniakodu.pickide.domain.enumUtil.ProgrammingSkill;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,24 +30,94 @@ public class Survey {
     @JoinColumn(name = "user_id")
     private User user;
 
-//    List<Criteria> criterias;
-//
-//    List<Alternative> alternatives;
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            mappedBy = "survey", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    List<Criteria> criterias = new ArrayList<>();
 
-    @Enumerated(EnumType.STRING)
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            mappedBy = "survey", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    List<Alternative> alternatives = new ArrayList<>();
+
+    @Transient
     private ProgrammingSkill programmingSkill;
+
+    @Transient
+    private PreferedCriteria preferedCriteria;
+
+    @Transient
+    private PreferedIDE preferedIDE;
 
     public Survey() {
 
+    }
+
+    public Survey(String surveyName, ProgrammingSkill programmingSkill) {
+        this.surveyName = surveyName;
+        this.programmingSkill = programmingSkill;
+        addPreferedCriteriasAndAlternatives();
     }
 
     public Survey(String surveyName, User user, ProgrammingSkill programmingSkill) {
         this.surveyName = surveyName;
         this.user = user;
         this.programmingSkill = programmingSkill;
+        addPreferedCriteriasAndAlternatives();
+    }
+
+    private void addPreferedCriteriasAndAlternatives() {
+        if (programmingSkill.getResponse().equals(ProgrammingSkill.BEGINNER.getResponse())) {
+            List<String> preferedCriterias = PreferedCriteria.BEGINNER.getReponse();
+            List<String> preferedAlternatives = PreferedIDE.BEGINNER.getReponse();
+            addDefaultCriterias(preferedCriterias);
+            addDefaultAlternatives(preferedAlternatives);
+
+        } else if ((programmingSkill.getResponse().equals(ProgrammingSkill.MID_EXP.getResponse()))) {
+
+            List<String> preferedCriterias = PreferedCriteria.MID_EXP.getReponse();
+            List<String> preferedAlternatives = PreferedIDE.MID_EXP.getReponse();
+            addDefaultCriterias(preferedCriterias);
+            addDefaultAlternatives(preferedAlternatives);
+        } else {
+            List<String> preferedCriterias = PreferedCriteria.PRO_EXP.getReponse();
+            List<String> preferedAlternatives = PreferedIDE.PRO_EXP.getReponse();
+            addDefaultCriterias(preferedCriterias);
+            addDefaultAlternatives(preferedAlternatives);
+        }
     }
 
 
+    private void addDefaultCriterias(List<String> preferedCriterias) {
+        for (String criteriaName : preferedCriterias) {
+            addCriteria(new Criteria(criteriaName, this));
+        }
+    }
+
+    private void addDefaultAlternatives(List<String> preferedCriterias) {
+        for (String alternativeName : preferedCriterias) {
+            addAlternative(new Alternative(alternativeName, this));
+        }
+    }
+
+
+    public void addCriteria(Criteria criteria) {
+        criterias.add(criteria);
+    }
+
+    public void addAlternative(Alternative alternative) {
+        alternatives.add(alternative);
+    }
+
+    @Override
+    public String toString() {
+        return "Survey{" +
+                "id=" + id +
+                ", surveyName='" + surveyName + '\'' +
+                '}';
+    }
 }
 
 
