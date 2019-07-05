@@ -1,7 +1,10 @@
 package pl.edu.kopalniakodu.pickide.domain;
 
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,12 +17,15 @@ import javax.validation.constraints.NotEmpty;
 import java.util.*;
 
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
 @ConfirmPasswords
 public class User implements UserDetails {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull
@@ -53,6 +59,8 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "user", orphanRemoval = true)
+    private List<Survey> surveys = new ArrayList<>();
 
     public void addRole(Role role) {
         roles.add(role);
@@ -60,6 +68,14 @@ public class User implements UserDetails {
 
     public void addRoles(Set<Role> roles) {
         roles.forEach(this::addRole);
+    }
+
+    public void addSurvey(Survey survey) {
+        surveys.add(survey);
+    }
+
+    public void addSurveys(Survey survey) {
+        surveys.forEach(this::addSurvey);
     }
 
     public User() {
@@ -76,13 +92,6 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -93,14 +102,11 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     @Override
     public String getUsername() {
         return email;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -122,30 +128,6 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -156,33 +138,4 @@ public class User implements UserDetails {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        return nickName != null ? nickName.equals(user.nickName) : user.nickName == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (nickName != null ? nickName.hashCode() : 0);
-        return result;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 }

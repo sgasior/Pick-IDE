@@ -25,7 +25,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/start").hasRole("USER")
                 .antMatchers("/login").not().authenticated()
                 .and()
                 .formLogin()
