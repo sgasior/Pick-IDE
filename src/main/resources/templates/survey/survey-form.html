@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Questionnaire')}"></th:block>
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{/css/survey-form.css}">
+
+
+</head>
+
+
+<body>
+
+<div th:replace="~{layouts/main_layout :: navbar}"></div>
+
+<div class="new-content">
+    <div class="container-fluid">
+
+        <section id="survey">
+
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="col-lg-6 col-md-10 col-sm-12 survey-box">
+                    <div class="survey-form-welcome-msg">
+                        <h2><strong>Prepare your survey</strong></h2>
+                        <hr>
+                    </div>
+
+                    <div class="survey-form">
+                        <form id="surveyForm" action="POST">
+                            <div class="tab survey-inputs" id="tab1">
+
+                                <div class="survey-input">
+                                    <label for="survey_name">Share with others:</label>
+
+                                    <div class="toggle-checkbox">
+                                        <input type="checkbox" id="toggle-checkbox">
+                                        <label for="toggle-checkbox">
+                                            <div class="circle-inner"></div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="survey-input">
+                                    <label for="survey_name">Survey name:</label>
+                                    <input type="text" name="survey_name" id="survey_name" required>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="tab survey-inputs" id="tab2">
+                                <p>Prefered criterias:</p>
+
+                                <div class="row">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_1">
+                                        <label for="checkbox_1">Criteria 1</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_2">
+                                        <label for="checkbox_2">Criteria 2</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_3">
+                                        <label for="checkbox_2">Criteria 3</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_4">
+                                        <label for="checkbox_2">Criteria 4</label>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <p>Other criterias:</p>
+
+                                <div class="row">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_5">
+                                        <label for="checkbox_5">Criteria 1</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_6">
+                                        <label for="checkbox_6">Criteria 2</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_7">
+                                        <label for="checkbox_7">Criteria 3</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_8">
+                                        <label for="checkbox_8">Criteria 4</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_10">
+                                        <label for="checkbox_10">Criteria 5</label>
+                                    </div>
+                                </div>
+                                <div class="new-inputs-msg">
+                                    <hr>
+                                    <p>Added criterias:</p>
+                                </div>
+
+                                <div class="row" id="new-criterias">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="tab survey-inputs" id="tab3">
+                                <p>Prefered alternatives:</p>
+
+                                <div class="row">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_1">
+                                        <label for="checkbox_1">Alternative 1</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_2">
+                                        <label for="checkbox_2">Alternative 2</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_3">
+                                        <label for="checkbox_2">Alternative 3</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_4">
+                                        <label for="checkbox_2">Alternative 4</label>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <p>Other alternatives:</p>
+
+                                <div class="row">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_5">
+                                        <label for="checkbox_5">Alternative 1</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_6">
+                                        <label for="checkbox_6">Alternative 2</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_7">
+                                        <label for="checkbox_7">Alternative 3</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_8">
+                                        <label for="checkbox_8">Alternative 4</label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox_9">
+                                        <label for="checkbox_9">Alternative 5</label>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="new-inputs-msg">
+                                    <hr>
+                                    <p>Added alternatives:</p>
+                                </div>
+
+                                <div class="row" id="new-alternatives">
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="survey-inputs" id="tab-add-criteria">
+                                <div class="survey-input">
+                                    <label for="criteria_name">Criteria name:</label>
+                                    <input type="text" name="criteria_name" id="criteria_name" required>
+                                    <button type="button" class="acceptCriteria"
+                                            onclick="acceptCriterias('new-criterias',document.getElementById('criteria_name').value)">
+                                        Accept
+                                    </button>
+                                    <button type="button" class="cancelAdding" onclick="cancelAddingCriteria()">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="survey-inputs" id="tab-add-alternatives">
+                                <div class="survey-input">
+                                    <label for="alternative_name">Alternative name:</label>
+                                    <input type="text" name="alternative_name" id="alternative_name" required>
+                                    <button type="button" class="acceptCriteria"
+                                            onclick="acceptAlternatives('new-alternatives',document.getElementById('alternative_name').value)">
+                                        Accept
+                                    </button>
+                                    <button type="button" class="cancelAdding" onclick="cancelAddingAlternatives()">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="stepsButtons">
+                                <button type="button" id="addCriteria" onclick="addCriterias()">
+                                    Add Criteria
+                                </button>
+                                <button type="button" id="addAlternative" onclick="addAlternatives()">
+                                    Add Alternative
+                                </button>
+                                <button type="button" id="prevBtn" onclick="nextView(-1)">
+                                    Previous
+                                </button>
+                                <button type="button" id="nextBtn" onclick="nextView(1)">
+                                    Next
+                                </button>
+
+                            </div>
+
+
+                            <div class="steps">
+                                <div class="step-circle"></div>
+                                <div class="step-circle"></div>
+                                <div class="step-circle"></div>
+
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div th:replace="~{layouts/main_layout :: footer}"></div>
+
+
+<script type="text/javascript" th:src="@{/vendors/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/survey.js}"></script>
+</body>
+</html>

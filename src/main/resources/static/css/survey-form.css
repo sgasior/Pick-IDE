@@ -1,0 +1,374 @@
+html,
+body {
+    height: 100%;
+}
+
+
+.container-fluid {
+    height: 100%;
+}
+
+
+
+/* -----------Survey section--------*/
+
+#survey {
+    background-color: #f8f1f1;
+}
+
+
+.survey-box {
+    height: 100%;
+    margin-top: 120px;
+    margin-bottom: 375px;
+    font-family: Roboto, sans-serif;
+    color: #086972;
+    background: #acc6aa;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3%;
+    padding: 20px 40px;
+}
+
+.survey-form-welcome-msg {
+    padding-top: 20px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+
+.survey-form-welcome-msg hr {
+    width: 80%;
+    margin: 12px auto;
+    border: solid #086972 1px;
+    border-bottom: none;
+}
+
+.survey-form {
+    text-align: justify;
+    line-height: 2;
+    margin-top: 30px;
+}
+
+/*Hide all tabs by default*/
+
+.tab {
+    display: none;
+}
+
+#tab1 .survey-input {
+    margin-bottom: 24px;
+}
+
+
+#tab2 .row {
+    width: 75%;
+    position: relative;
+    right: 25px;
+}
+
+#tab2 .checkbox {
+    margin-left: 25px;
+}
+
+#tab2 hr {
+    width: 100%;
+    margin: 12px auto;
+    border: solid #086972 1px;
+    border-bottom: none;
+}
+
+
+#tab3 .row {
+    width: 75%;
+    position: relative;
+    right: 25px;
+}
+
+#tab3 .checkbox {
+    margin-left: 25px;
+}
+
+#tab3 hr {
+    width: 100%;
+    margin: 12px auto;
+    border: solid #086972 1px;
+    border-bottom: none;
+}
+
+
+.stepsButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.new-inputs-msg {
+    display: none;
+}
+
+.deleteCheckbox {
+    color: red;
+    background: none;
+    border: none;
+    position: relative;
+    right: 20px;
+    bottom: 5px;
+    font-weight: 900;
+}
+
+#prevBtn {
+    margin-left: auto;
+}
+
+
+.steps {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.step-circle {
+    border: none;
+    display: inline-block;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: grey;
+    margin: 0 6px;
+}
+
+.active-step {
+    background: #086972;
+}
+
+/*default display none*/
+
+#tab-add-criteria {
+    display: none;
+}
+
+
+#tab-add-alternatives {
+    display: none;
+}
+
+
+/* -----------BUTTONS--------*/
+
+button:focus {
+    outline: 0;
+}
+
+#prevBtn {
+    width: 120px;
+    height: 50px;
+    background: white;
+    border: 1px solid #086972;
+    border-radius: 10px;
+    margin-right: 12px;
+
+}
+
+#nextBtn {
+    width: 80px;
+    height: 50px;
+    background: rgba(167, 255, 131, 0.8);
+    color: #071a52;
+    border: 1px solid #086972;
+    border-radius: 10px;
+}
+
+#nextBtn:hover {
+    background: rgba(167, 255, 131, 0.3);
+}
+
+#prevBtn:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+
+
+.stepsButtons #addCriteria {
+    display: none;
+}
+
+#addCriteria {
+    width: 120px;
+    height: 50px;
+    background: white;
+    border: 1px solid #086972;
+    border-radius: 10px;
+}
+
+#addCriteria:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+
+#addAlternative {
+    width: 150px;
+    height: 50px;
+    background: white;
+    border: 1px solid #086972;
+    border-radius: 10px;
+}
+
+
+.acceptCriteria {
+    width: 120px;
+    height: 50px;
+    background: rgba(167, 255, 131, 0.8);
+    color: #071a52;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.acceptCriteria:hover {
+    background: rgba(167, 255, 131, 0.3);
+}
+
+.cancelAdding {
+    width: 120px;
+    height: 50px;
+    background: #c19191;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.cancelAdding:hover {
+    background: rgba(193, 145, 145, 0.9);
+}
+
+
+
+
+/* -----------INPUTS --------*/
+
+.survey-inputs input[type="text"] {
+    border-radius: 10px;
+    height: 40px;
+    width: 100%;
+    border: 1px solid #086972;
+    background: #fff;
+    padding-left: 32px;
+    outline: none;
+}
+
+label {
+    display: block;
+    font-weight: 900;
+}
+
+#criteria_name,
+#alternative_name {
+    margin-bottom: 20px;
+}
+
+.survey-inputs input[type="password"]::placeholder,
+.survey-inputs input[type="email"]::placeholder {
+    color: #071a52;
+    font-size: 14px;
+}
+
+
+.hr-input {
+    margin-top: 0;
+    margin-left: 40px;
+    width: 80%;
+    border: solid #fff 1px;
+    border-bottom: none;
+}
+
+
+
+/* -----------Checkboxes--------*/
+
+/* toggle checkbox*/
+
+.toggle-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-checkbox input[type="checkbox"] + label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 40px;
+}
+
+.toggle-checkbox input[type="checkbox"] + label {
+    content: "";
+    position: relative;
+    border-radius: 15px;
+    width: 45px;
+    height: 25px;
+    background: gray;
+    padding: 6px;
+    transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+
+
+.toggle-checkbox .circle-inner {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    right: 21px;
+    top: 2.5px
+}
+
+.active-toggle {
+    background-color: #17b978 !important;
+}
+
+.active-toggle .circle-inner {
+    left: 21px;
+}
+
+.checkbox {
+    position: relative;
+}
+
+.checkbox input[type="checkbox"] {
+    opacity: 0;
+}
+
+.checkbox input[type="checkbox"] + label {
+    position: relative;
+    bottom: 18px;
+    cursor: pointer;
+    padding-left: 40px;
+    font-weight: 100;
+}
+
+.checkbox input[type="checkbox"] + label:before {
+    content: "";
+    border: 1px solid #071a52;
+    border-radius: 25%;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    top: 0;
+    left: 0px;
+
+}
+
+.checkbox input[type="checkbox"] + label:after {
+    content: "\2714";
+    font-size: 25px;
+    position: absolute;
+    color: #071a52;
+    top: -12px;
+    left: 3px;
+    opacity: 0;
+    transition: transform 0.1s linear, opacity 0.1s;
+    -moz-transition: transform 0.1s linear, opacity 0.1s;
+    -webkit-transition: transform 0.1s linear, opacity 0.1s;
+    -o-transition: transform 0.1s linear, opacity 0.1s;
+}
+
+.checkbox input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}

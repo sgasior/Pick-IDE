@@ -14,6 +14,6 @@ public class WelcomePageController {
 
     @GetMapping("/start")
     public String startPage() {
-        return "start";
+        return "survey/survey-start";
     }
 }

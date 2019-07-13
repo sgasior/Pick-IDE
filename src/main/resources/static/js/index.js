@@ -54,7 +54,6 @@ function stickNav() {
 $(document).ready(function () {
 
 
-
     $(".feature-box:nth-child(1)").css("opacity", 0);
 
     $(".feature-box:nth-child(1)").waypoint(function () {
@@ -63,7 +62,6 @@ $(document).ready(function () {
     }, {
         offset: '80%'
     });
-
 
 
     $(".feature-box:nth-child(2)").css("opacity", 0);
@@ -75,7 +73,6 @@ $(document).ready(function () {
     });
 
 
-
     $(".feature-box:nth-child(3)").css("opacity", 0);
     $(".feature-box:nth-child(3)").waypoint(function () {
         $(".feature-box:nth-child(3)").addClass("animated bounceIn");
@@ -83,7 +80,6 @@ $(document).ready(function () {
     }, {
         offset: '80%'
     });
-
 
 
     $("#about-app h2").css("opacity", 0);
@@ -118,8 +114,6 @@ $(document).ready(function () {
     });
 
 
-
-
     $(".slider").css("opacity", 0);
     $(".slider").waypoint(function () {
         $(".slider").addClass("animated fadeIn");
@@ -128,7 +122,6 @@ $(document).ready(function () {
     });
 
 });
-
 
 
 // -- - SLIDER START-- -
@@ -143,12 +136,6 @@ var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimation
 var sliderInterval = setInterval(function () {
     slide("slide-right");
 }, 6000);
-
-
-//$("#how-it-works button").click(function () {
-//    var userChosenButton = this.id;
-//    slide(userChosenButton);
-//})
 
 
 function slide(userChosenButton) {
@@ -199,9 +186,4 @@ function animateImages(actucalImage, nextImage) {
 // -- - SLIDER END-- -
 
 
-// -- - TOGGLE BUTTON START-- -
 
-
-$(".toggle-btn").click(function () {
-    $(this).toggleClass("active-toggle");
-});

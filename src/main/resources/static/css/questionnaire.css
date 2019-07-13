@@ -61,6 +61,52 @@
 
 /* -----------Checkboxes--------*/
 
+/* toggle checkbox*/
+
+.toggle-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-checkbox input[type="checkbox"] + label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 40px;
+}
+
+.toggle-checkbox input[type="checkbox"] + label {
+    content: "";
+    position: relative;
+    border-radius: 15px;
+    width: 45px;
+    height: 25px;
+    background: gray;
+    padding: 6px;
+    transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+
+
+.toggle-checkbox .circle-inner {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    right: 21px;
+    top: 2.5px
+}
+
+.active-toggle {
+    background-color: #17b978 !important;
+}
+
+.active-toggle .circle-inner {
+    left: 21px;
+}
+
+
 .checkbox input[type="checkbox"] {
     opacity: 0;
 }
@@ -80,6 +126,7 @@
     position: absolute;
     top: 0;
     left: 0px;
+
 }
 
 .checkbox input[type="checkbox"] + label:after {
@@ -150,42 +197,6 @@
 
 
 /* -----------Buttons--------*/
-
-.toggle-btn {
-    border-radius: 15px;
-    width: 45px;
-    height: 25px;
-    background: gray;
-    padding: 6px;
-    transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -webkit-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-}
-
-
-.active-toggle {
-    background-color: #17b978;
-}
-
-.active-toggle .circle-inner {
-    position: relative;
-    bottom: 3.5px;
-    left: 10px;
-}
-
-.toggle-btn .circle-inner {
-    width: 20px;
-    height: 20px;
-    background: white;
-    border-radius: 50%;
-    position: relative;
-    bottom: 3.5px;
-    right: 10px;
-    display: inline-block;
-
-}
-
 
 .next-button {
     width: 28%;
