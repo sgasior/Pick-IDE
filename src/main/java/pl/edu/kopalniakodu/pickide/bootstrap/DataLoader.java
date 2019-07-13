@@ -31,6 +31,7 @@ public class DataLoader implements CommandLineRunner {
 
 
     private static final String CRITERIA_NAME_SYNTAX = "SYNTAX";
+    private static final String CRITERIA_NAME_PLUGIN = "PLUGIN";
     private static final String ALTERNATIVE__NAME_INTELIJ = "INTELLIJ IDEA";
 
     private UserRepository userRepository;
@@ -38,13 +39,19 @@ public class DataLoader implements CommandLineRunner {
     private SurveyRepository surveyRepository;
     private CriteriaRepository criteriaRepository;
     private AlternativeRepository alternativeRepository;
+    private AnswerRepository answerRepository;
+    private AnswerCriteriaRepository answerCriteriaRepository;
+    private AnswerAlternativeRepository answerAlternativeRepository;
 
-    public DataLoader(UserRepository userRepository, RoleRepository roleRepository, SurveyRepository surveyRepository, CriteriaRepository criteriaRepository, AlternativeRepository alternativeRepository) {
+    public DataLoader(UserRepository userRepository, RoleRepository roleRepository, SurveyRepository surveyRepository, CriteriaRepository criteriaRepository, AlternativeRepository alternativeRepository, AnswerRepository answerRepository, AnswerCriteriaRepository answerCriteriaRepository, AnswerAlternativeRepository answerAlternativeRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.surveyRepository = surveyRepository;
         this.criteriaRepository = criteriaRepository;
         this.alternativeRepository = alternativeRepository;
+        this.answerRepository = answerRepository;
+        this.answerCriteriaRepository = answerCriteriaRepository;
+        this.answerAlternativeRepository = answerAlternativeRepository;
     }
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -54,52 +61,13 @@ public class DataLoader implements CommandLineRunner {
 
         LoadUsersAndRoles();
         LoadSurverys();
+//        LoadAnswers();
 //        LoadCriterias();
+//        LoadAnswerCriteria();
 //        LoadAlternatives();
+//        LoadAnswerAlternative();
     }
 
-    private void LoadAlternatives() {
-        Survey survey_1 = surveyRepository.findBySurveyName(SURVEY_NAME_BEGINNER).get();
-        Alternative alternative_1 = new Alternative(ALTERNATIVE__NAME_INTELIJ, survey_1);
-
-        survey_1.addAlternative(alternative_1);
-        surveyRepository.save(survey_1);
-        alternativeRepository.deleteById(1L);
-    }
-
-    private void LoadCriterias() {
-        Survey survey_1 = surveyRepository.findBySurveyName(SURVEY_NAME_BEGINNER).get();
-        Criteria criteria_1 = new Criteria(CRITERIA_NAME_SYNTAX, survey_1);
-
-
-        survey_1.addCriteria(criteria_1);
-        surveyRepository.save(survey_1);
-//        criteriaRepository.deleteById(1L);
-
-    }
-
-    private void LoadSurverys() {
-        User user = userRepository.findByEmail(USER_MAIL).get();
-        User admin = userRepository.findByEmail(ADMIN_MAIL).get();
-
-        Survey survey_1 = new Survey(SURVEY_NAME_BEGINNER, user, ProgrammingSkill.BEGINNER);
-        Survey survey_2 = new Survey(SURVEY_NAME_MID, user, ProgrammingSkill.MID_EXP);
-        Survey survey_3 = new Survey(SURVEY_NAME_PRO, admin, ProgrammingSkill.PRO);
-        Survey survey_4 = new Survey(SURVEY_NAME_GUEST, ProgrammingSkill.BEGINNER);
-
-        user.addSurvey(survey_1);
-        survey_2.getUser().addSurvey(survey_2);
-        admin.addSurvey(survey_3);
-
-        userRepository.save(user);
-        userRepository.save(admin);
-
-//        surveyRepository.deleteById(1L);
-//        userRepository.deleteById(1L);
-
-        surveyRepository.save(survey_4);
-
-    }
 
     private void LoadUsersAndRoles() {
 
@@ -137,6 +105,99 @@ public class DataLoader implements CommandLineRunner {
         userRepository.save(admin);
 
     }
+
+    private void LoadSurverys() {
+        User user = userRepository.findByEmail(USER_MAIL).get();
+        User admin = userRepository.findByEmail(ADMIN_MAIL).get();
+
+        Survey survey_1 = new Survey(SURVEY_NAME_BEGINNER, user, ProgrammingSkill.BEGINNER);
+        Survey survey_2 = new Survey(SURVEY_NAME_MID, user, ProgrammingSkill.MID_EXP);
+        Survey survey_3 = new Survey(SURVEY_NAME_PRO, admin, ProgrammingSkill.PRO);
+        Survey survey_4 = new Survey(SURVEY_NAME_GUEST, ProgrammingSkill.BEGINNER);
+
+        user.addSurvey(survey_1);
+        survey_2.getUser().addSurvey(survey_2);
+        admin.addSurvey(survey_3);
+
+        userRepository.save(user);
+        userRepository.save(admin);
+
+//        surveyRepository.deleteById(1L);
+//        userRepository.deleteById(1L);
+
+        surveyRepository.save(survey_4);
+
+    }
+
+
+    private void LoadAnswers() {
+        Survey survey_1 = surveyRepository.findBySurveyName(SURVEY_NAME_BEGINNER).get();
+        Survey survey_2 = surveyRepository.findBySurveyName(SURVEY_NAME_MID).get();
+        Answer answer_1 = new Answer();
+        Answer answer_2 = new Answer();
+
+        answer_1.setSurvey(survey_1);
+        survey_2.addAnswwer(answer_2);
+
+        answerRepository.save(answer_1);
+        surveyRepository.save(survey_2);
+
+    }
+
+    private void LoadCriterias() {
+
+        Criteria criteria_1 = new Criteria(CRITERIA_NAME_SYNTAX);
+        criteriaRepository.save(criteria_1);
+
+        Criteria criteria_2 = new Criteria(CRITERIA_NAME_PLUGIN);
+        criteriaRepository.save(criteria_2);
+
+        Criteria criteria_3 = new Criteria(CRITERIA_NAME_PLUGIN);
+        criteriaRepository.save(criteria_3);
+
+
+    }
+
+
+    private void LoadAnswerCriteria() {
+        AnswerCriteria answerCriteria_1 = new AnswerCriteria();
+        AnswerCriteria answerCriteria_2 = new AnswerCriteria();
+
+        Answer answer_1 = answerRepository.findById(1L).get();
+        Answer answer_2 = answerRepository.findById(2L).get();
+        Criteria criteria_1 = criteriaRepository.findById(1L).get();
+
+        answerCriteria_1.setAnswer(answer_1);
+        answerCriteria_1.setCriteria(criteria_1);
+
+        answerCriteria_2.setAnswer(answer_2);
+        answerCriteria_2.setCriteria(criteria_1);
+
+        answerCriteriaRepository.save(answerCriteria_1);
+        answerCriteriaRepository.save(answerCriteria_2);
+
+    }
+
+
+    private void LoadAlternatives() {
+        Alternative alternative_1 = new Alternative(ALTERNATIVE__NAME_INTELIJ);
+        alternativeRepository.save(alternative_1);
+
+    }
+
+
+    private void LoadAnswerAlternative() {
+        AnswerAlternative answerAlternative = new AnswerAlternative();
+
+        Answer answer_2 = answerRepository.findById(2L).get();
+        Alternative alternative_2 = alternativeRepository.findById(2L).get();
+
+        answerAlternative.setAlternative(alternative_2);
+        answerAlternative.setAnswer(answer_2);
+
+        answerAlternativeRepository.save(answerAlternative);
+    }
+
 
     private String encodePassword(String password) {
         return "{bcrypt}" + encoder.encode(password);

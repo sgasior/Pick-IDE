@@ -3,8 +3,12 @@ package pl.edu.kopalniakodu.pickide.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -14,21 +18,26 @@ public class Alternative {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    public Alternative() {
-    }
 
     private String alternativeName;
 
-    private double alternativeWeight;
-
     private String alternativeDescription;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "survey_id")
     private Survey survey;
+
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            mappedBy = "alternative", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Set<AnswerAlternative> answerAlternatives = new HashSet<>();
+
+    public Alternative() {
+    }
 
 
     public Alternative(String alternativeName, Survey survey) {
@@ -36,18 +45,21 @@ public class Alternative {
         this.survey = survey;
     }
 
-    public Alternative(String alternativeName, double alternativeWeight, String alternativeDescription) {
+    public Alternative(String alternativeName) {
         this.alternativeName = alternativeName;
-        this.alternativeWeight = alternativeWeight;
+    }
+
+    public Alternative(String alternativeName, String alternativeDescription) {
+        this.alternativeName = alternativeName;
         this.alternativeDescription = alternativeDescription;
     }
+
 
     @Override
     public String toString() {
         return "Alternative{" +
                 "id=" + id +
                 ", alternativeName='" + alternativeName + '\'' +
-                ", alternativeWeight=" + alternativeWeight +
                 ", alternativeDescription='" + alternativeDescription + '\'' +
                 '}';
     }

@@ -14,44 +14,30 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Criteria {
+public class Answer {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String criteriaName;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "survey_id")
     private Survey survey;
 
+
     @OneToMany(
             cascade = {CascadeType.ALL},
-            mappedBy = "criteria", orphanRemoval = true)
+            mappedBy = "answer", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<AnswerCriteria> answerCriteria = new HashSet<>();
 
-    public Criteria() {
+
+    public Answer() {
 
     }
 
-    public Criteria(String criteriaName) {
-        this.criteriaName = criteriaName;
-    }
 
-
-    public Criteria(String criteriaName, Survey survey) {
-        this.criteriaName = criteriaName;
-        this.survey = survey;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Criteria{" +
-                "id=" + id +
-                ", criteriaName='" + criteriaName + '\'' +
-                '}';
-    }
 }
+
+

@@ -30,17 +30,27 @@ public class Survey {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     @OneToMany(
             cascade = {CascadeType.ALL},
             mappedBy = "survey", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     List<Criteria> criterias = new ArrayList<>();
 
+
     @OneToMany(
             cascade = {CascadeType.ALL},
             mappedBy = "survey", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     List<Alternative> alternatives = new ArrayList<>();
+
+
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            mappedBy = "survey", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Answer> answers = new ArrayList<>();
+
 
     @Transient
     private ProgrammingSkill programmingSkill;
@@ -58,14 +68,14 @@ public class Survey {
     public Survey(String surveyName, ProgrammingSkill programmingSkill) {
         this.surveyName = surveyName;
         this.programmingSkill = programmingSkill;
-        addPreferedCriteriasAndAlternatives();
+        //addPreferedCriteriasAndAlternatives();
     }
 
     public Survey(String surveyName, User user, ProgrammingSkill programmingSkill) {
         this.surveyName = surveyName;
         this.user = user;
         this.programmingSkill = programmingSkill;
-        addPreferedCriteriasAndAlternatives();
+       // addPreferedCriteriasAndAlternatives();
     }
 
     private void addPreferedCriteriasAndAlternatives() {
@@ -105,10 +115,18 @@ public class Survey {
 
     public void addCriteria(Criteria criteria) {
         criterias.add(criteria);
+        criteria.setSurvey(this);
     }
 
     public void addAlternative(Alternative alternative) {
         alternatives.add(alternative);
+        alternative.setSurvey(this);
+    }
+
+
+    public void addAnswwer(Answer answer) {
+        answers.add(answer);
+        answer.setSurvey(this);
     }
 
     @Override
