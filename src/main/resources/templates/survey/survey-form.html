@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="survey-form">
-                        <form id="surveyForm" action="POST">
+                        <form id="surveyForm" th:action="@{/processNewSurvey}" method="POST" th:object="${survey}">
                             <div class="tab survey-inputs" id="tab1">
 
                                 <div class="survey-input">
@@ -44,7 +44,8 @@
 
                                 <div class="survey-input">
                                     <label for="survey_name">Survey name:</label>
-                                    <input type="text" name="survey_name" id="survey_name" required>
+                                    <input type="text" name="survey_name" id="survey_name" th:field="*{surveyName}"
+                                           required>
                                 </div>
 
 
@@ -55,55 +56,27 @@
                                 <p>Prefered criterias:</p>
 
                                 <div class="row">
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_1">
-                                        <label for="checkbox_1">Criteria 1</label>
-                                    </div>
+                                    <th:block th:each="preferedCriteria: ${preferedCriterias}">
+                                        <div class="checkbox">
+                                            <input type="checkbox" th:id="${preferedCriteria}">
+                                            <label th:for="${preferedCriteria}" th:text="${preferedCriteria}"></label>
+                                        </div>
 
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_2">
-                                        <label for="checkbox_2">Criteria 2</label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_3">
-                                        <label for="checkbox_2">Criteria 3</label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_4">
-                                        <label for="checkbox_2">Criteria 4</label>
-                                    </div>
+                                    </th:block>
                                 </div>
 
                                 <hr>
                                 <p>Other criterias:</p>
 
                                 <div class="row">
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_5">
-                                        <label for="checkbox_5">Criteria 1</label>
-                                    </div>
+                                    <th:block th:each="notPreferedCriteria: ${notPreferedCriterias}">
+                                        <div class="checkbox">
+                                            <input type="checkbox" th:id="${notPreferedCriteria}">
+                                            <label th:for="${notPreferedCriteria}"
+                                                   th:text="${notPreferedCriteria}"></label>
+                                        </div>
+                                    </th:block>
 
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_6">
-                                        <label for="checkbox_6">Criteria 2</label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_7">
-                                        <label for="checkbox_7">Criteria 3</label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_8">
-                                        <label for="checkbox_8">Criteria 4</label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_10">
-                                        <label for="checkbox_10">Criteria 5</label>
-                                    </div>
                                 </div>
                                 <div class="new-inputs-msg">
                                     <hr>
@@ -121,25 +94,15 @@
                                 <p>Prefered alternatives:</p>
 
                                 <div class="row">
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_1">
-                                        <label for="checkbox_1">Alternative 1</label>
-                                    </div>
+                                    <th:block th:each="preferedAlternative: ${preferedAlternatives}">
+                                        <div class="checkbox">
+                                            <input type="checkbox" th:id="${preferedAlternative}">
+                                            <label th:for="${preferedAlternative}"
+                                                   th:text="${preferedAlternative}"></label>
+                                        </div>
 
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_2">
-                                        <label for="checkbox_2">Alternative 2</label>
-                                    </div>
+                                    </th:block>
 
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_3">
-                                        <label for="checkbox_2">Alternative 3</label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_4">
-                                        <label for="checkbox_2">Alternative 4</label>
-                                    </div>
                                 </div>
 
                                 <hr>
@@ -147,31 +110,14 @@
                                 <p>Other alternatives:</p>
 
                                 <div class="row">
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_5">
-                                        <label for="checkbox_5">Alternative 1</label>
-                                    </div>
+                                    <th:block th:each="notPreferedAlternative: ${notPreferedAlternatives}">
+                                        <div class="checkbox">
+                                            <input type="checkbox" th:id="${notPreferedAlternative}">
+                                            <label th:for="${notPreferedAlternative}"
+                                                   th:text="${notPreferedAlternative}"></label>
+                                        </div>
 
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_6">
-                                        <label for="checkbox_6">Alternative 2</label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_7">
-                                        <label for="checkbox_7">Alternative 3</label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_8">
-                                        <label for="checkbox_8">Alternative 4</label>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="checkbox_9">
-                                        <label for="checkbox_9">Alternative 5</label>
-                                    </div>
-
+                                    </th:block>
                                 </div>
 
 

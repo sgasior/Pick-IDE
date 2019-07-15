@@ -19,92 +19,83 @@
     <div class="container-fluid">
 
         <section id="questions">
-            <div class="question" id="question-1">
-                <h5>Do you want to make a choice with others <strong>(Registration required)</strong></h5>
-                <div class="answers">
-                    <!--
-<div class="answer">
-    <div class="toggle-btn">
-        <div class="circle-inner">
+            <form th:action="@{/survey}" method="post">
+                <div class="question" id="question-1">
+                    <h5>Do you want to make a choice with others <strong>(Registration required)</strong></h5>
+                    <div class="answers">
+                        <div class="answer">
+                            <div class="toggle-checkbox">
+                                <input type="checkbox" id="toggle-checkbox" th:name="share">
+                                <label for="toggle-checkbox">
+                                    <div class="circle-inner">
 
-        </div>
-    </div>
-</div>
--->
-                    <div class="answer">
-                        <div class="toggle-checkbox">
-                            <input type="checkbox" id="toggle-checkbox">
-                            <label for="toggle-checkbox">
-                                <div class="circle-inner">
-
-                                </div>
-                            </label>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="question" id="question-3">
-                <h5>What is your programming experience</h5>
-                <div class="answers">
-                    <div class="answer">
-                        <div class="radio">
-                            <input type="radio" id="newbieExp" name="programmerExp" value="newbieExp" checked>
-                            <label for="newbieExp">I am newbie to programming</label>
+                <div class="question" id="question-3">
+                    <h5>What is your programming experience</h5>
+                    <div class="answers">
+                        <div class="answer">
+                            <div class="radio">
+                                <input type="radio" id="newbieExp" th:name="programmerExp" th:value="newbieExp" checked>
+                                <label for="newbieExp">I am newbie to programming</label>
+                            </div>
+
+                        </div>
+                        <div class="answer">
+                            <div class="radio">
+                                <input type="radio" id="midExp" th:name="programmerExp" th:value="midExp">
+                                <label for="midExp">I have some experience in programming</label>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <div class="radio">
+                                <input type="radio" id="proExp" th:name="programmerExp" th:value="proExp">
+                                <label for="proExp">I am professional programmer</label>
+                            </div>
                         </div>
 
-                    </div>
-                    <div class="answer">
-                        <div class="radio">
-                            <input type="radio" id="midExp" name="programmerExp" value="midExp">
-                            <label for="midExp">I have some experience in programming</label>
-                        </div>
-                    </div>
-                    <div class="answer">
-                        <div class="radio">
-                            <input type="radio" id="proExp" name="programmerExp" value="proExp">
-                            <label for="proExp">I am professional programmer</label>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="question" id="question-2">
-                <h5>Additional requirements</h5>
-                <div class="answers">
-                    <div class="answer">
-                        <div class="checkbox">
-                            <input type="checkbox" id="checkbox_1">
-                            <label for="checkbox_1">Get some information about AHP method</label>
-                        </div>
-                    </div>
-                    <div class="answer">
-                        <div class="checkbox">
-                            <input type="checkbox" id="checkbox_2">
-                            <label for="checkbox_2">
-                                Check what you can gain using this method
-                            </label>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="question" id="question-4">
-                <h5>Click button to continute</h5>
-                <div class="answers">
-                    <div class="answer">
-                        <button type="button" class="btn btn-dark next-button"
-                                onclick="window.location.href='/survey'">Next
-                        </button>
                     </div>
                 </div>
-            </div>
 
+
+                <div class="question" id="question-2">
+                    <h5>Additional requirements</h5>
+                    <div class="answers">
+                        <div class="answer">
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox_1" th:name="extraInfo">
+                                <label for="checkbox_1">Get some information about AHP method</label>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox_2" th:name="whatCanGain">
+                                <label for="checkbox_2">
+                                    Check what you can gain using this method
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="question" id="question-4">
+                    <h5>Click button to continute</h5>
+                    <div class="answers">
+                        <div class="answer">
+                            <button type="submit" class="btn btn-dark next-button">Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </section>
 
     </div>

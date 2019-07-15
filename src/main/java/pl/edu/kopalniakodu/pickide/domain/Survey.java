@@ -71,6 +71,11 @@ public class Survey {
         //addPreferedCriteriasAndAlternatives();
     }
 
+    public Survey(String surveyName, User user) {
+        this.surveyName = surveyName;
+        this.user = user;
+    }
+
     public Survey(String surveyName, User user, ProgrammingSkill programmingSkill) {
         this.surveyName = surveyName;
         this.user = user;

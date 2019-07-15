@@ -19,7 +19,7 @@ import java.util.*;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode()
 @ConfirmPasswords
 public class User implements UserDetails {
 
