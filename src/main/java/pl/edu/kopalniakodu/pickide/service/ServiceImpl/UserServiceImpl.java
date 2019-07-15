@@ -1,9 +1,11 @@
-package pl.edu.kopalniakodu.pickide.service;
+package pl.edu.kopalniakodu.pickide.service.ServiceImpl;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.edu.kopalniakodu.pickide.domain.User;
 import pl.edu.kopalniakodu.pickide.repository.UserRepository;
+import pl.edu.kopalniakodu.pickide.service.ServiceInterface.RoleService;
+import pl.edu.kopalniakodu.pickide.service.ServiceInterface.UserService;
 
 import java.util.Optional;
 

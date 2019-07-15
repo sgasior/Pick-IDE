@@ -1,14 +1,12 @@
 // -- - TOGGLE CHECKBOX START-- -
 
-$("label[for='toggle-checkbox']").before().click(function () {
-    $(this).toggleClass("active-toggle");
-});
-
-
-if ($("#toggle-checkbox").attr("checked")) {
-    $("label[for='toggle-checkbox']").addClass("active-toggle");
-
+if ($("#toggle-checkbox").is(':checked')) {
+    $("label[for='toggle-checkbox']").before().addClass("active-toggle");
 }
+
+$('#toggle-checkbox:checkbox').click(function () {
+    $("label[for='toggle-checkbox']").before().toggleClass("active-toggle");
+});
 
 // -- - TOGGLE CHECKBOX END-- -
 
@@ -111,7 +109,7 @@ function acceptCriterias(divName, criteriaName) {
 
     $(".new-inputs-msg").css("display", "block");
     var newdiv = document.createElement("div");
-    newdiv.innerHTML = "<div class='checkbox' id='checkbox_criteria_" + criteria_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteCriteria_" + criteria_id_counter + "' onclick='deleteCriteria(this.id)'>X</button><input type='checkbox' id='newCriteria_" + criteria_id_counter + "'> <label for = 'newCriteria_" + criteria_id_counter + "'>" + criteriaName + "</label> </div>";
+    newdiv.innerHTML = "<div class='checkbox' id='checkbox_criteria_" + criteria_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteCriteria_" + criteria_id_counter + "' onclick='deleteCriteria(this.id)'>X</button><input type='checkbox' id='newCriteria_" + criteria_id_counter + "'name='selectedCriteria' value='" + criteriaName + "'> <label for = 'newCriteria_" + criteria_id_counter + "'>" + criteriaName + "</label> </div>";
     criteria_id_counter++;
     totalCriteriasCreated++;
     document.getElementById(divName).appendChild(newdiv);
@@ -150,7 +148,7 @@ function acceptAlternatives(divName, alternativeName) {
 
     var newdiv = document.createElement("div");
 
-    newdiv.innerHTML = "<div class='checkbox' id='checkbox_alternative_" + alternative_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteAlternative_" + alternative_id_counter + "' onclick='deleteAlternative(this.id)'>X</button><input type='checkbox' id='newAlternative_" + alternative_id_counter + "'> <label for = 'newAlternative_" + alternative_id_counter + "'>" + alternativeName + "</label> </div>";
+    newdiv.innerHTML = "<div class='checkbox' id='checkbox_alternative_" + alternative_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteAlternative_" + alternative_id_counter + "' onclick='deleteAlternative(this.id)'>X</button><input type='checkbox' id='newAlternative_" + alternative_id_counter + "' name='selectedAlternative' value='" + alternativeName + "'> <label for = 'newAlternative_" + alternative_id_counter + "'>" + alternativeName + "</label> </div>";
 
     alternative_id_counter++;
     totalAlternativesCreated++;

@@ -58,7 +58,8 @@
                                 <div class="row">
                                     <th:block th:each="preferedCriteria: ${preferedCriterias}">
                                         <div class="checkbox">
-                                            <input type="checkbox" th:id="${preferedCriteria}">
+                                            <input type="checkbox" th:id="${preferedCriteria}" name="selectedCriteria"
+                                                   th:value="${preferedCriteria}">
                                             <label th:for="${preferedCriteria}" th:text="${preferedCriteria}"></label>
                                         </div>
 
@@ -71,10 +72,12 @@
                                 <div class="row">
                                     <th:block th:each="notPreferedCriteria: ${notPreferedCriterias}">
                                         <div class="checkbox">
-                                            <input type="checkbox" th:id="${notPreferedCriteria}">
+                                            <input type="checkbox" th:id="${notPreferedCriteria}"
+                                                   name="selectedCriteria" th:value="${notPreferedCriteria}">
                                             <label th:for="${notPreferedCriteria}"
                                                    th:text="${notPreferedCriteria}"></label>
                                         </div>
+
                                     </th:block>
 
                                 </div>
@@ -96,7 +99,9 @@
                                 <div class="row">
                                     <th:block th:each="preferedAlternative: ${preferedAlternatives}">
                                         <div class="checkbox">
-                                            <input type="checkbox" th:id="${preferedAlternative}">
+                                            <input type="checkbox" th:id="${preferedAlternative}"
+                                                   name="selectedAlternative"
+                                                   th:value="${preferedAlternative}">
                                             <label th:for="${preferedAlternative}"
                                                    th:text="${preferedAlternative}"></label>
                                         </div>
@@ -112,7 +117,9 @@
                                 <div class="row">
                                     <th:block th:each="notPreferedAlternative: ${notPreferedAlternatives}">
                                         <div class="checkbox">
-                                            <input type="checkbox" th:id="${notPreferedAlternative}">
+                                            <input type="checkbox" th:id="${notPreferedAlternative}"
+                                                   name="selectedAlternative"
+                                                   th:value="${notPreferedAlternative}">
                                             <label th:for="${notPreferedAlternative}"
                                                    th:text="${notPreferedAlternative}"></label>
                                         </div>

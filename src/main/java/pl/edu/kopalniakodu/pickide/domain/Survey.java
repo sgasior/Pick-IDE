@@ -80,7 +80,7 @@ public class Survey {
         this.surveyName = surveyName;
         this.user = user;
         this.programmingSkill = programmingSkill;
-       // addPreferedCriteriasAndAlternatives();
+        // addPreferedCriteriasAndAlternatives();
     }
 
     private void addPreferedCriteriasAndAlternatives() {

@@ -1,4 +1,4 @@
-package pl.edu.kopalniakodu.pickide.service;
+package pl.edu.kopalniakodu.pickide.service.ServiceInterface;
 
 import java.util.List;
 

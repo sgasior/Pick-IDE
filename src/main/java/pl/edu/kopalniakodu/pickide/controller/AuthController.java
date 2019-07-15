@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.edu.kopalniakodu.pickide.domain.User;
-import pl.edu.kopalniakodu.pickide.service.UserService;
+import pl.edu.kopalniakodu.pickide.service.ServiceInterface.UserService;
 
 import javax.validation.Valid;
 

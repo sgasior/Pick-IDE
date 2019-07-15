@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
 import pl.edu.kopalniakodu.pickide.domain.User;
-import pl.edu.kopalniakodu.pickide.service.EnumUtillService;
-import pl.edu.kopalniakodu.pickide.service.SurveyService;
-import pl.edu.kopalniakodu.pickide.service.UserService;
+import pl.edu.kopalniakodu.pickide.service.ServiceInterface.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -108,7 +106,9 @@ public class SurveyController {
             @Valid Survey survey,
             BindingResult bindingResult,
             Model model,
-            RedirectAttributes redirectAttributes
+            RedirectAttributes redirectAttributes,
+            @RequestParam(value = "selectedCriteria", required = false) String[] selectedCriterias,
+            @RequestParam(value = "selectedAlternative", required = false) String[] selectedAlternative
     ) {
 
         if (bindingResult.hasErrors()) {
@@ -116,6 +116,10 @@ public class SurveyController {
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             return "newSurvey";
         } else {
+
+            surveyService.addCriterias(selectedCriterias, survey);
+            surveyService.addAlternatives(selectedAlternative, survey);
+
             Optional<User> userOptional = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
             if (userOptional.isPresent()) {
                 survey.setUser(userOptional.get());
@@ -123,6 +127,7 @@ public class SurveyController {
             } else {
                 surveyService.save(survey);
             }
+
             return "redirect:/";
         }
 
