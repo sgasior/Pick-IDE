@@ -106,10 +106,14 @@ function acceptCriterias(divName, criteriaName) {
         alert("Criteria name cannot be empty");
         return;
     }
+    if (criteriaName.includes(" ")) {
+        alert("Criteria  cannot contain whitespaces");
+        return;
+    }
 
     $(".new-inputs-msg").css("display", "block");
     var newdiv = document.createElement("div");
-    newdiv.innerHTML = "<div class='checkbox' id='checkbox_criteria_" + criteria_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteCriteria_" + criteria_id_counter + "' onclick='deleteCriteria(this.id)'>X</button><input type='checkbox' id='newCriteria_" + criteria_id_counter + "'name='selectedCriteria' value='" + criteriaName + "'> <label for = 'newCriteria_" + criteria_id_counter + "'>" + criteriaName + "</label> </div>";
+    newdiv.innerHTML = "<div class='checkbox' id='checkbox_criteria_" + criteria_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteCriteria_" + criteria_id_counter + "' onclick='deleteCriteria(this.id)'>X</button><input type='checkbox' id='newCriteria_" + criteria_id_counter + "'name='selectedCriteria' value='" + criteriaName + "' checked> <label for = 'newCriteria_" + criteria_id_counter + "'>" + criteriaName + "</label> </div>";
     criteria_id_counter++;
     totalCriteriasCreated++;
     document.getElementById(divName).appendChild(newdiv);
@@ -143,12 +147,16 @@ function acceptAlternatives(divName, alternativeName) {
         alert("Alternative name cannot be empty");
         return;
     }
+    if (alternativeName.includes(" ")) {
+        alert("Alternative  cannot contain whitespaces");
+        return;
+    }
 
     $(".new-inputs-msg").css("display", "block");
 
     var newdiv = document.createElement("div");
 
-    newdiv.innerHTML = "<div class='checkbox' id='checkbox_alternative_" + alternative_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteAlternative_" + alternative_id_counter + "' onclick='deleteAlternative(this.id)'>X</button><input type='checkbox' id='newAlternative_" + alternative_id_counter + "' name='selectedAlternative' value='" + alternativeName + "'> <label for = 'newAlternative_" + alternative_id_counter + "'>" + alternativeName + "</label> </div>";
+    newdiv.innerHTML = "<div class='checkbox' id='checkbox_alternative_" + alternative_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteAlternative_" + alternative_id_counter + "' onclick='deleteAlternative(this.id)'>X</button><input type='checkbox' id='newAlternative_" + alternative_id_counter + "' name='selectedAlternative' value='" + alternativeName + "' checked> <label for = 'newAlternative_" + alternative_id_counter + "'>" + alternativeName + "</label> </div>";
 
     alternative_id_counter++;
     totalAlternativesCreated++;
@@ -181,4 +189,64 @@ function deleteAlternative(clicked_id) {
     var el = document.getElementById('checkbox_alternative_' + id);
     el.remove();
     totalAlternativesCreated--;
+}
+
+
+// -- - DYNAMICALLY ADDING FORMS END-- -
+
+
+// -- - SETTING SURVEY FORM AFTER REFRESH PAGE START-- -
+
+if (selectedCriterias != null){
+    selectedCriterias.forEach(refreshCriterias);
+}
+if (selectedAlternatives != null){
+    selectedAlternatives.forEach(refreshAlternatives);
+}
+
+
+function addCriteria(criteriaName) {
+
+    divName='new-criterias';
+
+    var newdiv = document.createElement("div");
+    newdiv.innerHTML = "<div class='checkbox' id='checkbox_criteria_" + criteria_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteCriteria_" + criteria_id_counter + "' onclick='deleteCriteria(this.id)'>X</button><input type='checkbox' id='newCriteria_" + criteria_id_counter + "'name='selectedCriteria' value='" + criteriaName + "' checked> <label for = 'newCriteria_" + criteria_id_counter + "'>" + criteriaName + "</label> </div>";
+    criteria_id_counter++;
+    totalCriteriasCreated++;
+    document.getElementById(divName).appendChild(newdiv);
+
+}
+
+
+function addAlternative(alternativeName) {
+
+    divName='new-alternatives';
+
+    var newdiv = document.createElement("div");
+
+    newdiv.innerHTML = "<div class='checkbox' id='checkbox_alternative_" + alternative_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteAlternative_" + alternative_id_counter + "' onclick='deleteAlternative(this.id)'>X</button><input type='checkbox' id='newAlternative_" + alternative_id_counter + "' name='selectedAlternative' value='" + alternativeName + "' checked> <label for = 'newAlternative_" + alternative_id_counter + "'>" + alternativeName + "</label> </div>";
+
+    alternative_id_counter++;
+    totalAlternativesCreated++;
+    document.getElementById(divName).appendChild(newdiv);
+
+}
+
+
+function refreshCriterias(item, index) {
+
+    if ($("#"+item).length) {
+        $("#" + item).prop('checked', true);
+    } else {
+        addCriteria(item);
+    }
+}
+
+function refreshAlternatives(item, index) {
+
+    if ($("#"+item).length) {
+        $("#" + item).prop('checked', true);
+    } else {
+        addAlternative(item);
+    }
 }

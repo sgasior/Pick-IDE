@@ -3,14 +3,17 @@ package pl.edu.kopalniakodu.pickide.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import pl.edu.kopalniakodu.pickide.domain.enumUtil.PreferedCriteria;
 import pl.edu.kopalniakodu.pickide.domain.enumUtil.PreferedIDE;
 import pl.edu.kopalniakodu.pickide.domain.enumUtil.ProgrammingSkill;
+import pl.edu.kopalniakodu.pickide.domain.validator.NonWhitespace;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,9 @@ public class Survey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "Please enter survey name")
+    @NonNull
+    @NonWhitespace(message = "Your survey name cannot contain whitespaces")
     private String surveyName;
 
     @ManyToOne(fetch = FetchType.LAZY)

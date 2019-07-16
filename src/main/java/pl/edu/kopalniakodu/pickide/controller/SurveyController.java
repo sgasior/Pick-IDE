@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
@@ -43,11 +44,6 @@ public class SurveyController {
             Model model
     ) {
 
-//        log.info("programmerExp: " + programmerExp);
-//        log.info("share: " + share);
-//        log.info("extra info: " + extra_info);
-//        log.info("whatCanGain " + whatCanGainInfo);
-
         model.addAttribute("share", share);
 
         model.addAttribute("preferedCriterias", enumUtillService.preferedCriterias(programmerExp));
@@ -77,13 +73,7 @@ public class SurveyController {
             @SessionAttribute("notPreferedAlternatives") List<String> notPreferedAlternatives
     ) {
 
-        model.addAttribute("survey", new Survey());
-
-        model.addAttribute("preferedCriterias", preferedCriterias);
-        model.addAttribute("notPreferedCriterias", notPreferedCriterias);
-
-        model.addAttribute("preferedAlternatives", preferedAlternatives);
-        model.addAttribute("notPreferedAlternatives", notPreferedAlternatives);
+        addAtributesToNewSurveyForm(model, preferedCriterias, notPreferedCriterias, preferedAlternatives, notPreferedAlternatives);
 
         return "survey/survey-form";
     }
@@ -92,12 +82,13 @@ public class SurveyController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/account/newSurvey")
     public String newSurveyFormWithUserLoggedIn(
-            @Valid Survey survey,
-            BindingResult bindingResult,
             Model model,
-            RedirectAttributes redirectAttributes
+            @SessionAttribute("preferedCriterias") List<String> preferedCriterias,
+            @SessionAttribute("notPreferedCriterias") List<String> notPreferedCriterias,
+            @SessionAttribute("preferedAlternatives") List<String> preferedAlternatives,
+            @SessionAttribute("notPreferedAlternatives") List<String> notPreferedAlternatives
     ) {
-        model.addAttribute("survey", new Survey());
+        addAtributesToNewSurveyForm(model, preferedCriterias, notPreferedCriterias, preferedAlternatives, notPreferedAlternatives);
         return "survey/survey-form";
     }
 
@@ -106,15 +97,19 @@ public class SurveyController {
             @Valid Survey survey,
             BindingResult bindingResult,
             Model model,
-            RedirectAttributes redirectAttributes,
             @RequestParam(value = "selectedCriteria", required = false) String[] selectedCriterias,
             @RequestParam(value = "selectedAlternative", required = false) String[] selectedAlternative
     ) {
 
+        validateSurveyForm(bindingResult, selectedCriterias, selectedAlternative);
+
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("survey", survey);
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
-            return "newSurvey";
+            model.addAttribute("selectedCriterias", selectedCriterias);
+            model.addAttribute("selectedAlternatives", selectedAlternative);
+            return "survey/survey-form";
         } else {
 
             surveyService.addCriterias(selectedCriterias, survey);
@@ -144,6 +139,88 @@ public class SurveyController {
             return "redirect:/newSurvey";
         }
     }
+
+
+    private void validateSurveyForm(BindingResult bindingResult, @RequestParam(value = "selectedCriteria", required = false) String[] selectedCriterias, @RequestParam(value = "selectedAlternative", required = false) String[] selectedAlternative) {
+
+        if (selectedCriterias == null && selectedCriterias == null) {
+            bindingResult.addError(new ObjectError(
+                    "null-criteria-and-alternative",
+                    "You have to choose at least 2 criteria and 2 alternative")
+            );
+            return;
+        }
+
+
+        if (selectedCriterias == null || selectedCriterias.length <= 1) {
+            bindingResult.addError(new ObjectError(
+                    "min-criteria-error",
+                    "You have to choose at least 2 criteria")
+            );
+            return;
+        }
+
+
+        if (selectedAlternative == null || selectedAlternative.length <= 1) {
+            bindingResult.addError(new ObjectError(
+                    "min-criteria-error",
+                    "You have to choose at least 2 alternative")
+            );
+            return;
+        }
+
+        if (selectedCriterias.length > 4) {
+            bindingResult.addError(new ObjectError(
+                    "max-criteria-error",
+                    "You have chosen more criteria than it should be. You can select max 4.")
+            );
+        }
+
+        if (selectedAlternative.length > 4) {
+            bindingResult.addError(new ObjectError(
+                    "max-alternative-error\"",
+                    "You have chosen more alternative than it should be. You can select max 4.")
+            );
+        }
+
+        if (hasDuplicate(selectedCriterias)) {
+            bindingResult.addError(new ObjectError(
+                    "duplicate-criteria",
+                    "You cannot choose two same criteria")
+            );
+        }
+
+        if (hasDuplicate(selectedAlternative)) {
+            bindingResult.addError(new ObjectError(
+                    "duplicate-criteria",
+                    "You cannot choose two same alternative")
+            );
+        }
+
+    }
+
+    private static boolean hasDuplicate(String[] tab) {
+        for (int i = 0; i < tab.length; i++) {
+            for (int j = 0; j < tab.length; j++) {
+                if (tab[i].equals(tab[j]) && i != j) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void addAtributesToNewSurveyForm(Model model, @SessionAttribute("preferedCriterias") List<String> preferedCriterias, @SessionAttribute("notPreferedCriterias") List<String> notPreferedCriterias, @SessionAttribute("preferedAlternatives") List<String> preferedAlternatives, @SessionAttribute("notPreferedAlternatives") List<String> notPreferedAlternatives) {
+
+        model.addAttribute("survey", new Survey());
+
+        model.addAttribute("preferedCriterias", preferedCriterias);
+        model.addAttribute("notPreferedCriterias", notPreferedCriterias);
+
+        model.addAttribute("preferedAlternatives", preferedAlternatives);
+        model.addAttribute("notPreferedAlternatives", notPreferedAlternatives);
+    }
+
 
 }
 

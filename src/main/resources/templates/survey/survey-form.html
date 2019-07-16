@@ -20,6 +20,22 @@
 
         <section id="survey">
 
+
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="col-lg-6 col-md-10 col-sm-12 survey-form-alerts">
+                    <div id="alerts" th:if="validationErrors">
+                        <div th:each="validationError : ${validationErrors}">
+                            <div class="alert alert-danger fade show">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>
+                                    <th:block th:text="${validationError.getDefaultMessage()}"></th:block>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-lg-6 col-md-10 col-sm-12 survey-box">
                     <div class="survey-form-welcome-msg">
@@ -31,20 +47,20 @@
                         <form id="surveyForm" th:action="@{/processNewSurvey}" method="POST" th:object="${survey}">
                             <div class="tab survey-inputs" id="tab1">
 
-                                <div class="survey-input">
-                                    <label for="survey_name">Share with others:</label>
+                                <!--<div class="survey-input">-->
+                                    <!--<label for="surveyName">Share with others:</label>-->
 
-                                    <div class="toggle-checkbox">
-                                        <input type="checkbox" id="toggle-checkbox">
-                                        <label for="toggle-checkbox">
-                                            <div class="circle-inner"></div>
-                                        </label>
-                                    </div>
-                                </div>
+                                    <!--<div class="toggle-checkbox">-->
+                                        <!--<input type="checkbox" id="toggle-checkbox">-->
+                                        <!--<label for="toggle-checkbox">-->
+                                            <!--<div class="circle-inner"></div>-->
+                                        <!--</label>-->
+                                    <!--</div>-->
+                                <!--</div>-->
 
                                 <div class="survey-input">
-                                    <label for="survey_name">Survey name:</label>
-                                    <input type="text" name="survey_name" id="survey_name" th:field="*{surveyName}"
+                                    <label for="surveyName">Survey name:</label>
+                                    <input type="text" name="surveyName" id="surveyName" th:field="*{surveyName}"
                                            required>
                                 </div>
 
@@ -208,10 +224,23 @@
 <div th:replace="~{layouts/main_layout :: footer}"></div>
 
 
+<script th:inline="javascript">
+
+    var selectedCriterias = [[${selectedCriterias}]];
+    var selectedAlternatives = [[${selectedAlternatives}]];
+
+</script>
+
 <script type="text/javascript" th:src="@{/vendors/js/jquery-3.3.1.min.js}"></script>
 <script type="text/javascript" th:src="@{/vendors/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/index.js}"></script>
 <script type="text/javascript" th:src="@{/js/survey.js}"></script>
+
+
+
+
+
+
 </body>
 </html>

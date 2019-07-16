@@ -9,13 +9,19 @@ body {
 }
 
 
-
 /* -----------Survey section--------*/
 
 #survey {
     background-color: #f8f1f1;
 }
 
+.survey-form-alerts {
+    padding: 0;
+    position: relative;
+    margin-bottom: 0;
+    position: relative;
+    top: 80px
+}
 
 .survey-box {
     height: 100%;
@@ -186,7 +192,6 @@ button:focus {
 }
 
 
-
 .stepsButtons #addCriteria {
     display: none;
 }
@@ -239,8 +244,6 @@ button:focus {
 }
 
 
-
-
 /* -----------INPUTS --------*/
 
 .survey-inputs input[type="text"] {
@@ -277,7 +280,6 @@ label {
     border: solid #fff 1px;
     border-bottom: none;
 }
-
 
 
 /* -----------Checkboxes--------*/
