@@ -1,0 +1,141 @@
+#main {
+    height: auto;
+}
+
+
+/* -----------Questions section--------*/
+
+.survey-info {
+    padding: 32px 150px 32px 150px;
+    text-align: center;
+    background-color: #f8f1f1;
+}
+
+.survey-info h5 {
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+#question-2 {
+    background-color: #acc6aa;
+}
+
+#question-1 {
+    background-color: #c19191;
+}
+
+#question-2 {
+    background-color: #ffffb5;
+    padding-bottom: 60px;
+}
+
+
+
+#question-1 .answer {
+    text-align: left;
+    margin: auto;
+    margin-left: 30%;
+}
+
+.answers {
+    margin-top: 32px;
+}
+
+.answer {
+    padding: 20px 0;
+
+}
+
+
+
+
+/* -----------Radio --------*/
+
+.radio input[type="radio"] {
+    opacity: 0;
+}
+
+.radio input[type="radio"] + label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 40px;
+}
+
+.radio input[type="radio"] + label:before {
+    content: "";
+    border: 1px solid black;
+    background: #c19191;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    top: 0;
+    left: 0px;
+}
+
+.radio input[type="radio"] + label:after {
+    content: "";
+    border: 1px solid #071a52;
+    background: #071a52;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    position: absolute;
+    color: #071a52;
+    top: 7px;
+    left: 6.7px;
+    opacity: 0;
+    transition: transform 0.1s linear, opacity 0.1s;
+    -moz-transition: transform 0.1s linear, opacity 0.1s;
+    -webkit-transition: transform 0.1s linear, opacity 0.1s;
+    -o-transition: transform 0.1s linear, opacity 0.1s;
+}
+
+
+.radio input[type="radio"]:checked + label:after {
+    opacity: 1;
+}
+
+
+/* -----------Buttons--------*/
+
+.start-survey-button {
+    width: 28%;
+}
+
+
+/* -----------MEDIA QUERIES--------*/
+
+@media (max-width: 1239px) {
+
+    #question-1 .answer {
+        margin-left: 25%;
+    }
+    .survey-info {
+        padding: 32px 20px 32px 20px;
+
+    }
+
+}
+
+
+@media (max-width: 822px) {
+    #question-1 .answer {
+        margin-left: 15%;
+    }
+
+    .survey-info {
+        padding: 32px 0 32px 0;
+    }
+}
+
+
+@media (max-width: 622px) {
+    #question-1 .answer {
+        margin-left: 5%;
+    }
+
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Survey extra info')}"></th:block>
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{/css/survey-form-extra-info.css}">
+
+
+</head>
+
+
+<body>
+
+<div th:replace="~{layouts/main_layout :: navbar}"></div>
+
+<div class="new-content">
+    <div class="container-fluid">
+        <section id="questions">
+            <form th:action="@{/generateSurvey}" method="post">
+                <div class="survey-info">
+                    <h5>
+                        <strong>Take into consideration consistency of answers</strong>
+                    </h5>
+                    <h5>In next step you will be doing pairwise comparison <br>using the previously chosen criteria and
+                        alternatives</h5>
+
+                </div>
+
+
+                <div class="survey-info" id="question-1" th:if="${isAutomaticRatingEnable}">
+                    <h5><strong>Which way will you choose when comparing selected IDEs</strong></h5>
+                    <div class="answers">
+
+                        <div class="answer">
+                            <div class="radio">
+                                <input type="radio" id="automatic-rating" name="rating" value="automatic-rating"
+                                       th:checked="${!skillMidOrPro}"/>
+                                <label for="automatic-rating"><strong>I would like to use already made rating for
+                                    IDEs </strong><br> (recommended for beginners)</label>
+                            </div>
+                        </div>
+
+                        <div class="answer">
+                            <div class="radio">
+                                <input type="radio" id="manually-rating" name="rating" value="manually-rating"
+                                       th:checked="${skillMidOrPro}"/>
+                                <label for="manually-rating"><strong>I would like to rate all IDEs manually</strong>
+                                    <br>Select
+                                    only if you know all selected IDE's very well. <br> (not recommended for
+                                    beginners)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="survey-info" id="question-2">
+                    <h5>Generate survey</h5>
+                    <div class="answers">
+                        <div class="answer">
+
+                            <button type="submit" class="btn btn-danger start-survey-button">
+                                Start
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+    </div>
+</div>
+
+<div th:replace="~{layouts/main_layout :: footer}"></div>
+
+
+<script type="text/javascript" th:src="@{/vendors/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/survey.js}"></script>
+</body>
+</html>

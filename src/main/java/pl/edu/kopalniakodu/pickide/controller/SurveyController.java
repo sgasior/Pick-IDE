@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
 import pl.edu.kopalniakodu.pickide.domain.User;
-import pl.edu.kopalniakodu.pickide.service.ServiceInterface.*;
+import pl.edu.kopalniakodu.pickide.service.ServiceInterface.EnumUtillService;
+import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
+import pl.edu.kopalniakodu.pickide.service.ServiceInterface.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes({"share", "preferedCriterias", "notPreferedCriterias", "preferedAlternatives", "notPreferedAlternatives"})
+@SessionAttributes({"share", "preferedCriterias", "notPreferedCriterias", "preferedAlternatives", "notPreferedAlternatives", "programmerExp", "survey"})
 public class SurveyController {
 
     private static final Logger log = LoggerFactory.getLogger(SurveyController.class);
@@ -45,6 +47,7 @@ public class SurveyController {
     ) {
 
         model.addAttribute("share", share);
+        model.addAttribute("programmerExp", programmerExp);
 
         model.addAttribute("preferedCriterias", enumUtillService.preferedCriterias(programmerExp));
         model.addAttribute("notPreferedCriterias", enumUtillService.notPreferedCriterias(programmerExp));
@@ -98,7 +101,8 @@ public class SurveyController {
             BindingResult bindingResult,
             Model model,
             @RequestParam(value = "selectedCriteria", required = false) String[] selectedCriterias,
-            @RequestParam(value = "selectedAlternative", required = false) String[] selectedAlternative
+            @RequestParam(value = "selectedAlternative", required = false) String[] selectedAlternative,
+            @SessionAttribute("programmerExp") String programmerExp
     ) {
 
         validateSurveyForm(bindingResult, selectedCriterias, selectedAlternative);
@@ -115,17 +119,33 @@ public class SurveyController {
             surveyService.addCriterias(selectedCriterias, survey);
             surveyService.addAlternatives(selectedAlternative, survey);
 
-            Optional<User> userOptional = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-            if (userOptional.isPresent()) {
-                survey.setUser(userOptional.get());
-                surveyService.save(survey);
+            model.addAttribute("survey", survey);
+            model.addAttribute("skillMidOrPro", enumUtillService.isProgrammingSkillMidOrPro(programmerExp));
+
+
+            if (surveyService.isNewCriteriaOrAlternativeAdded(survey)) {
+                model.addAttribute("isAutomaticRatingEnable", false);
             } else {
-                surveyService.save(survey);
+                model.addAttribute("isAutomaticRatingEnable", true);
             }
 
-            return "redirect:/";
+            return "survey/survey-form-extra-info";
         }
 
+    }
+
+    @PostMapping("/generateSurvey")
+    public String generateSurvey(
+            @SessionAttribute("survey") Survey survey
+    ) {
+        Optional<User> userOptional = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (userOptional.isPresent()) {
+            survey.setUser(userOptional.get());
+            surveyService.save(survey);
+        } else {
+            surveyService.save(survey);
+        }
+        return "index.html";
     }
 
 

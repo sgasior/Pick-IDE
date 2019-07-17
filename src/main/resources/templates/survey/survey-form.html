@@ -48,14 +48,14 @@
                             <div class="tab survey-inputs" id="tab1">
 
                                 <!--<div class="survey-input">-->
-                                    <!--<label for="surveyName">Share with others:</label>-->
+                                <!--<label for="surveyName">Share with others:</label>-->
 
-                                    <!--<div class="toggle-checkbox">-->
-                                        <!--<input type="checkbox" id="toggle-checkbox">-->
-                                        <!--<label for="toggle-checkbox">-->
-                                            <!--<div class="circle-inner"></div>-->
-                                        <!--</label>-->
-                                    <!--</div>-->
+                                <!--<div class="toggle-checkbox">-->
+                                <!--<input type="checkbox" id="toggle-checkbox">-->
+                                <!--<label for="toggle-checkbox">-->
+                                <!--<div class="circle-inner"></div>-->
+                                <!--</label>-->
+                                <!--</div>-->
                                 <!--</div>-->
 
                                 <div class="survey-input">
@@ -168,6 +168,8 @@
                                     <button type="button" class="cancelAdding" onclick="cancelAddingCriteria()">
                                         Cancel
                                     </button>
+                                    <p class="adding-warning">Add your own criteria only if you don't want to use
+                                        already made ratings </p>
                                 </div>
                             </div>
 
@@ -183,6 +185,8 @@
                                     <button type="button" class="cancelAdding" onclick="cancelAddingAlternatives()">
                                         Cancel
                                     </button>
+                                    <p class="adding-warning">Add your own alternative only if you don't want to use
+                                        already made ratings </p>
                                 </div>
                             </div>
 
@@ -236,10 +240,6 @@
 <script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/index.js}"></script>
 <script type="text/javascript" th:src="@{/js/survey.js}"></script>
-
-
-
-
 
 
 </body>

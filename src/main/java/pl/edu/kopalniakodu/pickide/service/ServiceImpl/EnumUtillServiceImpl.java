@@ -96,6 +96,15 @@ public class EnumUtillServiceImpl implements EnumUtillService {
         return notPreferedAlternatives;
     }
 
+    @Override
+    public boolean isProgrammingSkillMidOrPro(String programmerExp) {
+        if (programmerExp.equals("midExp") || programmerExp.equals("proExp")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private ProgrammingSkill getProgrammingSkill(String programmerExp) {
         ProgrammingSkill programmingSkill;
         if (programmerExp.equals("newbieExp")) {

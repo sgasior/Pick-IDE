@@ -11,4 +11,6 @@ public interface EnumUtillService {
     List<String> preferedAlternatives(String programmerExp);
 
     List<String> notPreferedAlternatives(String programmerExp);
+
+    boolean isProgrammingSkillMidOrPro(String programmerExp);
 }

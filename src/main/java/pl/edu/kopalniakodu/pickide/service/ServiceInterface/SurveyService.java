@@ -10,4 +10,6 @@ public interface SurveyService {
     void addCriterias(String[] selectedCriterias, Survey survey);
 
     void addAlternatives(String[] selectedAlternative, Survey survey);
+
+    boolean isNewCriteriaOrAlternativeAdded(Survey survey);
 }
