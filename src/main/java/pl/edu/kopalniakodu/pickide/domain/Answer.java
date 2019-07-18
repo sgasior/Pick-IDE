@@ -37,7 +37,9 @@ public class Answer {
 
     }
 
-
+    public Answer(Survey survey) {
+        this.survey = survey;
+    }
 }
 
 

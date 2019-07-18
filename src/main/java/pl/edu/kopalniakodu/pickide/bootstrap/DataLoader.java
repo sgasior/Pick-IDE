@@ -4,7 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.edu.kopalniakodu.pickide.domain.*;
-import pl.edu.kopalniakodu.pickide.domain.enumUtil.ProgrammingSkill;
+import pl.edu.kopalniakodu.pickide.domain.util.ProgrammingSkill;
 import pl.edu.kopalniakodu.pickide.repository.*;
 
 import java.util.ArrayList;

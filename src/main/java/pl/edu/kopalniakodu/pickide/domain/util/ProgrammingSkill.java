@@ -1,4 +1,4 @@
-package pl.edu.kopalniakodu.pickide.domain.enumUtil;
+package pl.edu.kopalniakodu.pickide.domain.util;
 
 public enum ProgrammingSkill {
 

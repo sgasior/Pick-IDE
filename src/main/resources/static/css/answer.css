@@ -1,0 +1,190 @@
+html,
+body {
+    height: 100%;
+}
+
+
+.container-fluid {
+    height: 100%;
+}
+
+
+/* -----------Survey section--------*/
+
+#answer {
+    background-color: #f8f1f1;
+}
+
+.answer-form-alerts {
+    padding: 0;
+    margin-bottom: 0;
+    position: relative;
+    top: 80px
+}
+
+
+.answer-box {
+    height: 100%;
+    margin-top: 50px;
+    margin-bottom: 60px;
+    font-family: Roboto, sans-serif;
+    padding: 20px 40px;
+    color: #086972;
+}
+
+.criteria-comparison-welcome-msg {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    letter-spacing: 1px;
+    font-weight: 900;
+    text-align: left;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: #071a52;
+}
+
+.criteria-comparison-question {
+    text-align: justify;
+    text-align: center;
+    padding: 0 20%;
+    font-size: 1.5rem;
+}
+
+hr {
+    border: dotted #086972 6px;
+    border-bottom: none;
+    width: 4%;
+    margin: 50px auto;
+}
+
+
+.answer-form {
+    text-align: justify;
+    line-height: 2;
+    margin-top: 30px;
+}
+
+
+.ahp-range {
+    margin-bottom: 20px;
+}
+
+.next-step {
+    margin-top: 70px;
+    text-align: center;
+}
+
+
+/* -----------Buttons--------*/
+
+.next-button {
+    width: 100%;
+}
+
+
+/* -----------RANGE--------*/
+
+.range {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: gray;
+    width: 100%;
+    outline: none;
+    height: 6px;
+    opacity: 0.7;
+    -webkit-transition: .3s;
+    /* 0.2 seconds transition on hover */
+    transition: opacity .3s;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.range:hover {
+    opacity: 1;
+}
+
+.range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #17b978;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 50%;
+    position: relative;
+}
+
+.range::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #17b978;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 50%;
+    position: relative;
+}
+
+
+.comparison {
+    position: relative;
+}
+
+
+label {
+    margin-bottom: 40px;
+    font-size: 1.3rem;
+    color: #071a52;
+}
+
+.rightLabel {
+    display: inline-block;
+    position: absolute;
+    right: 0%;
+    top: 50%;
+    font-weight: 900;
+}
+
+.leftLabel {
+    display: inline-block;
+    position: absolute;
+    left: 0%;
+    top: 50%;
+    font-weight: 900;
+}
+
+.saaty-scale {
+    text-align: center;
+    font-size: 1.3rem;
+    padding: 0 20px;
+    text-transform: uppercase;
+    color: #071a52;
+    font-weight: 900;
+    position: relative;
+    top: 40px
+}
+
+
+@media (max-width: 1200px) {
+
+    .criteria-comparison-question {
+        padding: 0 5%;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    .saaty-scale {
+        font-size: 0.9rem;
+    }
+
+
+}

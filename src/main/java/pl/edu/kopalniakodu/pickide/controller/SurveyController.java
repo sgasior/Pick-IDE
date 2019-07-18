@@ -145,7 +145,7 @@ public class SurveyController {
         } else {
             surveyService.save(survey);
         }
-        return "index.html";
+        return "redirect:/answer";
     }
 
 

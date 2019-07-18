@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Pairwase comparison')}"></th:block>
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{/css/answer.css}">
+
+
+</head>
+
+
+
+<body>
+
+<div th:replace="~{layouts/main_layout :: navbar}"></div>
+
+<div class="new-content">
+    <div class="container-fluid">
+
+        <section id="answer">
+
+            <!--
+<div class="row h-100 justify-content-center align-items-center">
+    <div class="col-lg-6 col-md-10 col-sm-12 answer-form-alerts">
+        <div id="alerts">
+            <div class="alert alert-danger fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Invalid!</strong>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+            <div class="row h-100 justify-content-center align-items-center">
+
+                <div class="col-lg-8 col-md-12 answer-box">
+
+                    <div class="criteria-comparison">
+
+                        <div class="criteria-comparison-welcome-msg">
+                            Criteria comparison
+                        </div>
+                        <div class="criteria-comparison-question">
+                            What is the advantage one criteria over other in pupose of selecting most suitable IDE for
+                            you
+                        </div>
+                        <hr>
+                        <div class="answer-form">
+                            <form id="answerForm" action="POST">
+
+                                <div class="ahp-range">
+                                    <div class="comparison">
+
+                                        <div class="saaty-scale comparison1">
+                                            equal
+                                        </div>
+
+                                        <label for="comparison1">
+                                            <span class="leftLabel">
+                                                Criterium 1
+                                            </span>
+
+                                            <span class="rightLabel">
+                                                Criterium 2
+                                            </span>
+                                        </label>
+                                        <input type="range" min="1" max="17" value="9" class="range" id="comparison1"
+                                               oninput="setSaatyScale(this.id)">
+                                    </div>
+                                </div>
+
+                                <div class="ahp-range">
+                                    <div class="comparison">
+
+                                        <div class="saaty-scale comparison2">
+                                            equal
+                                        </div>
+
+                                        <label for="comparison1">
+                                            <span class="leftLabel">
+                                                Criterium 1
+                                            </span>
+
+                                            <span class="rightLabel">
+                                                Criterium 3
+                                            </span>
+                                        </label>
+                                        <input type="range" min="1" max="17" value="9" class="range" id="comparison2"
+                                               oninput="setSaatyScale(this.id)">
+                                    </div>
+                                </div>
+
+                                <div class="ahp-range">
+                                    <div class="comparison">
+
+                                        <div class="saaty-scale comparison3">
+                                            equal
+                                        </div>
+
+                                        <label for="comparison1">
+                                            <span class="leftLabel">
+                                                Criterium 2
+                                            </span>
+
+                                            <span class="rightLabel">
+                                                Criterium 3
+                                            </span>
+                                        </label>
+                                        <input type="range" min="1" max="17" value="9" class="range" id="comparison3"
+                                               oninput="setSaatyScale(this.id)">
+                                    </div>
+                                </div>
+
+
+                                <div class="next-step">
+                                    <button type="button" class="btn btn-dark next-button"
+                                            onclick="window.location.href='index.html'">Next
+                                    </button>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+
+<div th:replace="~{layouts/main_layout :: footer}"></div>
+
+
+<script type="text/javascript" th:src="@{/vendors/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/answer.js}"></script>
+
+
+</body>
+</html>

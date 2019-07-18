@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import pl.edu.kopalniakodu.pickide.domain.Alternative;
 import pl.edu.kopalniakodu.pickide.domain.Criteria;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
-import pl.edu.kopalniakodu.pickide.domain.enumUtil.PreferedCriteria;
-import pl.edu.kopalniakodu.pickide.domain.enumUtil.PreferedIDE;
+import pl.edu.kopalniakodu.pickide.domain.util.PreferedCriteria;
+import pl.edu.kopalniakodu.pickide.domain.util.PreferedIDE;
 import pl.edu.kopalniakodu.pickide.repository.SurveyRepository;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 

@@ -1,4 +1,4 @@
-package pl.edu.kopalniakodu.pickide.domain.enumUtil;
+package pl.edu.kopalniakodu.pickide.domain.util;
 
 import java.util.Arrays;
 import java.util.List;

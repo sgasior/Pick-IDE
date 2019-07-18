@@ -7,9 +7,9 @@ import lombok.NonNull;
 import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import pl.edu.kopalniakodu.pickide.domain.enumUtil.PreferedCriteria;
-import pl.edu.kopalniakodu.pickide.domain.enumUtil.PreferedIDE;
-import pl.edu.kopalniakodu.pickide.domain.enumUtil.ProgrammingSkill;
+import pl.edu.kopalniakodu.pickide.domain.util.PreferedCriteria;
+import pl.edu.kopalniakodu.pickide.domain.util.PreferedIDE;
+import pl.edu.kopalniakodu.pickide.domain.util.ProgrammingSkill;
 import pl.edu.kopalniakodu.pickide.domain.validator.NonWhitespace;
 
 import javax.persistence.*;

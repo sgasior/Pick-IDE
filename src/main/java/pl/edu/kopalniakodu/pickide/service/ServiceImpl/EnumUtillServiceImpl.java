@@ -1,9 +1,9 @@
 package pl.edu.kopalniakodu.pickide.service.ServiceImpl;
 
 import org.springframework.stereotype.Service;
-import pl.edu.kopalniakodu.pickide.domain.enumUtil.PreferedCriteria;
-import pl.edu.kopalniakodu.pickide.domain.enumUtil.PreferedIDE;
-import pl.edu.kopalniakodu.pickide.domain.enumUtil.ProgrammingSkill;
+import pl.edu.kopalniakodu.pickide.domain.util.PreferedCriteria;
+import pl.edu.kopalniakodu.pickide.domain.util.PreferedIDE;
+import pl.edu.kopalniakodu.pickide.domain.util.ProgrammingSkill;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.EnumUtillService;
 
 import java.util.ArrayList;
