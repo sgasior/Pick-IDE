@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes({"share", "preferedCriterias", "notPreferedCriterias", "preferedAlternatives", "notPreferedAlternatives", "programmerExp", "survey"})
+@SessionAttributes({"share", "preferedCriterias", "notPreferedCriterias", "preferedAlternatives", "notPreferedAlternatives", "programmerExp", "survey", "isAutomaticAlternativeRating"})
 public class SurveyController {
 
     private static final Logger log = LoggerFactory.getLogger(SurveyController.class);
@@ -136,8 +136,19 @@ public class SurveyController {
 
     @PostMapping("/generateSurvey")
     public String generateSurvey(
-            @SessionAttribute("survey") Survey survey
+            @SessionAttribute("survey") Survey survey,
+            @RequestParam(value = "rating", required = false) String rating,
+            Model model
     ) {
+        boolean isAutomaticAlternativeRating = false;
+        if (rating == null) {
+            isAutomaticAlternativeRating = false;
+        } else if (rating.equals("automatic-rating")) {
+            isAutomaticAlternativeRating = true;
+        }
+
+
+        model.addAttribute("isAutomaticAlternativeRating", isAutomaticAlternativeRating);
         Optional<User> userOptional = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         if (userOptional.isPresent()) {
             survey.setUser(userOptional.get());

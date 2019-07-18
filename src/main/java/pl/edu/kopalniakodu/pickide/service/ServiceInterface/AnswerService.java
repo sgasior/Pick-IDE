@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AnswerService {
     List<Comparison<Criteria>> findAllCriteriaComparison(List<Criteria> criterias);
+
+    void analyseUsingAHP(List<Comparison<Criteria>> comparisonList, String[] criteriaRating);
 }

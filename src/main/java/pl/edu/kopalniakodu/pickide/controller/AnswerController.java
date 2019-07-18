@@ -4,9 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.kopalniakodu.pickide.domain.Answer;
 import pl.edu.kopalniakodu.pickide.domain.Criteria;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
@@ -16,7 +14,7 @@ import pl.edu.kopalniakodu.pickide.service.ServiceInterface.AnswerService;
 import java.util.List;
 
 @Controller
-@SessionAttributes("survey")
+@SessionAttributes({"survey", "isAutomaticAlternativeRating", "comparisons"})
 public class AnswerController {
 
     private static final Logger log = LoggerFactory.getLogger(AnswerController.class);
@@ -28,17 +26,30 @@ public class AnswerController {
     }
 
     @GetMapping("/answer")
-    public String test(
+    public String newAnswerForm(
             @SessionAttribute("survey") Survey survey,
             Model model
     ) {
-        log.info("Survey id: " + survey.getId());
-
         List<Comparison<Criteria>> comparisonList = answerService.findAllCriteriaComparison(survey.getCriterias());
 
         model.addAttribute("comparisons", comparisonList);
         model.addAttribute("answer", new Answer(survey));
         return "survey/answer";
+    }
+
+
+    @PostMapping("/processNewAnswerCriteria")
+    public String processNewAnswerCriteria(
+            @SessionAttribute("isAutomaticAlternativeRating") boolean isAutomaticAlternativeRating,
+            @SessionAttribute("comparisons") List<Comparison<Criteria>> comparisonList,
+            @RequestParam(value = "criteriaRating") String[] criteriaRating
+    ) {
+        log.info("" + isAutomaticAlternativeRating);
+
+        answerService.analyseUsingAHP(comparisonList, criteriaRating);
+
+
+        return "index";
     }
 
 }

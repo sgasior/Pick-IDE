@@ -26,4 +26,15 @@ public class AnswerServiceImpl implements AnswerService {
         }
         return result;
     }
+
+    @Override
+    public void analyseUsingAHP(List<Comparison<Criteria>> comparisonList, String[] criteriaRating) {
+        for (int i = 0; i < criteriaRating.length; i++) {
+            comparisonList.get(i).setValue(Integer.parseInt(criteriaRating[i]));
+        }
+
+//        for (Comparison<Criteria> comparison : comparisonList) {
+//            System.out.println(comparison.getChoice1() + " - " + comparison.getChoice2() + " value: " + comparison.getValue());
+//        }
+    }
 }
