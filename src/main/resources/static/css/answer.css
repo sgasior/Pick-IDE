@@ -47,7 +47,8 @@ body {
 .criteria-comparison-question {
     text-align: justify;
     text-align: center;
-    padding: 0 20%;
+    padding: 0 220px;
+    /*            padding: 0 20%;*/
     font-size: 1.5rem;
 }
 
@@ -80,6 +81,7 @@ hr {
 
 .next-button {
     width: 100%;
+    margin-bottom: 100px;
 }
 
 
@@ -163,7 +165,7 @@ label {
     color: #071a52;
     font-weight: 900;
     position: relative;
-    top: 40px
+    top: 40px;
 }
 
 

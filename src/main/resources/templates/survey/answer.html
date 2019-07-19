@@ -48,7 +48,7 @@
                         </div>
                         <hr>
                         <div class="answer-form">
-                            <form id="answerForm" th:action="@{/processNewAnswerCriteria}"
+                            <form id="answerForm" th:action="@{/processNewAnswerCriteria(surveyID=${surveyID})}"
                                   method="POST">
                                 <th:block th:each="comparison: ${comparisons}">
                                     <div class="ahp-range">

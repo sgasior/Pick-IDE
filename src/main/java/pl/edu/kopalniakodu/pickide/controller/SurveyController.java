@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes({"share", "preferedCriterias", "notPreferedCriterias", "preferedAlternatives", "notPreferedAlternatives", "programmerExp", "survey", "isAutomaticAlternativeRating"})
+@SessionAttributes({"share", "preferedCriterias", "notPreferedCriterias", "preferedAlternatives", "notPreferedAlternatives", "programmerExp", "survey"})
 public class SurveyController {
 
     private static final Logger log = LoggerFactory.getLogger(SurveyController.class);
@@ -137,26 +137,33 @@ public class SurveyController {
     @PostMapping("/generateSurvey")
     public String generateSurvey(
             @SessionAttribute("survey") Survey survey,
+            @SessionAttribute("share") boolean share,
             @RequestParam(value = "rating", required = false) String rating,
-            Model model
+            Model model,
+            RedirectAttributes redirectAttributes
     ) {
-        boolean isAutomaticAlternativeRating = false;
         if (rating == null) {
-            isAutomaticAlternativeRating = false;
+            survey.setAutomaticAlternativeRating(false);
         } else if (rating.equals("automatic-rating")) {
-            isAutomaticAlternativeRating = true;
+            survey.setAutomaticAlternativeRating(true);
         }
 
-
-        model.addAttribute("isAutomaticAlternativeRating", isAutomaticAlternativeRating);
         Optional<User> userOptional = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         if (userOptional.isPresent()) {
             survey.setUser(userOptional.get());
+        }
+
+        if (share) {
+            survey.setSurveyURL(surveyService.generateRandomUrl());
             surveyService.save(survey);
+            redirectAttributes.addAttribute("surveyURL", survey.getSurveyURL());
+            return "redirect:/answer/{surveyURL}";
         } else {
             surveyService.save(survey);
+            return "redirect:/answer";
         }
-        return "redirect:/answer";
+
+
     }
 
 

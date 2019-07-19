@@ -12,4 +12,10 @@ public interface SurveyService {
     void addAlternatives(String[] selectedAlternative, Survey survey);
 
     boolean isNewCriteriaOrAlternativeAdded(Survey survey);
+
+    String generateRandomUrl();
+
+    Survey findSurveyBySurveyURL(String surveyURL);
+
+    Survey findById(Long surveyID);
 }

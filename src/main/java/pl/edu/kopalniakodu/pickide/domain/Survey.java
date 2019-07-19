@@ -57,6 +57,9 @@ public class Survey {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Answer> answers = new ArrayList<>();
 
+    private String surveyURL;
+
+    private boolean isAutomaticAlternativeRating;
 
     @Transient
     private ProgrammingSkill programmingSkill;
@@ -145,6 +148,8 @@ public class Survey {
         return "Survey{" +
                 "id=" + id +
                 ", surveyName='" + surveyName + '\'' +
+                ", surveyURL='" + surveyURL + '\'' +
+                ", isAutomaticAlternativeRating=" + isAutomaticAlternativeRating +
                 '}';
     }
 }
