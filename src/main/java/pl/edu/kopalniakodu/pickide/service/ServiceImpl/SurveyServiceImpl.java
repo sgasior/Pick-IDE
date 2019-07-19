@@ -9,6 +9,7 @@ import pl.edu.kopalniakodu.pickide.domain.util.PreferedIDE;
 import pl.edu.kopalniakodu.pickide.repository.SurveyRepository;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -77,7 +78,7 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
-    public String generateRandomUrl() {
+    public String generateRandomURIParam() {
         int minASCI = 97;
         int maxASCINumber = 122;
         int targetStringLength = 10;
@@ -104,13 +105,20 @@ public class SurveyServiceImpl implements SurveyService {
 
 
     @Override
-    public Survey findSurveyBySurveyURL(String surveyURL) {
-        return surveyRepository.findSurveyBySurveyURL(surveyURL).get();
+    public Survey findSurveyBySurveyURIParam(String surveyURIParam) {
+        return surveyRepository.findSurveyBySurveyURIParam(surveyURIParam).get();
     }
 
     @Override
     public Survey findById(Long surveyID) {
         return surveyRepository.findById(surveyID).get();
+    }
+
+    @Override
+    public String generateSurveyURL(String surveyURI, HttpServletRequest request) {
+        String url = request.getRequestURL().toString();
+        return url.substring(0, url.lastIndexOf("/")) + "/" + surveyURI;
+
     }
 
 

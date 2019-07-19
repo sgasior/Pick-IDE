@@ -1,0 +1,79 @@
+html,
+body {
+    height: 100%;
+}
+
+
+.container-fluid {
+    height: 100%;
+}
+
+
+/* -----------Survey section--------*/
+
+#share-link {
+    background-color: #f8f1f1;
+}
+
+
+.box {
+    height: 100%;
+    margin-top: 100px;
+    margin-bottom: 167px;
+    font-family: Roboto, sans-serif;
+    padding: 60px 100px;
+    color: #086972;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 2%;
+    border: 1px solid #071a52;
+}
+
+
+.alert {
+    border: 1px solid #071a52;
+    padding: 50px
+}
+
+.copy {
+    padding-top: 20px;
+}
+
+
+/* -----------Buttons--------*/
+
+.next-button {
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+
+#copyBtn {
+    width: 110px;
+    height: 45px;
+    background: rgba(8, 105, 114, 0.8);
+    color: #fff;
+    border: 2px solid #071a52;
+    border-radius: 10px;
+    position: relative;
+    outline: none;
+}
+
+#copyBtn .far {
+    margin-right: 5px;
+}
+
+#copyBtn:hover {
+    background: rgba(8, 105, 114, 1);
+}
+
+/* -----------INPUTS --------*/
+
+.copy input[type="text"] {
+    height: 47px;
+    color: #071a52;
+    outline: none;
+    border: 2px solid #071a52;
+    border-radius: 10px;
+    font-size: 16px;
+
+}

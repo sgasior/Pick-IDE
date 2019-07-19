@@ -28,12 +28,12 @@ public class AnswerController {
         this.surveyService = surveyService;
     }
 
-    @GetMapping("answer/{surveyURL}")
+    @GetMapping("answer/{surveyURIParam}")
     public String newAnswerForm(
-            @PathVariable(value = "surveyURL") String surveyURL,
+            @PathVariable(value = "surveyURIParam") String surveyURIParam,
             Model model
     ) {
-        Survey survey = surveyService.findSurveyBySurveyURL(surveyURL);
+        Survey survey = surveyService.findSurveyBySurveyURIParam(surveyURIParam);
         List<Comparison<Criteria>> comparisonList = answerService.findAllCriteriaComparison(survey.getCriterias());
 
         model.addAttribute("surveyID", survey.getId());
@@ -60,10 +60,8 @@ public class AnswerController {
             @RequestParam("surveyID") Long surveyID,
             @RequestParam(value = "criteriaRating") String[] criteriaRating
     ) {
-        log.info("Survey id: " + surveyID);
         Survey survey = surveyService.findById(surveyID);
         List<Comparison<Criteria>> comparisonList = answerService.findAllCriteriaComparison(survey.getCriterias());
-        log.info("" + survey.isAutomaticAlternativeRating());
 
         Map<Criteria, Double> answerCriteria = answerService
                 .findWeightsOfAllCriteria(comparisonList, criteriaRating);

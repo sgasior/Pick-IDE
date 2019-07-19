@@ -16,12 +16,16 @@ import pl.edu.kopalniakodu.pickide.service.ServiceInterface.EnumUtillService;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes({"share", "preferedCriterias", "notPreferedCriterias", "preferedAlternatives", "notPreferedAlternatives", "programmerExp", "survey"})
+@SessionAttributes({"share", "preferedCriterias",
+        "notPreferedCriterias", "preferedAlternatives",
+        "notPreferedAlternatives", "programmerExp",
+        "survey", "surveyURL"})
 public class SurveyController {
 
     private static final Logger log = LoggerFactory.getLogger(SurveyController.class);
@@ -140,7 +144,7 @@ public class SurveyController {
             @SessionAttribute("share") boolean share,
             @RequestParam(value = "rating", required = false) String rating,
             Model model,
-            RedirectAttributes redirectAttributes
+            HttpServletRequest request
     ) {
         if (rating == null) {
             survey.setAutomaticAlternativeRating(false);
@@ -154,10 +158,15 @@ public class SurveyController {
         }
 
         if (share) {
-            survey.setSurveyURL(surveyService.generateRandomUrl());
+            String surveyURIParam = surveyService.generateRandomURIParam();
+            survey.setSurveyURIParam(surveyURIParam);
+
+            String surveyURL = surveyService.generateSurveyURL("answer/" + surveyURIParam, request);
+
             surveyService.save(survey);
-            redirectAttributes.addAttribute("surveyURL", survey.getSurveyURL());
-            return "redirect:/answer/{surveyURL}";
+            model.addAttribute("surveyURL", surveyURL);
+            return "redirect:/survey/share";
+
         } else {
             surveyService.save(survey);
             return "redirect:/answer";
@@ -166,6 +175,14 @@ public class SurveyController {
 
     }
 
+    @GetMapping("/survey/share")
+    public String surveyCreatedInfo(
+            @SessionAttribute("surveyURL") String surveyURL,
+            Model model
+    ) {
+        model.addAttribute("surveyURL", surveyURL);
+        return "survey/share-link";
+    }
 
     @PostMapping("/ahp-info-page")
     public String newSurveyFormWithoutAccount(

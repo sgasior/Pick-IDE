@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Share')}"></th:block>
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{/css/share-link.css}">
+
+
+</head>
+
+
+<body>
+
+<div th:replace="~{layouts/main_layout :: navbar}"></div>
+
+<div class="new-content">
+    <div class="container-fluid">
+        <section id="share-link">
+
+
+            <div class="row h-100 justify-content-center align-items-center">
+
+                <div class="col-lg-8 col-md-12 box">
+
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading"><strong>Well done!</strong></h4>
+                        <p>You successfully created survey. Now you can copy the link and decide with others which IDE
+                            is the best for you. Remember that you can always turn off the ability to add answers or
+                            even delete survey.</p>
+                        <hr>
+                        <p class="mb-0">Good luck in choosing the most suitable IDE!</p>
+                    </div>
+
+
+                    <div class="copy">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" class="form-control-plaintext" id="surveyURL"
+                                       th:value="${surveyURL}">
+                            </div>
+                            <div class="col-5">
+                                <button type="button" id="copyBtn" onclick="copyURL()">
+                                    <i class="far fa-copy"></i>
+                                    Copy link
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<div th:replace="~{layouts/main_layout :: footer}"></div>
+
+
+<script type="text/javascript" th:src="@{/vendors/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/share-link.js}"></script>
+
+
+</body>
+</html>

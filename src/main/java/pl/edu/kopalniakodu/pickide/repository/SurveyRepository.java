@@ -9,6 +9,6 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
 
     Optional<Survey> findBySurveyName(String surveyName);
 
-    Optional<Survey> findSurveyBySurveyURL(String surveyURL);
+    Optional<Survey> findSurveyBySurveyURIParam(String surveyURIParam);
 
 }

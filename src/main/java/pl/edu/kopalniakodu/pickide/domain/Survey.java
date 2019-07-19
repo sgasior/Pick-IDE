@@ -57,7 +57,8 @@ public class Survey {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Answer> answers = new ArrayList<>();
 
-    private String surveyURL;
+    @Column(name = "survey_uri_param")
+    private String surveyURIParam;
 
     private boolean isAutomaticAlternativeRating;
 
@@ -148,7 +149,7 @@ public class Survey {
         return "Survey{" +
                 "id=" + id +
                 ", surveyName='" + surveyName + '\'' +
-                ", surveyURL='" + surveyURL + '\'' +
+                ", surveyURIParam='" + surveyURIParam + '\'' +
                 ", isAutomaticAlternativeRating=" + isAutomaticAlternativeRating +
                 '}';
     }

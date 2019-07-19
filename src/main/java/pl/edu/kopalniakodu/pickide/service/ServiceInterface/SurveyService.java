@@ -2,6 +2,8 @@ package pl.edu.kopalniakodu.pickide.service.ServiceInterface;
 
 import pl.edu.kopalniakodu.pickide.domain.Survey;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface SurveyService {
 
     Survey save(Survey survey);
@@ -13,9 +15,11 @@ public interface SurveyService {
 
     boolean isNewCriteriaOrAlternativeAdded(Survey survey);
 
-    String generateRandomUrl();
+    String generateRandomURIParam();
 
-    Survey findSurveyBySurveyURL(String surveyURL);
+    Survey findSurveyBySurveyURIParam(String surveyURL);
 
     Survey findById(Long surveyID);
+
+    String generateSurveyURL(String s, HttpServletRequest request);
 }
