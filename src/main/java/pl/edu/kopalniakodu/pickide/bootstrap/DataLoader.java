@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import pl.edu.kopalniakodu.pickide.domain.*;
 import pl.edu.kopalniakodu.pickide.domain.util.ProgrammingSkill;
 import pl.edu.kopalniakodu.pickide.repository.*;
+import pl.edu.kopalniakodu.pickide.util.ahp.AhpAnalyzer;
+import pl.edu.kopalniakodu.pickide.util.ahp.AhpAnalyzerImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +68,107 @@ public class DataLoader implements CommandLineRunner {
 //        LoadAnswerCriteria();
 //        LoadAlternatives();
 //        LoadAnswerAlternative();
+//        LoadAHPTester();
     }
 
+    private void LoadAHPTester() {
+        double[][] ahpMatrix1 = new double[3][3];
+
+        ahpMatrix1[0][0] = 1;
+        ahpMatrix1[0][1] = 5;
+        ahpMatrix1[0][2] = 3;
+
+        ahpMatrix1[1][0] = 0.2;
+        ahpMatrix1[1][1] = 1;
+        ahpMatrix1[1][2] = 1;
+
+        ahpMatrix1[2][0] = 1 / 3d;
+        ahpMatrix1[2][1] = 1;
+        ahpMatrix1[2][2] = 1;
+
+        AhpAnalyzer ahpAnalyzer = new AhpAnalyzerImpl(ahpMatrix1);
+//        printMatrix(ahpMatrix1);
+//        System.out.println("C.I: " + ahpAnalyzer.getConsistencyIndex());
+//        System.out.println("C.R: " + ahpAnalyzer.getConsistencyRatio());
+//        System.out.println("Lambda max " + ahpAnalyzer.getLambdaMax());
+//        System.out.println("Matrix rank " + ahpAnalyzer.getMatrixRank());
+//        System.out.println("Random index " + ahpAnalyzer.getRandomIndex());
+//        System.out.println("\n\n");
+//        for (double weight : ahpAnalyzer.getWeights()) {
+//            System.out.println("weight: " + weight);
+//        }
+//        System.out.println("\n\n");
+
+
+        double[][] ahpMatrix2 = new double[2][2];
+
+        ahpMatrix2[0][0] = 1;
+        ahpMatrix2[0][1] = 1 / 3d;
+
+        ahpMatrix2[1][0] = 3;
+        ahpMatrix2[1][1] = 1;
+
+        AhpAnalyzerImpl ahpAnalyzer2 = new AhpAnalyzerImpl(ahpMatrix2);
+//        printMatrix(ahpMatrix2);
+//        System.out.println("C.I: " + ahpAnalyzer2.getConsistencyIndex());
+//        System.out.println("C.R: " + ahpAnalyzer2.getConsistencyRatio());
+//        System.out.println("Lambda max " + ahpAnalyzer2.getLambdaMax());
+//        System.out.println("Matrix rank " + ahpAnalyzer2.getMatrixRank());
+//        System.out.println("Random index " + ahpAnalyzer2.getRandomIndex());
+//        System.out.println("\n\n");
+//        for (double weight : ahpAnalyzer2.getWeights()) {
+//            System.out.println("weight: " + weight);
+//        }
+//        System.out.println("\n\n");
+
+
+        double[][] ahpMatrix3 = new double[4][4];
+
+        ahpMatrix3[0][0] = 1;
+        ahpMatrix3[0][1] = 0.2;
+        ahpMatrix3[0][2] = 1;
+        ahpMatrix3[0][3] = 1 / 3d;
+
+        ahpMatrix3[1][0] = 5;
+        ahpMatrix3[1][1] = 1;
+        ahpMatrix3[1][2] = 5;
+        ahpMatrix3[1][3] = 9;
+
+        ahpMatrix3[2][0] = 1;
+        ahpMatrix3[2][1] = 0.2;
+        ahpMatrix3[2][2] = 1;
+        ahpMatrix3[2][3] = 1;
+
+        ahpMatrix3[3][0] = 3;
+        ahpMatrix3[3][1] = 1 / 9d;
+        ahpMatrix3[3][2] = 1;
+        ahpMatrix3[3][3] = 1;
+
+        AhpAnalyzer ahpAnalyzer3 = new AhpAnalyzerImpl(ahpMatrix3);
+//        printMatrix(ahpMatrix3);
+//
+//        System.out.println("C.I: " + ahpAnalyzer3.getConsistencyIndex());
+//        System.out.println("C.R: " + ahpAnalyzer3.getConsistencyRatio());
+//        System.out.println("Lambda max " + ahpAnalyzer3.getLambdaMax());
+//        System.out.println("Matrix rank " + ahpAnalyzer3.getMatrixRank());
+//        System.out.println("Random index " + ahpAnalyzer3.getRandomIndex());
+//        System.out.println("Max consistency ratio " + ahpAnalyzer3.getMaxConsistencyRatio());
+//        System.out.println("\n\n");
+//        for (double weight : ahpAnalyzer3.getWeights()) {
+//            System.out.println("weight: " + weight);
+//        }
+//        System.out.println("\n\n");
+    }
+
+
+    private void printMatrix(double[][] ahpMatrix) {
+        for (int i = 0; i < ahpMatrix.length; i++) {
+            for (int j = 0; j < ahpMatrix[i].length; j++) {
+                System.out.print(" " + ahpMatrix[i][j]);
+            }
+            System.out.println();
+        }
+    }
 
     private void LoadUsersAndRoles() {
 
