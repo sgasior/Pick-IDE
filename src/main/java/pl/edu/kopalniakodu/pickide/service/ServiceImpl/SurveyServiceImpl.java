@@ -12,6 +12,7 @@ import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -105,8 +106,8 @@ public class SurveyServiceImpl implements SurveyService {
 
 
     @Override
-    public Survey findSurveyBySurveyURIParam(String surveyURIParam) {
-        return surveyRepository.findSurveyBySurveyURIParam(surveyURIParam).get();
+    public Optional<Survey> findSurveyBySurveyURIParam(String surveyURIParam) {
+        return surveyRepository.findSurveyBySurveyURIParam(surveyURIParam);
     }
 
     @Override

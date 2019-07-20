@@ -30,6 +30,13 @@ public class AnswerCriteria implements Serializable {
 
     private double weight;
 
+    public AnswerCriteria() {
+
+    }
+
+    public AnswerCriteria(Answer answer) {
+        this.answer = answer;
+    }
 
     @Override
     public boolean equals(Object o) {

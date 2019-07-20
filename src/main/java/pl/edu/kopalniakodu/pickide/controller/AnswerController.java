@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.kopalniakodu.pickide.domain.Answer;
 import pl.edu.kopalniakodu.pickide.domain.Criteria;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
 import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
@@ -33,7 +34,7 @@ public class AnswerController {
             @PathVariable(value = "surveyURIParam") String surveyURIParam,
             Model model
     ) {
-        Survey survey = surveyService.findSurveyBySurveyURIParam(surveyURIParam);
+        Survey survey = surveyService.findSurveyBySurveyURIParam(surveyURIParam).get();
         List<Comparison<Criteria>> comparisonList = answerService.findAllCriteriaComparison(survey.getCriterias());
 
         model.addAttribute("surveyID", survey.getId());
@@ -63,10 +64,12 @@ public class AnswerController {
         Survey survey = surveyService.findById(surveyID);
         List<Comparison<Criteria>> comparisonList = answerService.findAllCriteriaComparison(survey.getCriterias());
 
-        Map<Criteria, Double> answerCriteria = answerService
-                .findWeightsOfAllCriteria(comparisonList, criteriaRating);
+        Map<Criteria, Double> weightsOfAllCriteria = answerService
+                .findWeightsOfAllCriteria(comparisonList, criteriaRating, survey.getCriterias());
 
-        answerService.save(survey);
+        Answer answer = new Answer(survey);
+        answerService.save(answer);
+        answerService.saveAnswerCriteria(answer, weightsOfAllCriteria);
 
 
         return "index";

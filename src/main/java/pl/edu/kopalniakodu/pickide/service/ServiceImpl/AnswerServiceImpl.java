@@ -3,13 +3,19 @@ package pl.edu.kopalniakodu.pickide.service.ServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import pl.edu.kopalniakodu.pickide.domain.Answer;
+import pl.edu.kopalniakodu.pickide.domain.AnswerCriteria;
 import pl.edu.kopalniakodu.pickide.domain.Criteria;
-import pl.edu.kopalniakodu.pickide.domain.Survey;
 import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
+import pl.edu.kopalniakodu.pickide.repository.AnswerCriteriaRepository;
+import pl.edu.kopalniakodu.pickide.repository.AnswerRepository;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.AnswerService;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
+import pl.edu.kopalniakodu.pickide.util.ahp.AhpAnalyzer;
+import pl.edu.kopalniakodu.pickide.util.ahp.AhpAnalyzerImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +24,14 @@ public class AnswerServiceImpl implements AnswerService {
 
     private static final Logger log = LoggerFactory.getLogger(AnswerServiceImpl.class);
 
+    private AnswerCriteriaRepository answerCriteriaRepository;
     private SurveyService surveyService;
+    private AnswerRepository answerRepository;
 
-    public AnswerServiceImpl(SurveyService surveyService) {
+    public AnswerServiceImpl(AnswerCriteriaRepository answerCriteriaRepository, SurveyService surveyService, AnswerRepository answerRepository) {
+        this.answerCriteriaRepository = answerCriteriaRepository;
         this.surveyService = surveyService;
+        this.answerRepository = answerRepository;
     }
 
     @Override
@@ -42,14 +52,37 @@ public class AnswerServiceImpl implements AnswerService {
 
 
     @Override
-    public Map<Criteria, Double> findWeightsOfAllCriteria(List<Comparison<Criteria>> comparisonList, String[] criteriaRating) {
+    public Map<Criteria, Double> findWeightsOfAllCriteria(List<Comparison<Criteria>> comparisonList, String[] criteriaRating, List<Criteria> criteriaList) {
 
+        Map<Criteria, Double> result = new HashMap<>();
         double[][] ahpMatrix = generateAHPMatrix(comparisonList, criteriaRating);
+        AhpAnalyzer ahpAnalyzer = new AhpAnalyzerImpl(ahpMatrix);
 
-        printMatrix(ahpMatrix);
+        double[] weight = ahpAnalyzer.getWeights();
+        for (int i = 0; i < criteriaList.size(); i++) {
+            result.put(criteriaList.get(i), weight[i]);
+        }
 
-        return null;
+        return result;
     }
+
+    @Override
+    public void saveAnswerCriteria(Answer answer, Map<Criteria, Double> weightsOfAllCriteria) {
+
+        weightsOfAllCriteria.forEach((k, v) -> {
+            AnswerCriteria answerCriteria = new AnswerCriteria(answer);
+            answerCriteria.setCriteria(k);
+            answerCriteria.setWeight(v);
+            answerCriteriaRepository.save(answerCriteria);
+        });
+
+    }
+
+    @Override
+    public void save(Answer answer) {
+        answerRepository.save(answer);
+    }
+
 
     private double[][] generateAHPMatrix(List<Comparison<Criteria>> comparisonList, String[] criteriaRating) {
 
@@ -98,7 +131,6 @@ public class AnswerServiceImpl implements AnswerService {
         }
     }
 
-
     private static double convertToSaatyScale(int value) {
 
         if (value == 1) {
@@ -137,11 +169,6 @@ public class AnswerServiceImpl implements AnswerService {
             return 1 / 9d;
         }
 
-    }
-
-    @Override
-    public void save(Survey survey) {
-        log.info(("method save() not impl"));
     }
 
 

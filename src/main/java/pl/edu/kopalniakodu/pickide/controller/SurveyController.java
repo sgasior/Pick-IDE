@@ -158,7 +158,11 @@ public class SurveyController {
         }
 
         if (share) {
-            String surveyURIParam = surveyService.generateRandomURIParam();
+            String surveyURIParam;
+            do {
+                surveyURIParam = surveyService.generateRandomURIParam();
+            } while (surveyService.findSurveyBySurveyURIParam(surveyURIParam).isPresent());
+
             survey.setSurveyURIParam(surveyURIParam);
 
             String surveyURL = surveyService.generateSurveyURL("answer/" + surveyURIParam, request);
