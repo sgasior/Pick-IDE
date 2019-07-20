@@ -62,7 +62,7 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         LoadUsersAndRoles();
-        LoadSurverys();
+//        LoadSurverys();
 //        LoadAnswers();
 //        LoadCriterias();
 //        LoadAnswerCriteria();
@@ -291,7 +291,7 @@ public class DataLoader implements CommandLineRunner {
         AnswerAlternative answerAlternative = new AnswerAlternative();
 
         Answer answer_2 = answerRepository.findById(2L).get();
-        Alternative alternative_2 = alternativeRepository.findById(2L).get();
+        Alternative alternative_2 = alternativeRepository.findById(1L).get();
 
         answerAlternative.setAlternative(alternative_2);
         answerAlternative.setAnswer(answer_2);

@@ -28,6 +28,14 @@ public class AnswerAlternative implements Serializable {
 
     private double weight;
 
+    public AnswerAlternative() {
+
+    }
+
+    public AnswerAlternative(Answer answer) {
+        this.answer = answer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

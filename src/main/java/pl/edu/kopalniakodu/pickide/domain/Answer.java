@@ -33,6 +33,13 @@ public class Answer {
     private Set<AnswerCriteria> answerCriteria = new HashSet<>();
 
 
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            mappedBy = "answer", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Set<AnswerAlternative> answerAlternative = new HashSet<>();
+
+
     public Answer() {
 
     }
