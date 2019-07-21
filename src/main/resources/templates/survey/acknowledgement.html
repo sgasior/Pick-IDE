@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Share')}"></th:block>
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{/css/acknowledgement.css}">
+
+
+</head>
+
+
+<body>
+
+<div th:replace="~{layouts/main_layout :: navbar}"></div>
+
+<div class="new-content">
+    <div class="container-fluid">
+
+        <section id="share-link">
+
+
+            <div class="row h-100 justify-content-center align-items-center">
+
+                <div class="col-lg-6 col-md-10 box">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="sucess-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="col-6 sucess-msg">
+                            Congratulations! You have completed filling out the questionnaire. Thank you for your time.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+
+<div th:replace="~{layouts/main_layout :: footer}"></div>
+
+
+<script type="text/javascript" th:src="@{/vendors/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/share-link.js}"></script>
+
+
+</body>
+</html>

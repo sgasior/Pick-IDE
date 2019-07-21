@@ -1,0 +1,38 @@
+html,
+body {
+    height: 100%;
+}
+
+
+.container-fluid {
+    height: 100%;
+}
+
+
+/* -----------Survey section--------*/
+
+#share-link {
+    background-color: #f8f1f1;
+}
+
+
+.box {
+    height: 100%;
+    margin-top: 150px;
+    margin-bottom: 264px;
+    font-family: Roboto, sans-serif;
+    padding: 60px 0px;
+    color: #071a52;
+    border-radius: 2%;
+}
+
+.sucess-icon {
+    text-align: right;
+    font-size: 100px;
+    margin-right: 60px;
+}
+
+.sucess-msg {
+    text-align: left;
+    font-size: 30px;
+}

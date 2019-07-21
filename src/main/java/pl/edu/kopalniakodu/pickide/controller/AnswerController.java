@@ -119,7 +119,11 @@ public class AnswerController {
         answerService.saveAnswerAlternative(answer, weightsOfAllAlternative, criteria);
 
         if (criteriaQueue.isEmpty()) {
-            return "result-page";
+            if (survey.getSurveyURIParam() != null) {
+                return "survey/acknowledgement";
+            } else {
+                return "result-page";
+            }
         } else {
             model.addAttribute("criteriaName", ((LinkedList<Criteria>) criteriaQueue).get(0).getCriteriaName());
             return "survey/answerAlternative";
