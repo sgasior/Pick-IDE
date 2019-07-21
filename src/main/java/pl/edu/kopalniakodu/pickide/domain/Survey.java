@@ -32,7 +32,7 @@ public class Survey {
     @NonWhitespace(message = "Your survey name cannot contain whitespaces")
     private String surveyName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 

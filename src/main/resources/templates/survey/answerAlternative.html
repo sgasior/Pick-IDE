@@ -40,17 +40,17 @@
                     <div class="criteria-comparison">
 
                         <div class="criteria-comparison-welcome-msg">
-                            Criteria comparison
+                            Alternative comparison
                         </div>
-                        <div class="criteria-comparison-question">
-                            What is the advantage one criteria over other in pupose of selecting most suitable IDE for
-                            you
+                        <div class="criteria-comparison-question"
+                             th:text="'What is the advantage one alternative over other considering only '+${criteriaName}">
                         </div>
                         <hr>
                         <div class="answer-form">
                             <form id="answerForm"
-                                  th:action="@{/answer/alternative(surveyID=${surveyID})}"
-                                  method="POST">
+                                  th:action="@{/answer/alternative}" method="POST">
+                                <!--th:action="@{/answer/alternative(surveyID=${surveyID})}"-->
+
                                 <!--th:action="@{/answer/alternative(surveyID=${surveyID},criteriaID=${criteriaID})}"-->
                                 <!--method="POST">-->
 

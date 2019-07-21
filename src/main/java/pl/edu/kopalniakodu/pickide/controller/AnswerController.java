@@ -33,7 +33,7 @@ public class AnswerController {
         this.surveyService = surveyService;
     }
 
-    @GetMapping("answer/criteria/{surveyURIParam}")
+    @GetMapping("/answer/{surveyURIParam}")
     public String newAnswerForm(
             @PathVariable(value = "surveyURIParam") String surveyURIParam,
             Model model
@@ -41,33 +41,31 @@ public class AnswerController {
         Survey survey = surveyService.findSurveyBySurveyURIParam(surveyURIParam).get();
         List<Comparison<Criteria>> comparisonList = answerService.findAllCriteriaComparison(survey.getCriterias());
 
-        model.addAttribute("surveyID", survey.getId());
+        model.addAttribute("survey", survey);
         model.addAttribute("comparisons", comparisonList);
         return "survey/answerCriteria";
     }
 
 
-    @GetMapping("/answer/criteria")
+    @GetMapping("/answer")
     public String newAnswerForm(
             @SessionAttribute("survey") Survey survey,
             Model model
     ) {
         List<Comparison<Criteria>> criteriaComparisonList = answerService.findAllCriteriaComparison(survey.getCriterias());
 
-        model.addAttribute("surveyID", survey.getId());
         model.addAttribute("comparisons", criteriaComparisonList);
         return "survey/answerCriteria";
     }
 
 
-    @PostMapping("/answer/criteria")
+    @PostMapping("/answer")
     public String processNewAnswerCriteria(
-            @RequestParam("surveyID") Long surveyID,
+            @SessionAttribute("survey") Survey survey,
             @RequestParam(value = "criteriaRating") String[] criteriaRating,
             Model model,
             RedirectAttributes redirectAttributes
     ) {
-        Survey survey = surveyService.findById(surveyID);
         List<Comparison<Criteria>> criteriaComparisonList = answerService.findAllCriteriaComparison(survey.getCriterias());
 
         Map<Criteria, Double> weightsOfAllCriteria = answerService
@@ -85,63 +83,22 @@ public class AnswerController {
             return "result-page";
         } else {
 
-            if (survey.getSurveyURIParam() != null) {
-                redirectAttributes.addAttribute("surveyURIParam", survey.getSurveyURIParam());
-                return "redirect:/answer/alternative/{surveyURIParam}";
-            } else {
-                return "redirect:/answer/alternative";
-            }
-
+            //share and not share option
+            List<Comparison<Alternative>> alternativeComparisonList = answerService.findAllAlternativeComparison(survey.getAlternatives());
+            Queue<Criteria> criteriaQueue = new LinkedList<>(survey.getCriterias());
+            model.addAttribute("criteriaQueue", criteriaQueue);
+            model.addAttribute("comparisons", alternativeComparisonList);
+            model.addAttribute("criteriaName", ((LinkedList<Criteria>) criteriaQueue).get(0).getCriteriaName());
+            return "survey/answerAlternative";
         }
 
-    }
-
-
-    @GetMapping("answer/alternative/{surveyURIParam}")
-    public String newAlternativeAnswerForm(
-            @PathVariable(value = "surveyURIParam") String surveyURIParam,
-            @SessionAttribute(value = "answer_id", required = false) Long answer_id,
-            Model model
-    ) {
-
-        Survey survey = surveyService.findSurveyBySurveyURIParam(surveyURIParam).get();
-        log.info("answer_id " + answer_id);
-        if (answer_id == null) {
-            Answer answer = new Answer(survey);
-            answerService.save(answer);
-            model.addAttribute("answer_id", answer.getId());
-        }
-
-        List<Comparison<Alternative>> alternativeComparisonList = answerService.findAllAlternativeComparison(survey.getAlternatives());
-
-        Queue<Criteria> criteriaQueue = new LinkedList<>(survey.getCriterias());
-        model.addAttribute("criteriaQueue", criteriaQueue);
-        model.addAttribute("surveyID", survey.getId());
-        model.addAttribute("comparisons", alternativeComparisonList);
-        return "survey/answerAlternative";
-    }
-
-
-    @GetMapping("/answer/alternative")
-    public String newAlternativeAnswerForm(
-            @SessionAttribute("survey") Survey survey,
-            Model model
-    ) {
-
-        List<Comparison<Alternative>> alternativeComparisonList = answerService.findAllAlternativeComparison(survey.getAlternatives());
-
-        Queue<Criteria> criteriaQueue = new LinkedList<>(survey.getCriterias());
-        model.addAttribute("criteriaQueue", criteriaQueue);
-        model.addAttribute("surveyID", survey.getId());
-        model.addAttribute("comparisons", alternativeComparisonList);
-        return "survey/answerAlternative";
     }
 
 
     @PostMapping("/answer/alternative")
     public String processNewAnswerAlternative(
-            @RequestParam("surveyID") Long surveyID,
             @RequestParam(value = "alternativeRating") String[] alternativeRating,
+            @SessionAttribute("survey") Survey survey,
             @SessionAttribute("answer_id") Long answer_id,
             @SessionAttribute("criteriaQueue") Queue<Criteria> criteriaQueue,
             Model model
@@ -149,14 +106,10 @@ public class AnswerController {
 
         Long criteriaID = criteriaQueue.remove().getId();
 
-        Survey survey = surveyService.findById(surveyID);
         Answer answer = answerService.findAnswerById(answer_id).get();
         Criteria criteria = surveyService.findCriteriaById(criteriaID).get();
         List<Comparison<Alternative>> alternativeComparisonList = answerService.findAllAlternativeComparison(survey.getAlternatives());
 
-
-        log.info("Criteria: " + surveyService.findCriteriaById(criteriaID).get().getCriteriaName());
-        log.info("Answer id: " + answer.getId());
 
         Map<Alternative, Double> weightsOfAllAlternative = answerService
                 .findWeightsOfAllAlternative(alternativeComparisonList, alternativeRating, survey.getAlternatives());
@@ -168,12 +121,8 @@ public class AnswerController {
         if (criteriaQueue.isEmpty()) {
             return "result-page";
         } else {
-            model.addAttribute("surveyID", survey.getId());
+            model.addAttribute("criteriaName", ((LinkedList<Criteria>) criteriaQueue).get(0).getCriteriaName());
             return "survey/answerAlternative";
         }
-
-
     }
-
-
 }
