@@ -1,11 +1,13 @@
 package pl.edu.kopalniakodu.pickide.service.ServiceInterface;
 
+import pl.edu.kopalniakodu.pickide.domain.Alternative;
 import pl.edu.kopalniakodu.pickide.domain.Answer;
 import pl.edu.kopalniakodu.pickide.domain.Criteria;
 import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface AnswerService {
     List<Comparison<Criteria>> findAllCriteriaComparison(List<Criteria> criterias);
@@ -15,4 +17,12 @@ public interface AnswerService {
     void saveAnswerCriteria(Answer answer, Map<Criteria, Double> weightsOfAllCriteria);
 
     void save(Answer answer);
+
+    List<Comparison<Alternative>> findAllAlternativeComparison(List<Alternative> alternatives);
+
+    Optional<Answer> findAnswerById(Long answer_id);
+
+    Map<Alternative, Double> findWeightsOfAllAlternative(List<Comparison<Alternative>> alternativeComparisonList, String[] alternativeRating, List<Alternative> alternatives);
+
+    void saveAnswerAlternative(Answer answer, Map<Alternative, Double> weightsOfAllAlternative, Criteria criteria);
 }

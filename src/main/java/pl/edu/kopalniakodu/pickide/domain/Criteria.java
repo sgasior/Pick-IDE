@@ -32,6 +32,12 @@ public class Criteria {
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<AnswerCriteria> answerCriteria = new HashSet<>();
 
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            mappedBy = "criteria", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Set<AnswerAlternative> answerAlternative = new HashSet<>();
+
     public Criteria() {
 
     }

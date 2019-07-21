@@ -3,10 +3,9 @@ package pl.edu.kopalniakodu.pickide.service.ServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import pl.edu.kopalniakodu.pickide.domain.Answer;
-import pl.edu.kopalniakodu.pickide.domain.AnswerCriteria;
-import pl.edu.kopalniakodu.pickide.domain.Criteria;
+import pl.edu.kopalniakodu.pickide.domain.*;
 import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
+import pl.edu.kopalniakodu.pickide.repository.AnswerAlternativeRepository;
 import pl.edu.kopalniakodu.pickide.repository.AnswerCriteriaRepository;
 import pl.edu.kopalniakodu.pickide.repository.AnswerRepository;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.AnswerService;
@@ -14,10 +13,10 @@ import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 import pl.edu.kopalniakodu.pickide.util.ahp.AhpAnalyzer;
 import pl.edu.kopalniakodu.pickide.util.ahp.AhpAnalyzerImpl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
@@ -25,29 +24,35 @@ public class AnswerServiceImpl implements AnswerService {
     private static final Logger log = LoggerFactory.getLogger(AnswerServiceImpl.class);
 
     private AnswerCriteriaRepository answerCriteriaRepository;
+    private AnswerAlternativeRepository answerAlternativeRepository;
     private SurveyService surveyService;
     private AnswerRepository answerRepository;
 
-    public AnswerServiceImpl(AnswerCriteriaRepository answerCriteriaRepository, SurveyService surveyService, AnswerRepository answerRepository) {
+    public AnswerServiceImpl(AnswerCriteriaRepository answerCriteriaRepository, AnswerAlternativeRepository answerAlternativeRepository, SurveyService surveyService, AnswerRepository answerRepository) {
         this.answerCriteriaRepository = answerCriteriaRepository;
+        this.answerAlternativeRepository = answerAlternativeRepository;
         this.surveyService = surveyService;
         this.answerRepository = answerRepository;
     }
 
     @Override
+    public Optional<Answer> findAnswerById(Long answer_id) {
+        return answerRepository.findById(answer_id);
+    }
+
+
+    @Override
     public List<Comparison<Criteria>> findAllCriteriaComparison(List<Criteria> criterias) {
 
-        List<Comparison<Criteria>> result = new ArrayList<>();
+        Comparison<Criteria> criteriaComparison = new Comparison<>();
+        return criteriaComparison.findAllComparison(criterias);
 
-        for (int i = 0; i < criterias.size() - 1; i++) {
-            int nextIndex = i + 1;
-            while (nextIndex < criterias.size()) {
-                Comparison<Criteria> criteriaComparison = new Comparison<>(criterias.get(i), criterias.get(nextIndex));
-                result.add(criteriaComparison);
-                nextIndex = nextIndex + 1;
-            }
-        }
-        return result;
+    }
+
+    @Override
+    public List<Comparison<Alternative>> findAllAlternativeComparison(List<Alternative> alternatives) {
+        Comparison<Alternative> criteriaComparison = new Comparison<>();
+        return criteriaComparison.findAllComparison(alternatives);
     }
 
 
@@ -55,7 +60,7 @@ public class AnswerServiceImpl implements AnswerService {
     public Map<Criteria, Double> findWeightsOfAllCriteria(List<Comparison<Criteria>> comparisonList, String[] criteriaRating, List<Criteria> criteriaList) {
 
         Map<Criteria, Double> result = new HashMap<>();
-        double[][] ahpMatrix = generateAHPMatrix(comparisonList, criteriaRating);
+        double[][] ahpMatrix = generateAHPMatrix(comparisonList, criteriaRating, criteriaList);
         AhpAnalyzer ahpAnalyzer = new AhpAnalyzerImpl(ahpMatrix);
 
         double[] weight = ahpAnalyzer.getWeights();
@@ -65,6 +70,33 @@ public class AnswerServiceImpl implements AnswerService {
 
         return result;
     }
+
+    @Override
+    public Map<Alternative, Double> findWeightsOfAllAlternative(List<Comparison<Alternative>> alternativeComparisonList, String[] alternativeRating, List<Alternative> alternatives) {
+
+        Map<Alternative, Double> result = new HashMap<>();
+        double[][] ahpMatrix = generateAHPMatrix(alternativeComparisonList, alternativeRating, alternatives);
+        AhpAnalyzer ahpAnalyzer = new AhpAnalyzerImpl(ahpMatrix);
+
+        double[] weight = ahpAnalyzer.getWeights();
+        for (int i = 0; i < alternatives.size(); i++) {
+            result.put(alternatives.get(i), weight[i]);
+        }
+
+        return result;
+    }
+
+    @Override
+    public void saveAnswerAlternative(Answer answer, Map<Alternative, Double> weightsOfAllAlternative, Criteria criteria) {
+
+        weightsOfAllAlternative.forEach((k, v) -> {
+            AnswerAlternative answerAlternative = new AnswerAlternative(answer, criteria);
+            answerAlternative.setAlternative(k);
+            answerAlternative.setWeight(v);
+            answerAlternativeRepository.save(answerAlternative);
+        });
+    }
+
 
     @Override
     public void saveAnswerCriteria(Answer answer, Map<Criteria, Double> weightsOfAllCriteria) {
@@ -78,13 +110,14 @@ public class AnswerServiceImpl implements AnswerService {
 
     }
 
+
     @Override
     public void save(Answer answer) {
         answerRepository.save(answer);
     }
 
 
-    private double[][] generateAHPMatrix(List<Comparison<Criteria>> comparisonList, String[] criteriaRating) {
+    private <T> double[][] generateAHPMatrix(List<Comparison<T>> comparisonList, String[] criteriaRating, List<T> listDeterminant) {
 
         for (int i = 0; i < criteriaRating.length; i++) {
             comparisonList.get(i).setValue(Integer.parseInt(criteriaRating[i]));
@@ -94,7 +127,7 @@ public class AnswerServiceImpl implements AnswerService {
 //            System.out.println(comparison.getChoice1() + " - " + comparison.getChoice2() + " value: " + comparison.getValue());
 //        }
 
-        int ahpMatrixSize = comparisonList.get(0).getChoice1().getSurvey().getCriterias().size();
+        int ahpMatrixSize = listDeterminant.size();
         double[][] ahpMatrix = new double[ahpMatrixSize][ahpMatrixSize];
 
         int criteriaCounter = 0;

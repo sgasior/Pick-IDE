@@ -1,6 +1,9 @@
 package pl.edu.kopalniakodu.pickide.domain.util;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Comparison<T> {
 
     private T choice1;
@@ -8,6 +11,9 @@ public class Comparison<T> {
 
     private T choice2;
 
+    public Comparison() {
+
+    }
 
     public Comparison(T choice1, T choice2) {
         this.choice1 = choice1;
@@ -68,4 +74,22 @@ public class Comparison<T> {
         result = 31 * result + (choice2 != null ? choice2.hashCode() : 0);
         return result;
     }
+
+
+    public List<Comparison<T>> findAllComparison(List<T> listItem) {
+
+        List<Comparison<T>> result = new ArrayList<>();
+
+        for (int i = 0; i < listItem.size() - 1; i++) {
+            int nextIndex = i + 1;
+            while (nextIndex < listItem.size()) {
+                Comparison<T> itemComparison = new Comparison<>(listItem.get(i), listItem.get(nextIndex));
+                result.add(itemComparison);
+                nextIndex = nextIndex + 1;
+            }
+        }
+        return result;
+    }
+
+
 }

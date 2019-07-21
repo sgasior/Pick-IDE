@@ -1,5 +1,6 @@
 package pl.edu.kopalniakodu.pickide.service.ServiceInterface;
 
+import pl.edu.kopalniakodu.pickide.domain.Criteria;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,4 +24,6 @@ public interface SurveyService {
     Survey findById(Long surveyID);
 
     String generateSurveyURL(String s, HttpServletRequest request);
+
+    Optional<Criteria> findCriteriaById(Long criteriaID);
 }

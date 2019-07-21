@@ -165,7 +165,7 @@ public class SurveyController {
 
             survey.setSurveyURIParam(surveyURIParam);
 
-            String surveyURL = surveyService.generateSurveyURL("answer/" + surveyURIParam, request);
+            String surveyURL = surveyService.generateSurveyURL("answer/criteria/" + surveyURIParam, request);
 
             surveyService.save(survey);
             model.addAttribute("surveyURL", surveyURL);
@@ -173,7 +173,7 @@ public class SurveyController {
 
         } else {
             surveyService.save(survey);
-            return "redirect:/answer";
+            return "redirect:/answer/criteria";
         }
 
 

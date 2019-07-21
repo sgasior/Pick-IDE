@@ -6,6 +6,7 @@ import pl.edu.kopalniakodu.pickide.domain.Criteria;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
 import pl.edu.kopalniakodu.pickide.domain.util.PreferedCriteria;
 import pl.edu.kopalniakodu.pickide.domain.util.PreferedIDE;
+import pl.edu.kopalniakodu.pickide.repository.CriteriaRepository;
 import pl.edu.kopalniakodu.pickide.repository.SurveyRepository;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 
@@ -19,9 +20,11 @@ import java.util.Random;
 public class SurveyServiceImpl implements SurveyService {
 
     private SurveyRepository surveyRepository;
+    private CriteriaRepository criteriaRepository;
 
-    public SurveyServiceImpl(SurveyRepository surveyRepository) {
+    public SurveyServiceImpl(SurveyRepository surveyRepository, CriteriaRepository criteriaRepository) {
         this.surveyRepository = surveyRepository;
+        this.criteriaRepository = criteriaRepository;
     }
 
     @Override
@@ -120,6 +123,11 @@ public class SurveyServiceImpl implements SurveyService {
         String url = request.getRequestURL().toString();
         return url.substring(0, url.lastIndexOf("/")) + "/" + surveyURI;
 
+    }
+
+    @Override
+    public Optional<Criteria> findCriteriaById(Long criteriaID) {
+        return criteriaRepository.findById(criteriaID);
     }
 
 

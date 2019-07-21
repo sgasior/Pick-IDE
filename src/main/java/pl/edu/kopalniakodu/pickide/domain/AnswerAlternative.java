@@ -26,6 +26,10 @@ public class AnswerAlternative implements Serializable {
     @JoinColumn(name = "alternative_id")
     private Alternative alternative;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "criteria_id")
+    private Criteria criteria;
+
     private double weight;
 
     public AnswerAlternative() {
@@ -34,6 +38,11 @@ public class AnswerAlternative implements Serializable {
 
     public AnswerAlternative(Answer answer) {
         this.answer = answer;
+    }
+
+    public AnswerAlternative(Answer answer, Criteria criteria) {
+        this.answer = answer;
+        this.criteria = criteria;
     }
 
     @Override
