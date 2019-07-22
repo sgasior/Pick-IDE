@@ -3,6 +3,7 @@ package pl.edu.kopalniakodu.pickide.service.ServiceInterface;
 import pl.edu.kopalniakodu.pickide.domain.Alternative;
 import pl.edu.kopalniakodu.pickide.domain.Answer;
 import pl.edu.kopalniakodu.pickide.domain.Criteria;
+import pl.edu.kopalniakodu.pickide.domain.Survey;
 import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface AnswerService {
     Map<Alternative, Map<Double, Double>> findWeightsOfAllAlternative(List<Comparison<Alternative>> alternativeComparisonList, String[] alternativeRating, List<Alternative> alternatives);
 
     void saveAnswerAlternative(Answer answer, Map<Alternative, Map<Double, Double>> weightsOfAllAlternative, Criteria criteria);
+
+    Map<Criteria, Double> findAverageWeightsOfAllCriteria(Survey survey);
 }

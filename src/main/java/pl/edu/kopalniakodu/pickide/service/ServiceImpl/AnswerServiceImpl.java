@@ -93,6 +93,30 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
+    public Map<Criteria, Double> findAverageWeightsOfAllCriteria(Survey survey) {
+
+        Map<Criteria, Double> result = new HashMap<>();
+
+        for (Criteria criteria : survey.getCriterias()) {
+
+            double avg = 0;
+            double sum = 0;
+            List<AnswerCriteria> answerCriteriaList = answerCriteriaRepository.findAllByCriteria(criteria);
+
+            for (AnswerCriteria answerCriteria : answerCriteriaList) {
+                sum += answerCriteria.getWeight();
+            }
+            avg = sum / answerCriteriaList.size();
+            avg = Math.round(avg * 1000d) / 1000d;
+            result.put(criteria, avg);
+        }
+
+
+        return result;
+    }
+
+
+    @Override
     public void saveAnswerAlternative(Answer answer, Map<Alternative, Map<Double, Double>> weightsOfAllAlternative, Criteria criteria) {
 
         weightsOfAllAlternative.forEach((k, v) -> {

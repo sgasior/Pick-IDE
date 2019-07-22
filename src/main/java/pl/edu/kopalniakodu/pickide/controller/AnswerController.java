@@ -14,10 +14,7 @@ import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.AnswerService;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 @Controller
 @SessionAttributes({"survey", "comparisons", "answer_id", "criteriaQueue"})
@@ -77,9 +74,11 @@ public class AnswerController {
 
         model.addAttribute("answer_id", answer.getId());
 
-        if (survey.isAutomaticAlternativeRating()) {
-            //TODO
-            //redirect
+        if (survey.isAutomaticAlternativeRating() && survey.getSurveyURIParam() != null) {
+            return "survey/acknowledgement";
+        } else if (survey.isAutomaticAlternativeRating() && survey.getSurveyURIParam() == null) {
+
+            prepareResultModel(model, survey);
             return "survey/result-page";
         } else {
 
@@ -122,11 +121,35 @@ public class AnswerController {
             if (survey.getSurveyURIParam() != null) {
                 return "survey/acknowledgement";
             } else {
+
+                prepareResultModel(model, survey);
                 return "survey/result-page";
+
+
             }
         } else {
             model.addAttribute("criteriaName", ((LinkedList<Criteria>) criteriaQueue).get(0).getCriteriaName());
             return "survey/answerAlternative";
         }
     }
+
+
+    @GetMapping("/result/{surveyURIParam}")
+    public String result(
+            @PathVariable(value = "surveyURIParam") String surveyURIParam,
+            Model model
+    ) {
+        Survey survey = surveyService.findSurveyBySurveyURIParam(surveyURIParam).get();
+
+        prepareResultModel(model, survey);
+
+        return "survey/result-page";
+    }
+
+    private void prepareResultModel(Model model, Survey survey) {
+        Map<Criteria, Double> averageWeightsOfAllCriteria = answerService.findAverageWeightsOfAllCriteria(survey);
+        model.addAttribute("weights", averageWeightsOfAllCriteria);
+    }
+
+
 }
