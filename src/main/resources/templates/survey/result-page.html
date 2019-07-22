@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Share')}"></th:block>
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{/css/result-page.css}">
+
+
+</head>
+
+
+<body>
+
+<div th:replace="~{layouts/main_layout :: navbar}"></div>
+
+<div class="new-content">
+    <div class="container-fluid">
+        <section id="answer">
+
+
+            <div class="row h-100 justify-content-center align-items-center">
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="box">
+                        <div class="result-msg">
+                            You have choosen the most suitable IDE for your needs!
+                        </div>
+
+                        <div id="ranking">
+
+                            <div class="ranking-item" id="first_place">
+                                <i class="fas fa-trophy"></i><strong>IDE 1 with 0.400 sum of priority</strong>
+                            </div>
+                            <div class="ranking-item" id="second_place">
+                                <i class="fas fa-trophy"></i><strong>IDE 2 with 0.300 sum of priority</strong>
+                            </div>
+                            <div class="ranking-item" id="third_place">
+                                <i class="fas fa-trophy"></i><strong>IDE 3 with 0.200 sum of priority</strong>
+                            </div>
+                            <div class="ranking-item normal-place">
+                                <i class="fas fa-angle-right"></i>IDE 3 with 0.200 sum of priority
+                            </div>
+                            <div class="ranking-item normal-place">
+                                <i class="fas fa-angle-right"></i>IDE 3 with 0.200 sum of priority
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div id="weights">
+                        <div class="weight-msg">
+                            You gave the following weights to the criteria
+                        </div>
+
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Criteria name</th>
+                                <th scope="col">Criteria weight</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">C1</th>
+                                <td>0.3</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">C2</th>
+                                <td>0.5</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">C3</th>
+                                <td>0.2</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<div th:replace="~{layouts/main_layout :: footer}"></div>
+
+
+<script type="text/javascript" th:src="@{/vendors/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/share-link.js}"></script>
+
+
+</body>
+</html>

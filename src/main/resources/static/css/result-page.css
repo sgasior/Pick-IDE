@@ -1,0 +1,109 @@
+html,
+body {
+    height: 100%;
+}
+
+
+.container-fluid {
+    height: 100%;
+}
+
+
+/* -----------Survey section--------*/
+
+#answer {
+    background-color: #f8f1f1;
+}
+
+
+.box {
+    height: 100%;
+    margin-top: 50px;
+    margin-bottom: 60px;
+    font-family: Roboto, sans-serif;
+    padding: 20px 40px;
+    color: #086972;
+    background: rgba(0, 0, 0, 0.05);
+    padding-bottom: 100px;
+
+    -webkit-box-shadow: 35px 2px 37px 3px rgba(0, 0, 0, 0.47);
+    -moz-box-shadow: 35px 2px 37px 3px rgba(0, 0, 0, 0.47);
+    box-shadow: 35px 2px 37px 3px rgba(0, 0, 0, 0.47);
+
+
+}
+
+.result-msg {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    letter-spacing: 1px;
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: #071a52;
+}
+
+#ranking {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 1.2rem;
+}
+
+.ranking-item {
+    margin-top: 30px;
+    position: relative;
+    right: 25px;
+}
+
+.ranking-item .fas {
+    margin-right: 25px;
+}
+
+.normal-place {
+    color: #000;
+}
+
+
+#first_place {
+    color: darkgoldenrod;
+}
+
+#second_place {
+    color: silver;
+}
+
+#third_place {
+    color: brown;
+}
+
+hr {
+    border: dotted #071a52 6px;
+    border-bottom: none;
+    width: 4%;
+    margin: 20px auto;
+}
+
+
+#weights {
+    padding-bottom: 50PX;
+}
+
+.weight-msg {
+    padding-bottom: 40px;
+    letter-spacing: 1px;
+    font-weight: 900;
+    text-align: left;
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: #071a52;
+}
+
+
+.table {
+    text-align: center;
+    vertical-align: middle;
+}
+
+

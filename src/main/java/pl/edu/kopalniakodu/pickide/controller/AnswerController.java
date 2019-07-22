@@ -80,7 +80,7 @@ public class AnswerController {
         if (survey.isAutomaticAlternativeRating()) {
             //TODO
             //redirect
-            return "result-page";
+            return "survey/result-page";
         } else {
 
             //share and not share option
@@ -122,7 +122,7 @@ public class AnswerController {
             if (survey.getSurveyURIParam() != null) {
                 return "survey/acknowledgement";
             } else {
-                return "result-page";
+                return "survey/result-page";
             }
         } else {
             model.addAttribute("criteriaName", ((LinkedList<Criteria>) criteriaQueue).get(0).getCriteriaName());
