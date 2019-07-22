@@ -68,7 +68,7 @@ public class AnswerController {
     ) {
         List<Comparison<Criteria>> criteriaComparisonList = answerService.findAllCriteriaComparison(survey.getCriterias());
 
-        Map<Criteria, Double> weightsOfAllCriteria = answerService
+        Map<Criteria, Map<Double, Double>> weightsOfAllCriteria = answerService
                 .findWeightsOfAllCriteria(criteriaComparisonList, criteriaRating, survey.getCriterias());
 
         Answer answer = new Answer(survey);
@@ -111,7 +111,7 @@ public class AnswerController {
         List<Comparison<Alternative>> alternativeComparisonList = answerService.findAllAlternativeComparison(survey.getAlternatives());
 
 
-        Map<Alternative, Double> weightsOfAllAlternative = answerService
+        Map<Alternative, Map<Double, Double>> weightsOfAllAlternative = answerService
                 .findWeightsOfAllAlternative(alternativeComparisonList, alternativeRating, survey.getAlternatives());
 
 

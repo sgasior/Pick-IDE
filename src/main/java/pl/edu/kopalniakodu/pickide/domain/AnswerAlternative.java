@@ -32,6 +32,8 @@ public class AnswerAlternative implements Serializable {
 
     private double weight;
 
+    private double consistencyRatio;
+
     public AnswerAlternative() {
 
     }
@@ -53,6 +55,7 @@ public class AnswerAlternative implements Serializable {
         AnswerAlternative that = (AnswerAlternative) o;
 
         if (Double.compare(that.weight, weight) != 0) return false;
+        if (Double.compare(that.consistencyRatio, consistencyRatio) != 0) return false;
         return id != null ? id.equals(that.id) : that.id == null;
     }
 
@@ -62,6 +65,8 @@ public class AnswerAlternative implements Serializable {
         long temp;
         result = id != null ? id.hashCode() : 0;
         temp = Double.doubleToLongBits(weight);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(consistencyRatio);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }

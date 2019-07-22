@@ -12,9 +12,9 @@ import java.util.Optional;
 public interface AnswerService {
     List<Comparison<Criteria>> findAllCriteriaComparison(List<Criteria> criterias);
 
-    Map<Criteria, Double> findWeightsOfAllCriteria(List<Comparison<Criteria>> comparisonList, String[] criteriaRating, List<Criteria> criteriaList);
+    Map<Criteria, Map<Double, Double>> findWeightsOfAllCriteria(List<Comparison<Criteria>> comparisonList, String[] criteriaRating, List<Criteria> criteriaList);
 
-    void saveAnswerCriteria(Answer answer, Map<Criteria, Double> weightsOfAllCriteria);
+    void saveAnswerCriteria(Answer answer, Map<Criteria, Map<Double, Double>> weightsOfAllCriteria);
 
     void save(Answer answer);
 
@@ -22,7 +22,7 @@ public interface AnswerService {
 
     Optional<Answer> findAnswerById(Long answer_id);
 
-    Map<Alternative, Double> findWeightsOfAllAlternative(List<Comparison<Alternative>> alternativeComparisonList, String[] alternativeRating, List<Alternative> alternatives);
+    Map<Alternative, Map<Double, Double>> findWeightsOfAllAlternative(List<Comparison<Alternative>> alternativeComparisonList, String[] alternativeRating, List<Alternative> alternatives);
 
-    void saveAnswerAlternative(Answer answer, Map<Alternative, Double> weightsOfAllAlternative, Criteria criteria);
+    void saveAnswerAlternative(Answer answer, Map<Alternative, Map<Double, Double>> weightsOfAllAlternative, Criteria criteria);
 }

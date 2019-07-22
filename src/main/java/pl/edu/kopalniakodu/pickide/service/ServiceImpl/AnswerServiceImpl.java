@@ -57,54 +57,74 @@ public class AnswerServiceImpl implements AnswerService {
 
 
     @Override
-    public Map<Criteria, Double> findWeightsOfAllCriteria(List<Comparison<Criteria>> comparisonList, String[] criteriaRating, List<Criteria> criteriaList) {
+    public Map<Criteria, Map<Double, Double>> findWeightsOfAllCriteria(List<Comparison<Criteria>> comparisonList, String[] criteriaRating, List<Criteria> criteriaList) {
 
-        Map<Criteria, Double> result = new HashMap<>();
+        Map<Criteria, Map<Double, Double>> result = new HashMap<>();
         double[][] ahpMatrix = generateAHPMatrix(comparisonList, criteriaRating, criteriaList);
         AhpAnalyzer ahpAnalyzer = new AhpAnalyzerImpl(ahpMatrix);
 
         double[] weight = ahpAnalyzer.getWeights();
         for (int i = 0; i < criteriaList.size(); i++) {
-            result.put(criteriaList.get(i), weight[i]);
+
+            Map<Double, Double> mapWeightAndCR = new HashMap<>();
+            mapWeightAndCR.put(weight[i], ahpAnalyzer.getConsistencyRatio());
+            result.put(criteriaList.get(i), mapWeightAndCR);
         }
 
         return result;
     }
 
     @Override
-    public Map<Alternative, Double> findWeightsOfAllAlternative(List<Comparison<Alternative>> alternativeComparisonList, String[] alternativeRating, List<Alternative> alternatives) {
+    public Map<Alternative, Map<Double, Double>> findWeightsOfAllAlternative(List<Comparison<Alternative>> alternativeComparisonList, String[] alternativeRating, List<Alternative> alternatives) {
 
-        Map<Alternative, Double> result = new HashMap<>();
+        Map<Alternative, Map<Double, Double>> result = new HashMap<>();
         double[][] ahpMatrix = generateAHPMatrix(alternativeComparisonList, alternativeRating, alternatives);
         AhpAnalyzer ahpAnalyzer = new AhpAnalyzerImpl(ahpMatrix);
 
         double[] weight = ahpAnalyzer.getWeights();
         for (int i = 0; i < alternatives.size(); i++) {
-            result.put(alternatives.get(i), weight[i]);
+
+            Map<Double, Double> mapWeightAndCR = new HashMap<>();
+            mapWeightAndCR.put(weight[i], ahpAnalyzer.getConsistencyRatio());
+            result.put(alternatives.get(i), mapWeightAndCR);
         }
 
         return result;
     }
 
     @Override
-    public void saveAnswerAlternative(Answer answer, Map<Alternative, Double> weightsOfAllAlternative, Criteria criteria) {
+    public void saveAnswerAlternative(Answer answer, Map<Alternative, Map<Double, Double>> weightsOfAllAlternative, Criteria criteria) {
 
         weightsOfAllAlternative.forEach((k, v) -> {
             AnswerAlternative answerAlternative = new AnswerAlternative(answer, criteria);
             answerAlternative.setAlternative(k);
-            answerAlternative.setWeight(v);
+
+            v.forEach((weight, consistencyRatio) -> {
+                answerAlternative.setWeight(weight);
+                answerAlternative.setConsistencyRatio(consistencyRatio);
+
+            });
+
             answerAlternativeRepository.save(answerAlternative);
         });
+
     }
 
 
     @Override
-    public void saveAnswerCriteria(Answer answer, Map<Criteria, Double> weightsOfAllCriteria) {
+    public void saveAnswerCriteria(Answer answer, Map<Criteria, Map<Double, Double>> weightsOfAllCriteria) {
 
         weightsOfAllCriteria.forEach((k, v) -> {
             AnswerCriteria answerCriteria = new AnswerCriteria(answer);
             answerCriteria.setCriteria(k);
-            answerCriteria.setWeight(v);
+
+            v.forEach((weight, consistencyRatio) -> {
+                answerCriteria.setWeight(weight);
+                answerCriteria.setConsistencyRatio(consistencyRatio);
+
+            });
+
+
             answerCriteriaRepository.save(answerCriteria);
         });
 

@@ -68,7 +68,7 @@ public class DataLoader implements CommandLineRunner {
 //        LoadAnswerCriteria();
 //        LoadAlternatives();
 //        LoadAnswerAlternative();
-//        LoadAHPTester();
+        LoadAHPTester();
     }
 
     private void LoadAHPTester() {

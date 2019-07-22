@@ -12,9 +12,11 @@ public class AhpAnalyzerImpl implements AhpAnalyzer {
 
     private double consistencyIndex;
 
+    //in percentage
     private double consistencyRatio;
 
-    private double maxConsistencyRatio = 0.10;
+    //in percentage
+    private double maxConsistencyRatio = 10;
 
     private double randomIndex;
 
@@ -61,7 +63,9 @@ public class AhpAnalyzerImpl implements AhpAnalyzer {
     }
 
     private void setConsistencyRatio() {
-        double consistencyRatio = this.consistencyIndex / this.randomIndex;
+        //in percentage
+        double consistencyRatio = (this.consistencyIndex / this.randomIndex) * 100;
+
         this.consistencyRatio = (double) Math.round(consistencyRatio * 1000d) / 1000d;
     }
 
