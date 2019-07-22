@@ -56,14 +56,14 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public Map<Criteria, Map<Double, Double>> findWeightsOfAllCriteria(List<Comparison<Criteria>> comparisonList, String[] criteriaRating, List<Criteria> criteriaList) {
 
-        Map<Criteria, Map<Double, Double>> result = new HashMap<>();
+        Map<Criteria, Map<Double, Double>> result = new LinkedHashMap<>();
         double[][] ahpMatrix = generateAHPMatrix(comparisonList, criteriaRating, criteriaList);
         AhpAnalyzer ahpAnalyzer = new AhpAnalyzerImpl(ahpMatrix);
 
         double[] weight = ahpAnalyzer.getWeights();
         for (int i = 0; i < criteriaList.size(); i++) {
 
-            Map<Double, Double> mapWeightAndCR = new HashMap<>();
+            Map<Double, Double> mapWeightAndCR = new LinkedHashMap<>();
             mapWeightAndCR.put(weight[i], ahpAnalyzer.getConsistencyRatio());
             result.put(criteriaList.get(i), mapWeightAndCR);
         }
@@ -74,14 +74,14 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public Map<Alternative, Map<Double, Double>> findWeightsOfAllAlternative(List<Comparison<Alternative>> alternativeComparisonList, String[] alternativeRating, List<Alternative> alternatives) {
 
-        Map<Alternative, Map<Double, Double>> result = new HashMap<>();
+        Map<Alternative, Map<Double, Double>> result = new LinkedHashMap<>();
         double[][] ahpMatrix = generateAHPMatrix(alternativeComparisonList, alternativeRating, alternatives);
         AhpAnalyzer ahpAnalyzer = new AhpAnalyzerImpl(ahpMatrix);
 
         double[] weight = ahpAnalyzer.getWeights();
         for (int i = 0; i < alternatives.size(); i++) {
 
-            Map<Double, Double> mapWeightAndCR = new HashMap<>();
+            Map<Double, Double> mapWeightAndCR = new LinkedHashMap<>();
             mapWeightAndCR.put(weight[i], ahpAnalyzer.getConsistencyRatio());
             result.put(alternatives.get(i), mapWeightAndCR);
         }
@@ -92,7 +92,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public Map<Criteria, Double> findAverageWeightsOfAllCriteria(Survey survey) {
 
-        Map<Criteria, Double> result = new HashMap<>();
+        Map<Criteria, Double> result = new LinkedHashMap<>();
 
         for (Criteria criteria : survey.getCriterias()) {
 
@@ -114,7 +114,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public Map<Alternative, Double> rank(Survey survey) {
-        Map<Alternative, Double> result = new HashMap<>();
+        Map<Alternative, Double> result = new LinkedHashMap<>();
 
         List<AnswerAlternative> averageAnswerAlternativeList = averageWeightOfAnswerAlternative(survey);
         List<Alternative> alternativeList = survey.getAlternatives();

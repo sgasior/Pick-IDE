@@ -7,7 +7,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -30,14 +30,14 @@ public class Answer {
             cascade = {CascadeType.ALL},
             mappedBy = "answer", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<AnswerCriteria> answerCriteria = new HashSet<>();
+    private Set<AnswerCriteria> answerCriteria = new LinkedHashSet<>();
 
 
     @OneToMany(
             cascade = {CascadeType.ALL},
             mappedBy = "answer", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<AnswerAlternative> answerAlternative = new HashSet<>();
+    private Set<AnswerAlternative> answerAlternative = new LinkedHashSet<>();
 
 
     public Answer() {
