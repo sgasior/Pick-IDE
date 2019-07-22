@@ -14,7 +14,10 @@ import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.AnswerService;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
 @Controller
 @SessionAttributes({"survey", "comparisons", "answer_id", "criteriaQueue"})
@@ -148,6 +151,12 @@ public class AnswerController {
 
     private void prepareResultModel(Model model, Survey survey) {
         Map<Criteria, Double> averageWeightsOfAllCriteria = answerService.findAverageWeightsOfAllCriteria(survey);
+        Map<Alternative, Double> ranking = answerService.rank(survey);
+
+
+
+        log.info("test");
+
         model.addAttribute("weights", averageWeightsOfAllCriteria);
     }
 

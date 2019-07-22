@@ -13,10 +13,7 @@ import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 import pl.edu.kopalniakodu.pickide.util.ahp.AhpAnalyzer;
 import pl.edu.kopalniakodu.pickide.util.ahp.AhpAnalyzerImpl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
@@ -113,6 +110,94 @@ public class AnswerServiceImpl implements AnswerService {
 
 
         return result;
+    }
+
+    @Override
+    public Map<Alternative, Double> rank(Survey survey) {
+        Map<Alternative, Double> result = new HashMap<>();
+
+        List<AnswerAlternative> averageAnswerAlternativeList = averageWeightOfAnswerAlternative(survey);
+        List<Alternative> alternativeList = survey.getAlternatives();
+
+        Map<Criteria, Double> averageWeightsOfAllCriteria = findAverageWeightsOfAllCriteria(survey);
+
+
+        for (Alternative alternative : alternativeList) {
+            double sumOfPriority = 0;
+
+            List<AnswerAlternative> answerAlternativeList = findAllAnswersAlternativeByAlternativeName(alternative.getAlternativeName(), averageAnswerAlternativeList);
+
+            for (int i = 0; i < answerAlternativeList.size(); i++) {
+                sumOfPriority = sumOfPriority + (answerAlternativeList.get(i).getWeight() * findWeightOfCriteriaByCriteriaName(averageWeightsOfAllCriteria, answerAlternativeList.get(i).getCriteria().getCriteriaName()));
+            }
+
+            result.put(alternative, sumOfPriority);
+
+        }
+
+        return result;
+    }
+
+
+    private double findWeightOfCriteriaByCriteriaName(Map<Criteria, Double> map, String name) {
+
+        for (Map.Entry<Criteria, Double> entry : map.entrySet()) {
+            Criteria key = entry.getKey();
+            Double value = entry.getValue();
+
+            if (key.getCriteriaName().equals(name)) {
+                return value;
+            }
+
+        }
+
+        return 0;
+    }
+
+    private List<AnswerAlternative> findAllAnswersAlternativeByAlternativeName(String alternativeName, List<AnswerAlternative> averageAnswerAlternativeList) {
+
+        List<AnswerAlternative> result = new ArrayList<>();
+        for (AnswerAlternative averageAnswerAlternative : averageAnswerAlternativeList) {
+            if (averageAnswerAlternative.getAlternative().getAlternativeName().equals(alternativeName)) {
+                result.add(averageAnswerAlternative);
+            }
+        }
+
+        return result;
+
+    }
+
+
+    private List<AnswerAlternative> averageWeightOfAnswerAlternative(Survey survey) {
+        List<AnswerAlternative> averageAnswerAlternativeList = new ArrayList<>();
+
+        List<Criteria> criteriaList = survey.getCriterias();
+        for (Criteria criteria : criteriaList) {
+
+            for (Alternative alternative : survey.getAlternatives()) {
+                List<AnswerAlternative> answerAlternativeList =
+                        answerAlternativeRepository.findAllByCriteriaAndAlternative(criteria, alternative);
+
+                AnswerAlternative newItemInAverageAnswerAlternativeList = new AnswerAlternative();
+                double avg = 0;
+                double sum = 0;
+
+                for (AnswerAlternative answerAlternative : answerAlternativeList) {
+
+                    newItemInAverageAnswerAlternativeList.setAlternative(answerAlternative.getAlternative());
+                    sum += answerAlternative.getWeight();
+
+                }
+                avg = sum / answerAlternativeList.size();
+                avg = Math.round(avg * 1000d) / 1000d;
+
+                newItemInAverageAnswerAlternativeList.setWeight(avg);
+                newItemInAverageAnswerAlternativeList.setCriteria(criteria);
+                averageAnswerAlternativeList.add(newItemInAverageAnswerAlternativeList);
+            }
+        }
+
+        return averageAnswerAlternativeList;
     }
 
 

@@ -28,4 +28,6 @@ public interface AnswerService {
     void saveAnswerAlternative(Answer answer, Map<Alternative, Map<Double, Double>> weightsOfAllAlternative, Criteria criteria);
 
     Map<Criteria, Double> findAverageWeightsOfAllCriteria(Survey survey);
+
+    Map<Alternative, Double> rank(Survey survey);
 }
