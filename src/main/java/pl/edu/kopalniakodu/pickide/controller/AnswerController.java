@@ -169,7 +169,7 @@ public class AnswerController {
     private boolean isFilledAtLeastOnce(Survey survey) {
         boolean isFilledAtLeastOnce = false;
         for (Answer answer : survey.getAnswers()) {
-            if (answer.getAnswerAlternative().size() > 0 && answer.getAnswerCriteria().size() > 0) {
+            if (answer.getAnswerAlternative().size() == (survey.getCriterias().size() * survey.getAlternatives().size())) {
                 isFilledAtLeastOnce = true;
             }
         }
