@@ -17,4 +17,7 @@ public interface AnswerAlternativeRepository extends JpaRepository<AnswerAlterna
     @Query("DELETE FROM AnswerAlternative answ_alter WHERE answ_alter.answer=:answer")
     void deleteByAnswer(@Param("answer") Answer answer);
 
+
+    List<AnswerAlternative> findAllByAnswer(Answer answer);
+
 }

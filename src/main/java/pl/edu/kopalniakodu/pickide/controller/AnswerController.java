@@ -141,8 +141,17 @@ public class AnswerController {
     ) {
         Survey survey = surveyService.findSurveyBySurveyURIParam(surveyURIParam).get();
 
-        prepareResultModel(model, survey);
+        boolean isFilledAtLeastOnce = false;
+        for (Answer answer : survey.getAnswers()) {
+            if (answer.getAnswerAlternative().size() > 0 && answer.getAnswerCriteria().size() > 0) {
+                isFilledAtLeastOnce = true;
+            }
+        }
+        if (!isFilledAtLeastOnce) {
+            return "survey/no-answers";
+        }
 
+        prepareResultModel(model, survey);
         return "survey/result-page";
     }
 
@@ -154,8 +163,6 @@ public class AnswerController {
         Map<Alternative, Double> secondPlaceMap = getTopPlace(ranking, firstPlaceMap.size());
         Map<Alternative, Double> thirdPlaceMap = getTopPlace(ranking, secondPlaceMap.size() + firstPlaceMap.size());
         Map<Alternative, Double> lastPlaceMap = getTopPlace(ranking, secondPlaceMap.size() + firstPlaceMap.size() + thirdPlaceMap.size());
-
-        log.info("test");
 
         model.addAttribute("firstPlaceMap", firstPlaceMap);
         model.addAttribute("secondPlaceMap", secondPlaceMap);
