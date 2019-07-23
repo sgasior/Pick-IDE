@@ -42,17 +42,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">Survey_1</th>
+                                <tr th:each="survey: ${surveys}">
+                                    <th scope="row" th:text="${survey.getSurveyName()}">Survey name</th>
 
                                     <td class="link">
-                                        <a href="#"> <i class="fas fa-external-link-alt"></i></a>
+                                        <a th:href="'/answer/'+${survey.getSurveyURIParam()}"> <i
+                                                class="fas fa-external-link-alt"></i></a>
                                     </td>
                                     <td class="result">
-                                        <a href="#"><i class="fas fa-poll"></i></a>
+                                        <a th:href="'/result/'+${survey.getSurveyURIParam()}">
+                                            <i class="fas fa-poll"></i></a>
                                     </td>
-                                    <td class="trash">
-                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                    <td>
+                                        <form method="POST" th:action="@{/delete(surveyID=${survey.getId()})}">
+                                            <button type="submit" name="submit" value="value" class="trash">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
 

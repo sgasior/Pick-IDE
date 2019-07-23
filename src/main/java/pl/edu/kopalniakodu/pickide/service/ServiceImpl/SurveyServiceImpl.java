@@ -1,13 +1,10 @@
 package pl.edu.kopalniakodu.pickide.service.ServiceImpl;
 
 import org.springframework.stereotype.Service;
-import pl.edu.kopalniakodu.pickide.domain.Alternative;
-import pl.edu.kopalniakodu.pickide.domain.Criteria;
-import pl.edu.kopalniakodu.pickide.domain.Survey;
+import pl.edu.kopalniakodu.pickide.domain.*;
 import pl.edu.kopalniakodu.pickide.domain.util.PreferedCriteria;
 import pl.edu.kopalniakodu.pickide.domain.util.PreferedIDE;
-import pl.edu.kopalniakodu.pickide.repository.CriteriaRepository;
-import pl.edu.kopalniakodu.pickide.repository.SurveyRepository;
+import pl.edu.kopalniakodu.pickide.repository.*;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +18,18 @@ public class SurveyServiceImpl implements SurveyService {
 
     private SurveyRepository surveyRepository;
     private CriteriaRepository criteriaRepository;
+    private AlternativeRepository alternativeRepository;
+    private AnswerRepository answerRepository;
+    private AnswerAlternativeRepository answerAlternativeRepository;
+    private AnswerCriteriaRepository answerCriteriaRepository;
 
-    public SurveyServiceImpl(SurveyRepository surveyRepository, CriteriaRepository criteriaRepository) {
+    public SurveyServiceImpl(SurveyRepository surveyRepository, CriteriaRepository criteriaRepository, AlternativeRepository alternativeRepository, AnswerRepository answerRepository, AnswerAlternativeRepository answerAlternativeRepository, AnswerCriteriaRepository answerCriteriaRepository) {
         this.surveyRepository = surveyRepository;
         this.criteriaRepository = criteriaRepository;
+        this.alternativeRepository = alternativeRepository;
+        this.answerRepository = answerRepository;
+        this.answerAlternativeRepository = answerAlternativeRepository;
+        this.answerCriteriaRepository = answerCriteriaRepository;
     }
 
     @Override
@@ -128,6 +133,27 @@ public class SurveyServiceImpl implements SurveyService {
     @Override
     public Optional<Criteria> findCriteriaById(Long criteriaID) {
         return criteriaRepository.findById(criteriaID);
+    }
+
+    @Override
+    public List<Survey> findAllSharedSurveys(User user) {
+        return surveyRepository.findAllByUserAndSurveyURIParamNotNull(user);
+    }
+
+    @Override
+    public void deleteSurvey(Survey survey) {
+
+        survey.setUser(null);
+        criteriaRepository.deleteCriteriaBySurvey(survey);
+        alternativeRepository.deleteAlternativeBySurvey(survey);
+
+        for (Answer answer : survey.getAnswers()) {
+            answerAlternativeRepository.deleteByAnswer(answer);
+            answerCriteriaRepository.deleteByAnswer(answer);
+        }
+
+        answerRepository.deleteAnswerBySurvey(survey);
+        surveyRepository.deleteById(survey.getId());
     }
 
 

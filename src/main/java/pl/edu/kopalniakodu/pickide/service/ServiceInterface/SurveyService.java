@@ -2,8 +2,10 @@ package pl.edu.kopalniakodu.pickide.service.ServiceInterface;
 
 import pl.edu.kopalniakodu.pickide.domain.Criteria;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
+import pl.edu.kopalniakodu.pickide.domain.User;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Optional;
 
 public interface SurveyService {
@@ -26,4 +28,8 @@ public interface SurveyService {
     String generateSurveyURL(String s, HttpServletRequest request);
 
     Optional<Criteria> findCriteriaById(Long criteriaID);
+
+    List<Survey> findAllSharedSurveys(User user);
+
+    void deleteSurvey(Survey survey);
 }

@@ -223,10 +223,16 @@ public class DataLoader implements CommandLineRunner {
         userRepository.save(user);
         userRepository.save(admin);
 
-//        surveyRepository.deleteById(1L);
-//        userRepository.deleteById(1L);
 
         surveyRepository.save(survey_4);
+
+
+        Survey surveyFound = surveyRepository.findById(1L).get();
+
+
+        //surveyRepository.delete(surveyFound);
+        //surveyRepository.deleteById(1L);
+//        userRepository.deleteById(1L);
 
     }
 
