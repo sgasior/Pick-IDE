@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pl.edu.kopalniakodu.pickide.domain.*;
 import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
+import pl.edu.kopalniakodu.pickide.domain.util.RatingProvider;
+import pl.edu.kopalniakodu.pickide.domain.util.Rating;
 import pl.edu.kopalniakodu.pickide.repository.AnswerAlternativeRepository;
 import pl.edu.kopalniakodu.pickide.repository.AnswerCriteriaRepository;
 import pl.edu.kopalniakodu.pickide.repository.AnswerRepository;
@@ -133,6 +135,34 @@ public class AnswerServiceImpl implements AnswerService {
 
             sumOfPriority = Math.round(sumOfPriority * 1000d) / 1000d;
             result.put(alternative, sumOfPriority);
+
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<Rating> matchingRatings(List<Criteria> criterias, List<Alternative> alternatives) {
+
+        List<Rating> result = new ArrayList<>();
+        List<Rating> ratings = new RatingProvider().getRatings();
+        List<Rating> semiResult = new ArrayList<>();
+
+        for (Criteria criteria : criterias) {
+            for (Rating ratingItem : ratings) {
+                if (ratingItem.getPreferedCriteria().equals(criteria.getCriteriaName())) {
+                    semiResult.add(ratingItem);
+                }
+            }
+        }
+
+
+        for (Alternative alternative : alternatives) {
+            for (Rating ratingItem : semiResult) {
+                if (ratingItem.getPreferedAlternative().equals(alternative.getAlternativeName())) {
+                    result.add(ratingItem);
+                }
+            }
 
         }
 

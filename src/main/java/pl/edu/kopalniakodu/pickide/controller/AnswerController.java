@@ -11,6 +11,7 @@ import pl.edu.kopalniakodu.pickide.domain.Answer;
 import pl.edu.kopalniakodu.pickide.domain.Criteria;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
 import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
+import pl.edu.kopalniakodu.pickide.domain.util.Rating;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.AnswerService;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 
@@ -78,6 +79,22 @@ public class AnswerController {
             return "survey/acknowledgement";
         } else if (survey.isAutomaticAlternativeRating() && survey.getSurveyURIParam() == null) {
 
+            if (!isFilledAtLeastOnce(survey)) {
+                log.info("adding new automatic answer_alternative");
+
+                List<Rating> matchingRatings = answerService.matchingRatings(survey.getCriterias(), survey.getAlternatives());
+                log.info("test");
+            }
+
+
+//            Map<Alternative, Map<Double, Double>> weightsOfAllAlternative = answerService
+//                    .findWeightsOfAllAlternative(alternativeComparisonList, alternativeRating, survey.getAlternatives());
+//
+//
+//            answerService.save(answer);
+//            answerService.saveAnswerAlternative(answer, weightsOfAllAlternative, criteria);
+
+
             prepareResultModel(model, survey);
             return "survey/result-page";
         } else {
@@ -141,18 +158,22 @@ public class AnswerController {
     ) {
         Survey survey = surveyService.findSurveyBySurveyURIParam(surveyURIParam).get();
 
+        if (!isFilledAtLeastOnce(survey)) {
+            return "survey/no-answers";
+        }
+
+        prepareResultModel(model, survey);
+        return "survey/result-page";
+    }
+
+    private boolean isFilledAtLeastOnce(Survey survey) {
         boolean isFilledAtLeastOnce = false;
         for (Answer answer : survey.getAnswers()) {
             if (answer.getAnswerAlternative().size() > 0 && answer.getAnswerCriteria().size() > 0) {
                 isFilledAtLeastOnce = true;
             }
         }
-        if (!isFilledAtLeastOnce) {
-            return "survey/no-answers";
-        }
-
-        prepareResultModel(model, survey);
-        return "survey/result-page";
+        return isFilledAtLeastOnce;
     }
 
     private void prepareResultModel(Model model, Survey survey) {

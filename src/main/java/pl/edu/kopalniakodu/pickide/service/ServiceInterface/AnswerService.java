@@ -5,6 +5,7 @@ import pl.edu.kopalniakodu.pickide.domain.Answer;
 import pl.edu.kopalniakodu.pickide.domain.Criteria;
 import pl.edu.kopalniakodu.pickide.domain.Survey;
 import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
+import pl.edu.kopalniakodu.pickide.domain.util.Rating;
 
 import java.util.List;
 import java.util.Map;
@@ -30,4 +31,6 @@ public interface AnswerService {
     Map<Criteria, Double> findAverageWeightsOfAllCriteria(Survey survey);
 
     Map<Alternative, Double> rank(Survey survey);
+
+    List<Rating> matchingRatings(List<Criteria> criterias, List<Alternative> alternatives);
 }
