@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Share')}"></th:block>
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{/css/account.css}">
+
+
+</head>
+
+
+<body>
+
+<div th:replace="~{layouts/main_layout :: navbar}"></div>
+
+<div class="new-content">
+    <div class="container-fluid">
+
+        <section id="answer">
+
+
+            <div class="row h-100 justify-content-center align-items-center">
+
+                <div class="col-lg-8 col-md-12">
+                    <div class="box">
+
+
+                        <div id="surveys">
+                            <div class="welcome-msg">
+                                There is a list of your shared surveys:
+                            </div>
+
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Survey name</th>
+                                    <th scope="col">Survey link</th>
+                                    <th scope="col">Result link</th>
+                                    <th scope="col">Delete survey</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">Survey_1</th>
+
+                                    <td class="link">
+                                        <a href="#"> <i class="fas fa-external-link-alt"></i></a>
+                                    </td>
+                                    <td class="result">
+                                        <a href="#"><i class="fas fa-poll"></i></a>
+                                    </td>
+                                    <td class="trash">
+                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<div th:replace="~{layouts/main_layout :: footer}"></div>
+
+
+<script type="text/javascript" th:src="@{/vendors/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/share-link.js}"></script>
+
+
+</body>
+</html>

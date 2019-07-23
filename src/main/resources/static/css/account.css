@@ -1,0 +1,119 @@
+html,
+body {
+    height: 100%;
+}
+
+
+.container-fluid {
+    height: 100%;
+}
+
+
+
+/* -----------Survey section--------*/
+
+#answer {
+    background-color: #f8f1f1;
+}
+
+
+
+
+.box {
+    height: 100%;
+    margin-top: 50px;
+    margin-bottom: 60px;
+    font-family: Roboto,
+    sans-serif;
+    padding: 20px 40px;
+    color: #086972;
+    padding-bottom: 100px;
+}
+
+.table {
+    font-size: 1.3rem
+}
+
+.table .thead-dark th {
+    background: #071a52;
+    color: #17b978;
+    font-weight: 100;
+}
+
+#surveys {
+    padding-bottom: 175px;
+}
+
+.welcome-msg {
+    padding-bottom: 20px;
+    letter-spacing: 1px;
+    font-weight: 900;
+    text-align: left;
+    font-size: 2rem;
+    color: #071a52;
+}
+
+.link a {
+    color: deepskyblue;
+    opacity: 0.7;
+}
+
+.result a {
+    color: green;
+    opacity: 0.7;
+}
+
+.trash a {
+    color: darkred;
+    opacity: 0.7;
+}
+
+.link a:hover {
+    opacity: 1;
+}
+
+.result a:hover {
+    opacity: 1;
+}
+
+.trash a:hover {
+    opacity: 1;
+}
+
+
+.table {
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+@media (max-width: 1200px) {
+
+    .box {
+
+        padding: 20px 0px;
+
+    }
+
+
+    .table {
+        font-size: 1rem
+    }
+
+    .welcome-msg {
+        font-size: 1.5rem;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .table {
+        font-size: 0.9rem
+    }
+
+    .welcome-msg {
+        font-size: 1.2rem;
+    }
+
+}
