@@ -131,6 +131,7 @@ public class AnswerServiceImpl implements AnswerService {
                 sumOfPriority = sumOfPriority + (answerAlternativeList.get(i).getWeight() * findWeightOfCriteriaByCriteriaName(averageWeightsOfAllCriteria, answerAlternativeList.get(i).getCriteria().getCriteriaName()));
             }
 
+            sumOfPriority = Math.round(sumOfPriority * 1000d) / 1000d;
             result.put(alternative, sumOfPriority);
 
         }

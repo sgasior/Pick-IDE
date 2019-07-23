@@ -52,8 +52,9 @@ body {
 
 .ranking-item {
     margin-top: 30px;
-    position: relative;
-    right: 25px;
+    text-align: left;
+    margin-left: 30%;
+    margin-right: 25%;
 }
 
 .ranking-item .fas {
@@ -62,6 +63,8 @@ body {
 
 .normal-place {
     color: #000;
+    position: relative;
+    left: 6px;
 }
 
 

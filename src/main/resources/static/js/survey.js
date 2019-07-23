@@ -110,6 +110,10 @@ function acceptCriterias(divName, criteriaName) {
         alert("Criteria  cannot contain whitespaces");
         return;
     }
+    if (criteriaName.length > 12) {
+        alert("Criteria cannot have more than 12 characters");
+        return;
+    }
 
     $(".new-inputs-msg").css("display", "block");
     var newdiv = document.createElement("div");
@@ -149,6 +153,10 @@ function acceptAlternatives(divName, alternativeName) {
     }
     if (alternativeName.includes(" ")) {
         alert("Alternative  cannot contain whitespaces");
+        return;
+    }
+    if (alternativeName.length > 12) {
+        alert("Criteria cannot have more than 12 characters");
         return;
     }
 
@@ -197,17 +205,17 @@ function deleteAlternative(clicked_id) {
 
 // -- - SETTING SURVEY FORM AFTER REFRESH PAGE START-- -
 
-if (selectedCriterias != null){
+if (selectedCriterias != null) {
     selectedCriterias.forEach(refreshCriterias);
 }
-if (selectedAlternatives != null){
+if (selectedAlternatives != null) {
     selectedAlternatives.forEach(refreshAlternatives);
 }
 
 
 function addCriteria(criteriaName) {
 
-    divName='new-criterias';
+    divName = 'new-criterias';
 
     var newdiv = document.createElement("div");
     newdiv.innerHTML = "<div class='checkbox' id='checkbox_criteria_" + criteria_id_counter + "'><button type='button' class='deleteCheckbox' id='deleteCriteria_" + criteria_id_counter + "' onclick='deleteCriteria(this.id)'>X</button><input type='checkbox' id='newCriteria_" + criteria_id_counter + "'name='selectedCriteria' value='" + criteriaName + "' checked> <label for = 'newCriteria_" + criteria_id_counter + "'>" + criteriaName + "</label> </div>";
@@ -220,7 +228,7 @@ function addCriteria(criteriaName) {
 
 function addAlternative(alternativeName) {
 
-    divName='new-alternatives';
+    divName = 'new-alternatives';
 
     var newdiv = document.createElement("div");
 
@@ -235,7 +243,7 @@ function addAlternative(alternativeName) {
 
 function refreshCriterias(item, index) {
 
-    if ($("#"+item).length) {
+    if ($("#" + item).length) {
         $("#" + item).prop('checked', true);
     } else {
         addCriteria(item);
@@ -244,7 +252,7 @@ function refreshCriterias(item, index) {
 
 function refreshAlternatives(item, index) {
 
-    if ($("#"+item).length) {
+    if ($("#" + item).length) {
         $("#" + item).prop('checked', true);
     } else {
         addAlternative(item);

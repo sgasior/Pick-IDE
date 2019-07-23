@@ -14,10 +14,7 @@ import pl.edu.kopalniakodu.pickide.domain.util.Comparison;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.AnswerService;
 import pl.edu.kopalniakodu.pickide.service.ServiceInterface.SurveyService;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 @Controller
 @SessionAttributes({"survey", "comparisons", "answer_id", "criteriaQueue"})
@@ -153,12 +150,44 @@ public class AnswerController {
         Map<Criteria, Double> averageWeightsOfAllCriteria = answerService.findAverageWeightsOfAllCriteria(survey);
         Map<Alternative, Double> ranking = answerService.rank(survey);
 
-
+        Map<Alternative, Double> firstPlaceMap = getTopPlace(ranking, 0);
+        Map<Alternative, Double> secondPlaceMap = getTopPlace(ranking, firstPlaceMap.size());
+        Map<Alternative, Double> thirdPlaceMap = getTopPlace(ranking, secondPlaceMap.size() + firstPlaceMap.size());
+        Map<Alternative, Double> lastPlaceMap = getTopPlace(ranking, secondPlaceMap.size() + firstPlaceMap.size() + thirdPlaceMap.size());
 
         log.info("test");
+
+        model.addAttribute("firstPlaceMap", firstPlaceMap);
+        model.addAttribute("secondPlaceMap", secondPlaceMap);
+        model.addAttribute("thirdPlaceMap", thirdPlaceMap);
+        model.addAttribute("lastPlaceMap", lastPlaceMap);
 
         model.addAttribute("weights", averageWeightsOfAllCriteria);
     }
 
+    private Map<Alternative, Double> getTopPlace(Map<Alternative, Double> ranking, int placeNumber) {
+        Map<Alternative, Double> map = new HashMap();
+        ArrayList<Double> valueList = new ArrayList<Double>(ranking.values());
+        Collections.sort(valueList, Collections.reverseOrder());
+
+        if (valueList.size() <= placeNumber) {
+            return map;
+        }
+        for (Alternative alternative : getKeysFromValue(ranking, valueList.get(placeNumber))) {
+            map.put(alternative, valueList.get(placeNumber));
+        }
+        return map;
+    }
+
+
+    public List<Alternative> getKeysFromValue(Map<Alternative, Double> hm, Double value) {
+        List<Alternative> list = new ArrayList<Alternative>();
+        for (Alternative o : hm.keySet()) {
+            if (hm.get(o).equals(value)) {
+                list.add(o);
+            }
+        }
+        return list;
+    }
 
 }

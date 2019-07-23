@@ -22,7 +22,7 @@
 
             <div class="row h-100 justify-content-center align-items-center">
 
-                <div class="col-lg-6 col-md-12">
+                <div class="col-lg-7 col-md-12">
                     <div class="box">
                         <div class="result-msg">
                             You have choosen the most suitable IDE for your needs!
@@ -30,22 +30,40 @@
 
                         <div id="ranking">
 
-                            <div class="ranking-item" id="first_place">
-                                <i class="fas fa-trophy"></i><strong>IDE 1 with 0.400 sum of priority</strong>
-                            </div>
-                            <div class="ranking-item" id="second_place">
-                                <i class="fas fa-trophy"></i><strong>IDE 2 with 0.300 sum of priority</strong>
-                            </div>
-                            <div class="ranking-item" id="third_place">
-                                <i class="fas fa-trophy"></i><strong>IDE 3 with 0.200 sum of priority</strong>
-                            </div>
-                            <div class="ranking-item normal-place">
-                                <i class="fas fa-angle-right"></i>IDE 3 with 0.200 sum of priority
-                            </div>
-                            <div class="ranking-item normal-place">
-                                <i class="fas fa-angle-right"></i>IDE 3 with 0.200 sum of priority
-                            </div>
+                            <th:block th:each="first : ${firstPlaceMap}">
+                                <div class="ranking-item" id="first_place">
+                                    <i class="fas fa-trophy"></i>
+                                    <strong th:text="${first.key.getAlternativeName()} + ' with '+ ${first.value}+' sum of priority'">
+                                        IDE 1 with 0.400 sum of priority
+                                    </strong>
+                                </div>
+                            </th:block>
 
+                            <th:block th:each="second : ${secondPlaceMap}">
+                                <div class="ranking-item" id="second_place">
+                                    <i class="fas fa-trophy"></i>
+                                    <strong th:text="${second.key.getAlternativeName()} + ' with '+ ${second.value}+' sum of priority'">
+                                        IDE 1 with 0.400 sum of priority
+                                    </strong>
+                                </div>
+                            </th:block>
+
+                            <th:block th:each="third : ${thirdPlaceMap}">
+                                <div class="ranking-item" id="third_place">
+                                    <i class="fas fa-trophy"></i>
+                                    <strong th:text="${third.key.getAlternativeName()} + ' with '+ ${third.value}+' sum of priority'">
+                                        IDE 1 with 0.400 sum of priority
+                                    </strong>
+                                </div>
+                            </th:block>
+                            <th:block th:each="last : ${lastPlaceMap}">
+                                <div class="ranking-item normal-place">
+                                    <i class="fas fa-angle-right"></i>
+                                    <strong th:text="${last.key.getAlternativeName()} + ' with '+ ${last.value}+' sum of priority'">
+                                        IDE 1 with 0.400 sum of priority
+                                    </strong>
+                                </div>
+                            </th:block>
                         </div>
 
 
