@@ -91,6 +91,9 @@ body {
     vertical-align: middle;
 }
 
+.no-surveys{
+    padding-bottom: 149px;
+}
 
 @media (max-width: 1200px) {
 

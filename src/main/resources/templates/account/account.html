@@ -28,44 +28,55 @@
 
 
                         <div id="surveys">
-                            <div class="welcome-msg">
-                                There is a list of your shared surveys:
-                            </div>
 
-                            <table class="table table-hover">
-                                <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Survey name</th>
-                                    <th scope="col">Survey link</th>
-                                    <th scope="col">Result link</th>
-                                    <th scope="col">Delete survey</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="survey: ${surveys}">
-                                    <th scope="row" th:text="${survey.getSurveyName()}">Survey name</th>
-
-                                    <td class="link">
-                                        <a th:href="'/answer/'+${survey.getSurveyURIParam()}"> <i
-                                                class="fas fa-external-link-alt"></i></a>
-                                    </td>
-                                    <td class="result">
-                                        <a th:href="'/result/'+${survey.getSurveyURIParam()}">
-                                            <i class="fas fa-poll"></i></a>
-                                    </td>
-                                    <td>
-                                        <form method="POST" th:action="@{/delete(surveyID=${survey.getId()})}">
-                                            <button type="submit" name="submit" value="value" class="trash">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                            <th:block th:if="${surveys.size()==0}">
+                                <div class="welcome-msg no-surveys">
+                                    You do not have shared surveys
+                                </div>
+                            </th:block>
 
 
-                                </tbody>
-                            </table>
+                            <th:block th:if="${surveys.size()!=0}">
 
+
+                                <div class="welcome-msg">
+                                    There is a list of your shared surveys:
+                                </div>
+
+                                <table class="table table-hover">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Survey name</th>
+                                        <th scope="col">Survey link</th>
+                                        <th scope="col">Result link</th>
+                                        <th scope="col">Delete survey</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="survey: ${surveys}">
+                                        <th scope="row" th:text="${survey.getSurveyName()}">Survey name</th>
+
+                                        <td class="link">
+                                            <a th:href="'/answer/'+${survey.getSurveyURIParam()}"> <i
+                                                    class="fas fa-external-link-alt"></i></a>
+                                        </td>
+                                        <td class="result">
+                                            <a th:href="'/result/'+${survey.getSurveyURIParam()}">
+                                                <i class="fas fa-poll"></i></a>
+                                        </td>
+                                        <td>
+                                            <form method="POST" th:action="@{/delete(surveyID=${survey.getId()})}">
+                                                <button type="submit" name="submit" value="value" class="trash">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </th:block>
                         </div>
 
 
