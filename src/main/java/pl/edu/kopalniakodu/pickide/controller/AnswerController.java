@@ -208,7 +208,6 @@ public class AnswerController {
 
     private void generateAutomaticAlternativeRating(@SessionAttribute("survey") Survey survey, Answer answer) {
         if (!isFilledAtLeastOnce(survey)) {
-            log.info("adding new automatic answer_alternative");
 
             List<Rating> matchingRatings = answerService.matchingRatings(survey.getCriterias(), survey.getAlternatives());
 

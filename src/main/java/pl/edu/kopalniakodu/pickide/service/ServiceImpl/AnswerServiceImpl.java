@@ -98,10 +98,6 @@ public class AnswerServiceImpl implements AnswerService {
         Map<Map<Alternative, Criteria>, Double> result = new LinkedHashMap<>();
 
         List<Alternative> alternativeList = survey.getAlternatives();
-        for (Alternative alternative : survey.getAlternatives()) {
-            System.out.println("Alternative: " + alternative.getAlternativeName());
-            System.out.println("------------: ");
-        }
 
         for (Criteria criteria : survey.getCriterias()) {
             List<Rating> ratingWithMatchingCriteria = RatingProvider.findRatingByCriteria(criteria, matchingRatings);
@@ -121,12 +117,6 @@ public class AnswerServiceImpl implements AnswerService {
                 result.put(alternativeCriteriaMap, weight[i]);
             }
 
-            System.out.println("*****");
-            printMatrix(ahpMatrix);
-            System.out.println("*****");
-            System.out.println("\n\n");
-
-
         }
         return result;
     }
@@ -135,9 +125,6 @@ public class AnswerServiceImpl implements AnswerService {
     private double convertToSaatyScale(Rating ratingFirst, Rating ratingSecond) {
 
         double result;
-        System.out.println("ratingFirst " + ratingFirst.getPoints() + "alternative " + ratingFirst.getPreferedAlternative() + "dla kryterium " + ratingFirst.getPreferedCriteria());
-        System.out.println("ratingSecond " + ratingSecond.getPoints() + "alternative " + ratingSecond.getPreferedAlternative() + "dla kryterium " + ratingSecond.getPreferedCriteria());
-
         double valueDifference = ratingFirst.getPoints() - ratingSecond.getPoints();
         double absValueDifference = Math.abs(valueDifference);
 
