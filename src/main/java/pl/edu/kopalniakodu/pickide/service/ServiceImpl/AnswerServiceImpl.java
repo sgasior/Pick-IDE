@@ -105,10 +105,6 @@ public class AnswerServiceImpl implements AnswerService {
             AhpAnalyzer ahpAnalyzer = new AhpAnalyzerImpl(ahpMatrix);
 
             double[] weight = ahpAnalyzer.getWeights();
-            System.out.println("Wagi: ");
-            for (double w : weight) {
-                System.out.println(w);
-            }
 
             for (int i = 0; i < alternativeList.size(); i++) {
                 Map<Alternative, Criteria> alternativeCriteriaMap = new LinkedHashMap();
