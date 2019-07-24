@@ -1,5 +1,7 @@
 package pl.edu.kopalniakodu.pickide.domain.util;
 
+import pl.edu.kopalniakodu.pickide.domain.Criteria;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,5 +60,18 @@ public class RatingProvider {
 
     }};
 
+
+    public static List<Rating> findRatingByCriteria(Criteria criteria, List<Rating> ratings) {
+
+        List<Rating> result = new ArrayList<>();
+
+        for (Rating rating : ratings) {
+            if (rating.getPreferedCriteria().equals(criteria.getCriteriaName())) {
+                result.add(rating);
+            }
+        }
+        return result;
+
+    }
 
 }

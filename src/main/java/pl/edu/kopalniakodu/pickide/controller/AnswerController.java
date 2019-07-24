@@ -21,6 +21,7 @@ import java.util.*;
 @SessionAttributes({"survey", "comparisons", "answer_id", "criteriaQueue"})
 public class AnswerController {
 
+
     private static final Logger log = LoggerFactory.getLogger(AnswerController.class);
 
     private AnswerService answerService;
@@ -76,24 +77,11 @@ public class AnswerController {
         model.addAttribute("answer_id", answer.getId());
 
         if (survey.isAutomaticAlternativeRating() && survey.getSurveyURIParam() != null) {
+            generateAutomaticAlternativeRating(survey, answer);
             return "survey/acknowledgement";
         } else if (survey.isAutomaticAlternativeRating() && survey.getSurveyURIParam() == null) {
 
-            if (!isFilledAtLeastOnce(survey)) {
-                log.info("adding new automatic answer_alternative");
-
-                List<Rating> matchingRatings = answerService.matchingRatings(survey.getCriterias(), survey.getAlternatives());
-                log.info("test");
-            }
-
-
-//            Map<Alternative, Map<Double, Double>> weightsOfAllAlternative = answerService
-//                    .findWeightsOfAllAlternative(alternativeComparisonList, alternativeRating, survey.getAlternatives());
-//
-//
-//            answerService.save(answer);
-//            answerService.saveAnswerAlternative(answer, weightsOfAllAlternative, criteria);
-
+            generateAutomaticAlternativeRating(survey, answer);
 
             prepareResultModel(model, survey);
             return "survey/result-page";
@@ -216,6 +204,21 @@ public class AnswerController {
             }
         }
         return list;
+    }
+
+    private void generateAutomaticAlternativeRating(@SessionAttribute("survey") Survey survey, Answer answer) {
+        if (!isFilledAtLeastOnce(survey)) {
+            log.info("adding new automatic answer_alternative");
+
+            List<Rating> matchingRatings = answerService.matchingRatings(survey.getCriterias(), survey.getAlternatives());
+
+            Map<Map<Alternative, Criteria>, Double> weightsOfAllAlternative = answerService
+                    .findWeightsOfAllAlternativeWhenAutomaticAlternativeRating(matchingRatings, survey);
+
+
+            answerService.save(answer);
+            answerService.saveAnswerAlternative(answer, weightsOfAllAlternative);
+        }
     }
 
 }

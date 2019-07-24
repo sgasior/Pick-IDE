@@ -91,6 +91,86 @@ public class AnswerServiceImpl implements AnswerService {
         return result;
     }
 
+
+    @Override
+    public Map<Map<Alternative, Criteria>, Double> findWeightsOfAllAlternativeWhenAutomaticAlternativeRating(List<Rating> matchingRatings, Survey survey) {
+
+        Map<Map<Alternative, Criteria>, Double> result = new LinkedHashMap<>();
+
+        List<Alternative> alternativeList = survey.getAlternatives();
+        for (Alternative alternative : survey.getAlternatives()) {
+            System.out.println("Alternative: " + alternative.getAlternativeName());
+            System.out.println("------------: ");
+        }
+
+        for (Criteria criteria : survey.getCriterias()) {
+            List<Rating> ratingWithMatchingCriteria = RatingProvider.findRatingByCriteria(criteria, matchingRatings);
+            double[][] ahpMatrix = generateAHPMatrix(ratingWithMatchingCriteria);
+            AhpAnalyzer ahpAnalyzer = new AhpAnalyzerImpl(ahpMatrix);
+
+            double[] weight = ahpAnalyzer.getWeights();
+            System.out.println("Wagi: ");
+            for (double w : weight) {
+                System.out.println(w);
+            }
+
+            for (int i = 0; i < alternativeList.size(); i++) {
+                Map<Alternative, Criteria> alternativeCriteriaMap = new LinkedHashMap();
+
+                alternativeCriteriaMap.put(alternativeList.get(i), criteria);
+                result.put(alternativeCriteriaMap, weight[i]);
+            }
+
+            System.out.println("*****");
+            printMatrix(ahpMatrix);
+            System.out.println("*****");
+            System.out.println("\n\n");
+
+
+        }
+        return result;
+    }
+
+
+    private double convertToSaatyScale(Rating ratingFirst, Rating ratingSecond) {
+
+        double result;
+        System.out.println("ratingFirst " + ratingFirst.getPoints() + "alternative " + ratingFirst.getPreferedAlternative() + "dla kryterium " + ratingFirst.getPreferedCriteria());
+        System.out.println("ratingSecond " + ratingSecond.getPoints() + "alternative " + ratingSecond.getPreferedAlternative() + "dla kryterium " + ratingSecond.getPreferedCriteria());
+
+        double valueDifference = ratingFirst.getPoints() - ratingSecond.getPoints();
+        double absValueDifference = Math.abs(valueDifference);
+
+
+        if (absValueDifference <= 10) {
+            result = 1;
+        } else if (absValueDifference > 10 && absValueDifference <= 20) {
+            result = 2;
+        } else if (absValueDifference > 20 && absValueDifference <= 30) {
+            result = 3;
+        } else if (absValueDifference > 30 && absValueDifference <= 40) {
+            result = 4;
+        } else if (absValueDifference > 40 && absValueDifference <= 50) {
+            result = 5;
+        } else if (absValueDifference > 50 && absValueDifference <= 60) {
+            result = 6;
+        } else if (absValueDifference > 60 && absValueDifference <= 70) {
+            result = 7;
+        } else if (absValueDifference > 70 && absValueDifference <= 80) {
+            result = 8;
+        } else {
+            result = 9;
+        }
+
+        if (valueDifference < 0) {
+            return 1 / result;
+        } else {
+            return result;
+        }
+
+    }
+
+
     @Override
     public Map<Criteria, Double> findAverageWeightsOfAllCriteria(Survey survey) {
 
@@ -250,6 +330,24 @@ public class AnswerServiceImpl implements AnswerService {
 
     }
 
+    @Override
+    public void saveAnswerAlternative(Answer answer,
+                                      Map<Map<Alternative, Criteria>, Double> weightsOfAllAlternative) {
+
+        weightsOfAllAlternative.forEach((alternativeCriteria, weight) -> {
+
+            alternativeCriteria.forEach((alternative, criteria) -> {
+                AnswerAlternative answerAlternative = new AnswerAlternative(answer, criteria);
+                answerAlternative.setAlternative(alternative);
+                answerAlternative.setWeight(weight);
+                answerAlternativeRepository.save(answerAlternative);
+            });
+
+        });
+
+
+    }
+
 
     @Override
     public void saveAnswerCriteria(Answer answer, Map<Criteria, Map<Double, Double>> weightsOfAllCriteria) {
@@ -314,6 +412,39 @@ public class AnswerServiceImpl implements AnswerService {
         }
         return ahpMatrix;
     }
+
+
+    private double[][] generateAHPMatrix(List<Rating> ratingWithMatchingCriteria) {
+
+        int ahpMatrixSize = ratingWithMatchingCriteria.size();
+        double[][] ahpMatrix = new double[ahpMatrixSize][ahpMatrixSize];
+
+
+        for (int i = 0; i < ahpMatrix.length; i++) {
+            for (int j = 0; j < ahpMatrix[i].length; j++) {
+                if (i == j) {
+                    ahpMatrix[i][j] = 1;
+                }
+            }
+            int ratingCounter = i;
+            for (int k = i + 1; k < ahpMatrixSize; k++) {
+                ahpMatrix[i][k] = convertToSaatyScale(ratingWithMatchingCriteria.get(i), ratingWithMatchingCriteria.get(ratingCounter + 1));
+                ratingCounter++;
+            }
+        }
+
+        for (int i = 0; i < ahpMatrix.length; i++) {
+            for (int j = 0; j < ahpMatrix[i].length; j++) {
+                if (ahpMatrix[i][j] == 0) {
+                    ahpMatrix[i][j] = 1 / ahpMatrix[j][i];
+                }
+            }
+
+        }
+        return ahpMatrix;
+
+    }
+
 
     private void printMatrix(double[][] ahpMatrix) {
         for (int i = 0; i < ahpMatrix.length; i++) {

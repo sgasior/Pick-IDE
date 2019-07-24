@@ -33,4 +33,9 @@ public interface AnswerService {
     Map<Alternative, Double> rank(Survey survey);
 
     List<Rating> matchingRatings(List<Criteria> criterias, List<Alternative> alternatives);
+
+    Map<Map<Alternative, Criteria>, Double> findWeightsOfAllAlternativeWhenAutomaticAlternativeRating(List<Rating> matchingRatings, Survey survey);
+
+    void saveAnswerAlternative(Answer answer, Map<Map<Alternative, Criteria>, Double> weightsOfAllAlternative);
+
 }
