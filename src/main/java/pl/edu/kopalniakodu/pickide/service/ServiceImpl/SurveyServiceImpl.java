@@ -144,13 +144,14 @@ public class SurveyServiceImpl implements SurveyService {
     public void deleteSurvey(Survey survey) {
 
         survey.setUser(null);
-        criteriaRepository.deleteCriteriaBySurvey(survey);
-        alternativeRepository.deleteAlternativeBySurvey(survey);
 
         for (Answer answer : survey.getAnswers()) {
             answerAlternativeRepository.deleteByAnswer(answer);
             answerCriteriaRepository.deleteByAnswer(answer);
         }
+
+        criteriaRepository.deleteCriteriaBySurvey(survey);
+        alternativeRepository.deleteAlternativeBySurvey(survey);
 
         answerRepository.deleteAnswerBySurvey(survey);
         surveyRepository.deleteById(survey.getId());
