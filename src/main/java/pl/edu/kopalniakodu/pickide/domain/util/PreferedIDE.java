@@ -5,9 +5,9 @@ import java.util.List;
 
 public enum PreferedIDE {
 
-    BEGINNER(Arrays.asList("BEG_IDE1", "BEG_IDE2")),
-    MID_EXP(Arrays.asList("MID_IDE1", "MID_IDE2")),
-    PRO_EXP(Arrays.asList("PRO_IDE1", "PRO_IDE2"));
+    BEGINNER(Arrays.asList("Eclipse", "NetBeans")),
+    MID_EXP(Arrays.asList("IntelliJ Community")),
+    PRO_EXP(Arrays.asList("IntelliJ Ultimate"));
 
     private List<String> value;
 

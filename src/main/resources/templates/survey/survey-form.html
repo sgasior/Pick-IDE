@@ -74,9 +74,11 @@
                                 <div class="row">
                                     <th:block th:each="preferedCriteria: ${preferedCriterias}">
                                         <div class="checkbox">
-                                            <input type="checkbox" th:id="${preferedCriteria}" name="selectedCriteria"
+                                            <input type="checkbox" th:id="${#strings.replace(preferedCriteria,' ','_')}"
+                                                   name="selectedCriteria"
                                                    th:value="${preferedCriteria}">
-                                            <label th:for="${preferedCriteria}" th:text="${preferedCriteria}"></label>
+                                            <label th:for="${#strings.replace(preferedCriteria,' ','_')}"
+                                                   th:text="${preferedCriteria}"></label>
                                         </div>
 
                                     </th:block>
@@ -88,9 +90,11 @@
                                 <div class="row">
                                     <th:block th:each="notPreferedCriteria: ${notPreferedCriterias}">
                                         <div class="checkbox">
-                                            <input type="checkbox" th:id="${notPreferedCriteria}"
-                                                   name="selectedCriteria" th:value="${notPreferedCriteria}">
-                                            <label th:for="${notPreferedCriteria}"
+                                            <input type="checkbox"
+                                                   th:id="${#strings.replace(notPreferedCriteria,' ','_')}"
+                                                   name="selectedCriteria"
+                                                   th:value="${notPreferedCriteria}">
+                                            <label th:for="${#strings.replace(notPreferedCriteria,' ','_')}"
                                                    th:text="${notPreferedCriteria}"></label>
                                         </div>
 
@@ -115,10 +119,11 @@
                                 <div class="row">
                                     <th:block th:each="preferedAlternative: ${preferedAlternatives}">
                                         <div class="checkbox">
-                                            <input type="checkbox" th:id="${preferedAlternative}"
+                                            <input type="checkbox"
+                                                   th:id="${#strings.replace(preferedAlternative,' ','_')}"
                                                    name="selectedAlternative"
                                                    th:value="${preferedAlternative}">
-                                            <label th:for="${preferedAlternative}"
+                                            <label th:for="${#strings.replace(preferedAlternative,' ','_')}"
                                                    th:text="${preferedAlternative}"></label>
                                         </div>
 
@@ -133,10 +138,11 @@
                                 <div class="row">
                                     <th:block th:each="notPreferedAlternative: ${notPreferedAlternatives}">
                                         <div class="checkbox">
-                                            <input type="checkbox" th:id="${notPreferedAlternative}"
+                                            <input type="checkbox"
+                                                   th:id="${#strings.replace(notPreferedAlternative,' ','_')}"
                                                    name="selectedAlternative"
                                                    th:value="${notPreferedAlternative}">
-                                            <label th:for="${notPreferedAlternative}"
+                                            <label th:for="${#strings.replace(notPreferedAlternative,' ','_')}"
                                                    th:text="${notPreferedAlternative}"></label>
                                         </div>
 

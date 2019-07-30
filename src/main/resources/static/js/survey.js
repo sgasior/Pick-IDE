@@ -242,7 +242,7 @@ function addAlternative(alternativeName) {
 
 
 function refreshCriterias(item, index) {
-
+    item = item.replace(/ /g, "_");
     if ($("#" + item).length) {
         $("#" + item).prop('checked', true);
     } else {
@@ -251,10 +251,12 @@ function refreshCriterias(item, index) {
 }
 
 function refreshAlternatives(item, index) {
-
+    item = item.replace(/ /g, "_");
     if ($("#" + item).length) {
         $("#" + item).prop('checked', true);
     } else {
         addAlternative(item);
     }
 }
+
+

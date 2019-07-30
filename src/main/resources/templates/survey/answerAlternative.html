@@ -58,11 +58,11 @@
                                     <div class="ahp-range">
                                         <div class="comparison">
 
-                                            <div th:class="${'saaty-scale '+comparison.getChoice1().getAlternativeName()+'-'+ comparison.getChoice2().getAlternativeName()}">
+                                            <div th:class="${'saaty-scale '+#strings.replace(comparison.getChoice1().getAlternativeName()+'-'+ comparison.getChoice2().getAlternativeName(),' ','_')}">
                                                 equal
                                             </div>
 
-                                            <label th:for="${comparison.getChoice1().getAlternativeName()+'-'+ comparison.getChoice2().getAlternativeName()}">
+                                            <label th:for="${#strings.replace(comparison.getChoice1().getAlternativeName()+'-'+ comparison.getChoice2().getAlternativeName(),' ','_')}">
                                             <span class="leftLabel"
                                                   th:text="${comparison.getChoice1().getAlternativeName()}">
                                                 Criterium 1
@@ -74,7 +74,7 @@
                                             </span>
                                             </label>
                                             <input type="range" min="1" max="17" value="9" class="range"
-                                                   th:id="${comparison.getChoice1().getAlternativeName()+'-'+ comparison.getChoice2().getAlternativeName()}"
+                                                   th:id="${#strings.replace(comparison.getChoice1().getAlternativeName()+'-'+ comparison.getChoice2().getAlternativeName(),' ','_')}"
                                                    name="alternativeRating" oninput="setSaatyScale(this.id)">
                                             <!--th:field="*{comparison.value}"-->
                                         </div>

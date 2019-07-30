@@ -5,9 +5,9 @@ import java.util.List;
 
 public enum PreferedCriteria {
 
-    BEGINNER(Arrays.asList("BEG_CRITERIA1", "BEG_CRITERIA2")),
-    MID_EXP(Arrays.asList("MID_CRITERIA1", "MID_CRITERIA2")),
-    PRO_EXP(Arrays.asList("PRO_CRITERIA1", "PRO_CRITERIA2"));
+    BEGINNER(Arrays.asList("Syntax autocomplete", "Clear and efficient UI")),
+    MID_EXP(Arrays.asList("Support", "Built-in tools and supported frameworks")),
+    PRO_EXP(Arrays.asList("Debugger quality", "Extensibility"));
 
     private List<String> value;
 
