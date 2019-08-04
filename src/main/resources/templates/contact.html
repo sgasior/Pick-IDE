@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:include="~{layouts/main_layout :: head(title = 'Share')}"></th:block>
+
+    <!--    OWN CREATED STYLES-->
+    <link rel="stylesheet" th:href="@{/css/contact.css}">
+
+
+</head>
+
+
+<body>
+
+<div th:replace="~{layouts/main_layout :: navbar}"></div>
+
+<div class="new-content">
+    <div class="container-fluid">
+
+        <section id="contact">
+
+
+            <div class="row h-100 justify-content-center align-items-center">
+
+                <div class="col-lg-6 col-md-10 box">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="contact-icon">
+                                <i class="fas fa-address-book"></i>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="contact-msg">
+                                If you have any questions, please feel free to contact me.
+                            </div>
+
+                            <div class="contact-way">
+                                You can contact me via:
+
+
+                                <ul>
+                                    <li>
+                                        <a href="https://www.linkedin.com/in/szymon-gasior/ "><i class="social-icon fab fa-linkedin "></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="mailto:szgasior@gmail.com?subject=Pick-IDE&body=Treść wiadomości "><i class="social-icon far fa-envelope "></i></a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+
+<div th:replace="~{layouts/main_layout :: footer}"></div>
+
+
+<script type="text/javascript" th:src="@{/vendors/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendors/js/jquery.waypoints.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/share-link.js}"></script>
+
+
+</body>
+</html>

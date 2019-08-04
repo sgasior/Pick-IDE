@@ -16,4 +16,9 @@ public class WelcomePageController {
     public String startPage() {
         return "survey/survey-start";
     }
+
+    @GetMapping("/contact")
+    public String contactPage() {
+        return "contact";
+    }
 }
