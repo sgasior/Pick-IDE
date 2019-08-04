@@ -59,9 +59,11 @@ public class SurveyController {
         model.addAttribute("preferedAlternatives", enumUtillService.preferedAlternatives(programmerExp));
         model.addAttribute("notPreferedAlternatives", enumUtillService.notPreferedAlternatives(programmerExp));
 
+/*
+    unnecessary code (no need extra ahp-info-page because now additional requirements in survey-start.html uses href not checkboxes)
         if (extra_info || whatCanGainInfo) {
             return "ahp-info-page";
-        }
+        }*/
 
         if (share) {
             return "redirect:/account/newSurvey";
@@ -188,6 +190,8 @@ public class SurveyController {
         return "survey/share-link";
     }
 
+/*
+    unnecessary mapping (no need extra ahp-info-page because now additional requirements in survey-start.html uses href not checkboxes)
     @PostMapping("/ahp-info-page")
     public String newSurveyFormWithoutAccount(
             @SessionAttribute("share") boolean share
@@ -198,6 +202,7 @@ public class SurveyController {
             return "redirect:/newSurvey";
         }
     }
+*/
 
 
     private void validateSurveyForm(BindingResult bindingResult, @RequestParam(value = "selectedCriteria", required = false) String[] selectedCriterias, @RequestParam(value = "selectedAlternative", required = false) String[] selectedAlternative) {

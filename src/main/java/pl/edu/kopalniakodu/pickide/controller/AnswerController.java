@@ -196,7 +196,7 @@ public class AnswerController {
     }
 
 
-    public List<Alternative> getKeysFromValue(Map<Alternative, Double> hm, Double value) {
+    private List<Alternative> getKeysFromValue(Map<Alternative, Double> hm, Double value) {
         List<Alternative> list = new ArrayList<Alternative>();
         for (Alternative o : hm.keySet()) {
             if (hm.get(o).equals(value)) {
