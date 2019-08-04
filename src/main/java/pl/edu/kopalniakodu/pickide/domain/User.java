@@ -21,6 +21,7 @@ import java.util.*;
 @Setter
 @EqualsAndHashCode()
 @ConfirmPasswords
+@Table(name = "users")
 public class User implements UserDetails {
 
 
